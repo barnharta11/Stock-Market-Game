@@ -13,6 +13,7 @@ namespace Capstone.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int WinnerId { get; set; }
-        
+        public string CreatorName { get; set; }
+
     }
 }

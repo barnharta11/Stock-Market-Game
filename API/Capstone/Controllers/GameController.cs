@@ -15,10 +15,10 @@ namespace Capstone.Controllers
     {
 
         private readonly IGameDAO gameDAO;
-
-        public GameController(IGameDAO _gameDAO)
+        private readonly IUserDAO userDAO;
+        public GameController(IGameDAO _gameDAO, IUserDAO _userDAO)
         {
-
+            userDAO = _userDAO;
             gameDAO = _gameDAO;
         }
 
@@ -44,10 +44,11 @@ namespace Capstone.Controllers
         [HttpPost("/createGame")]
         public IActionResult AddGame(Game createGame)
         {
+            createGame.CreatorId = userDAO.GetUser(createGame.CreatorName).UserId;
             IActionResult result;
 
             Game existingGame = gameDAO.GetGame(createGame.GameName);
-            if (existingGame.GameName == createGame.GameName)
+            if (existingGame != null)
             {
                 return Conflict(new { message = "Game name already taken. Please choose a different game name." });
             }
