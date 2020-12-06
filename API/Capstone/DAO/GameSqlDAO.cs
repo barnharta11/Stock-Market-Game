@@ -90,11 +90,7 @@ namespace Capstone.DAO
                         readGame.StartDate = Convert.ToDateTime(reader["start_date"]);
                         readGame.EndDate = Convert.ToDateTime(reader["end_date"]);
                         readGame.CreatorId = Convert.ToInt32(reader["creator_id"]);
-                        
-                        //if ((reader["winner_id"]) != null)
-                        //{
-                        //    readGame.WinnerId = Convert.ToInt32(reader["winner_id"]);
-                        //}
+                        //readGame.WinnerId = Convert.ToInt32(reader["winner_id"]);                      
                         returnList.Add(readGame);
                     }
                 }
