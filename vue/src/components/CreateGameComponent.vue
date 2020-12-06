@@ -60,7 +60,7 @@ methods:{
         gameService.createGame(this.formgame)
         .then(response =>{
             if(response.status==201){
-                this.$route.push('/')
+                this.$router.push('/')
             }
         })
     }

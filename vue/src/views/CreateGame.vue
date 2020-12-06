@@ -8,8 +8,8 @@
 import CreateGameComponent from "../components/CreateGameComponent.vue"
 export default {
 components:{
-     CreateGameComponent
-   },
+    CreateGameComponent
+}
 }
 </script>
 
