@@ -31,7 +31,7 @@ CREATE TABLE games (
 	creator_id int NOT NULL,
 	start_date datetime NOT NULL,
 	end_date datetime NOT NULL,
-	winner_id int NOT NULL,
+	winner_id int,
 	Constraint fk_games_users_creator Foreign Key (creator_id) References users(user_id), 
 	Constraint fk_games_users_winner Foreign Key (winner_id) References users (user_id),
 	constraint pk_games Primary Key (game_id)
