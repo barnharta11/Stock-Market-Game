@@ -17,7 +17,7 @@ namespace Capstone.DAO
         }
         public Game AddGame(string gameName, int creatorId, DateTime startDate, DateTime endDate)
         {
-            int gameId = 0;
+            
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -29,7 +29,7 @@ namespace Capstone.DAO
                     command.Parameters.AddWithValue("@creatorid", creatorId);
                     command.Parameters.AddWithValue("@startdate", startDate);
                     command.Parameters.AddWithValue("@enddate", endDate);
-                    gameId = Convert.ToInt32(command.ExecuteScalar());
+                    command.ExecuteNonQuery();
 
                 }
             }
@@ -38,10 +38,10 @@ namespace Capstone.DAO
                 throw;
             }
 
-            return GetGame(gameId);
+            return GetGame(gameName);
         }
 
-        public Game GetGame(int gameId)
+        public Game GetGame(string gameName)
         {
 
             Game returnGame = null;
@@ -52,8 +52,8 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM games WHERE game_id = @gameid", conn);
-                    cmd.Parameters.AddWithValue("@gameid", gameId);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM games WHERE game_name = @gamename", conn);
+                    cmd.Parameters.AddWithValue("@gamename", gameName);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.HasRows && reader.Read())
@@ -68,6 +68,11 @@ namespace Capstone.DAO
             }
 
             return returnGame;
+        }
+
+        public Game GetGameList(int userId)
+        {
+            throw new NotImplementedException();
         }
 
         private Game GetGameFromReader(SqlDataReader reader)
