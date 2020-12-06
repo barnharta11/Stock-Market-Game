@@ -65,5 +65,10 @@ namespace Capstone.Controllers
 
             return result;
         }
+        [HttpGet("/games")]
+        public IActionResult ListAllGames()
+        {
+            return Ok(gameDAO.GetGameList());
+        }
     }
 }

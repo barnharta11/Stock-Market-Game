@@ -11,6 +11,7 @@ namespace Capstone.DAO
         Game GetGame(string gameName);
         Game AddGame(string gameName, int creatorId, DateTime startDate, DateTime endDate);
 
-        Game GetGameList(int userId);
+        List<Game> GetGameList();
+
     }
 }

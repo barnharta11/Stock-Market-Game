@@ -73,6 +73,7 @@ namespace Capstone.DAO
             return GetUser(username);
         }
 
+
         private User GetUserFromReader(SqlDataReader reader)
         {
             User u = new User()
@@ -86,6 +87,34 @@ namespace Capstone.DAO
             };
 
             return u;
+        }
+
+        public List<ReturnUser> ListAllUsers()
+        {
+            List<ReturnUser> returnList = new List<ReturnUser>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM users", conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read()){
+                        ReturnUser user = new ReturnUser();
+                        user.UserId = Convert.ToInt32(reader["user_id"]);
+                        user.Username = Convert.ToString(reader["user_name"]);
+                        returnList.Add(user);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return returnList;
         }
     }
 }

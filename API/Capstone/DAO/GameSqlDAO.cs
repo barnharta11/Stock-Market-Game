@@ -17,7 +17,7 @@ namespace Capstone.DAO
         }
         public Game AddGame(string gameName, int creatorId, DateTime startDate, DateTime endDate)
         {
-            
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -70,9 +70,41 @@ namespace Capstone.DAO
             return returnGame;
         }
 
-        public Game GetGameList(int userId)
+        public List<Game> GetGameList()
         {
-            throw new NotImplementedException();
+            List<Game> returnList = new List<Game>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM games", conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Game readGame = new Game();
+                        readGame.GameId = Convert.ToInt32(reader["game_id"]);
+                        readGame.GameName = Convert.ToString(reader["game_name"]);
+                        readGame.StartDate = Convert.ToDateTime(reader["start_date"]);
+                        readGame.EndDate = Convert.ToDateTime(reader["end_date"]);
+                        readGame.CreatorId = Convert.ToInt32(reader["creator_id"]);
+                        
+                        //if ((reader["winner_id"]) != null)
+                        //{
+                        //    readGame.WinnerId = Convert.ToInt32(reader["winner_id"]);
+                        //}
+                        returnList.Add(readGame);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return returnList;
         }
 
         private Game GetGameFromReader(SqlDataReader reader)
@@ -84,7 +116,7 @@ namespace Capstone.DAO
                 CreatorId = Convert.ToInt32(reader["creator_id"]),
                 StartDate = Convert.ToDateTime(reader["start_date"]),
                 EndDate = Convert.ToDateTime(reader["end_date"])
-                
+
             };
 
             return searchGame;

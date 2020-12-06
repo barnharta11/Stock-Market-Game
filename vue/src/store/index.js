@@ -19,7 +19,9 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    allUsers:[],
+    allGames:[]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -37,6 +39,12 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    SET_ALLUSERS(state, userlist){
+      state.allUsers = userlist
+    },
+    SET_ALLGAMES(state, gamelist){
+      state.allGames = gamelist
     }
   }
 })
