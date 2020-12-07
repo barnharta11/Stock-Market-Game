@@ -1,6 +1,12 @@
 <template>
   <div>
-      <div v-for="game in this.$store.state.allGames" v-bind:key="game.id">{{game.gameName}}</div>
+      <div v-for="game in this.$store.state.allGames" v-bind:key="game.id">
+          <span>{{game.gameName}} | </span>
+          <span>{{game.creatorName}} | </span>
+          <span>{{game.startDate}} | </span>
+          <span>{{game.endDate}}</span>
+      </div>
+      
   </div>
 </template>
 
