@@ -44,7 +44,7 @@ namespace Capstone.Controllers
         [HttpPost("/createGame")]
         public IActionResult AddGame(Game createGame)
         {
-            createGame.CreatorId = userDAO.GetUser(createGame.CreatorName).UserId;
+            createGame.CreatorId = GetUserId();
             IActionResult result;
 
             Game existingGame = gameDAO.GetGame(createGame.GameName);
@@ -75,6 +75,11 @@ namespace Capstone.Controllers
         public IActionResult ListUsersGames(int userID)
         {
             return Ok(gameDAO.GetGamesByUser(userID));
+        }
+        private int GetUserId()
+        {
+            string strUserId = User.Claims.FirstOrDefault(claim => claim.Type == "sub")?.Value;
+            return String.IsNullOrEmpty(strUserId) ? 0 : Convert.ToInt32(strUserId);
         }
     }
 }
