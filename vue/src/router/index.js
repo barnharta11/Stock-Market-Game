@@ -8,6 +8,7 @@ import store from '../store/index'
 import CreateGame from '../views/CreateGame.vue'
 import GameList from "../views/GameList.vue"
 import UsersGames from "../views/UsersGames.vue"
+import CreatedGames from "../views/CreatedGames.vue"
 
 Vue.use(Router)
 
@@ -87,6 +88,14 @@ const router = new Router({
       meta:{
         requiresAuth:true
       }
+  },
+  {
+    path: "/games/:userid/createdgames",
+    name: "createdgames",
+    component: CreatedGames,
+    meta:{
+      requiresAuth:true
+    }
   }
   ]
 })

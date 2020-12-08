@@ -1,6 +1,6 @@
 <template>
   <div>
-      <div v-for="game in this.$store.state.userGames" v-bind:key="game.id">
+      <div v-for="game in creatorGames" v-bind:key="game.id">
           <span>{{game.gameName}} | </span>
           <span>{{game.creatorName}} | </span>
           <span>{{game.startDate}} | </span>
@@ -16,11 +16,20 @@
 <script>
 import gameService from "../services/GameService.js"
 export default {
+    data(){
+        return{
+            creatorGames: []
+        }
+    },
 methods:{
     GetUsersGames(){
         gameService.getUsersGames(this.$store.state.user.userId)
         .then(response=>{
-            this.$store.commit("SET_USERSGAMES", response.data)
+            response.data.forEach(element => {
+                if(element.creatorName==this.$store.state.user.userName){
+                    this.creatorGames.push(element)
+                }
+            });
         })
     }
 },

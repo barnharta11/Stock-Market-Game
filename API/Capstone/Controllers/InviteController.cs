@@ -22,16 +22,8 @@ namespace Capstone.Controllers
 
         [HttpPost("/invite")]
         public IActionResult InviteUser(int userId, int gameId)
-        {
-            //createGame.CreatorId = userDAO.GetUser(createGame.CreatorName).UserId;
-            IActionResult result;
-
-            //Game existingGame = gameDAO.GetGame(createGame.GameName);
-            //if (existingGame != null)
-            //{
-            //    return Conflict(new { message = "Game name already taken. Please choose a different game name." });
-            //}
-
+        {            
+            IActionResult result; 
             string userGameId = Convert.ToString(userGameDAO.InviteUser(userId, gameId));
             if (userGameId != null)
             {
