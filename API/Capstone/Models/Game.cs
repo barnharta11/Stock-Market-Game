@@ -14,6 +14,8 @@ namespace Capstone.Models
         public DateTime EndDate { get; set; }
         public int WinnerId { get; set; }
         public string CreatorName { get; set; }
+        public string StatusName { get; set; }
+
 
     }
 }

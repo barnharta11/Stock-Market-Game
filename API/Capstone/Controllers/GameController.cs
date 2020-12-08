@@ -70,5 +70,11 @@ namespace Capstone.Controllers
         {
             return Ok(gameDAO.GetGameList());
         }
+
+        [HttpGet("/games/{userId}")]
+        public IActionResult ListUsersGames(int userID)
+        {
+            return Ok(gameDAO.GetGamesByUser(userID));
+        }
     }
 }

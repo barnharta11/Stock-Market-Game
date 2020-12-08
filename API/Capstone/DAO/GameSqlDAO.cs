@@ -103,6 +103,42 @@ namespace Capstone.DAO
             return returnList;
         }
 
+        public List<Game> GetGamesByUser(int userID)
+        {
+            List<Game> returnList = new List<Game>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("select games.game_id, games.game_name, users.username, games.start_date, games.end_date, game_status.status_name from user_games join games on user_games.game_id = games.game_id  join users as u on user_games.user_id = u.user_id join users on games.creator_id = users.user_id join game_status on user_games.status_code = game_status.status_id where user_games.user_id = @USERID order by user_games.status_code", conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    cmd.Parameters.AddWithValue("@UserID", userID);
+
+                    while (reader.Read())
+                    {
+                        Game readGame = new Game();
+                        readGame.GameId = Convert.ToInt32(reader["games.game_id"]);
+                        readGame.GameName = Convert.ToString(reader["games.game_name"]);
+                        readGame.StartDate = Convert.ToDateTime(reader["games.start_date"]);
+                        readGame.EndDate = Convert.ToDateTime(reader["games.end_date"]);
+                        readGame.CreatorName = Convert.ToString(reader["users.username"]);
+                        readGame.StatusName = Convert.ToString(reader["game_status.status_name"]);                      
+                        returnList.Add(readGame);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return returnList;
+        }
+
+
+
         private Game GetGameFromReader(SqlDataReader reader)
         {
             Game searchGame = new Game()
