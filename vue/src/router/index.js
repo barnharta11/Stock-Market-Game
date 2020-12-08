@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import CreateGame from '../views/CreateGame.vue'
 import GameList from "../views/GameList.vue"
+import UsersGames from "../views/UsersGames.vue"
 
 Vue.use(Router)
 
@@ -78,7 +79,15 @@ const router = new Router({
       meta:{
         requiresAuth:true
       }
-    }
+    },
+    {
+      path: "/games/:userid",
+      name: "usersGames",
+      component: UsersGames,
+      meta:{
+        requiresAuth:true
+      }
+  }
   ]
 })
 
