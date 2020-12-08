@@ -1,5 +1,5 @@
 <template>
-<div>test
+<div>
   <create-game-component/>
   </div>
 </template>

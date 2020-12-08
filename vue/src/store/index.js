@@ -23,8 +23,12 @@ export default new Vuex.Store({
     allUsers:[],
     allGames:[],
     userGames:[],
+    selectedGame:[]
   },
   mutations: {
+    SET_SELECTED_GAME(state, game){
+      state.selectedGame=game
+    },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);

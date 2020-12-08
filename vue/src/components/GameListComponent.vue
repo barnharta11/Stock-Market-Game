@@ -6,7 +6,7 @@
           <span>{{game.startDate}} | </span>
           <span>{{game.endDate}}</span>
       </div>
-      <router-link :to = "{name: 'usersGames', params: {userid:this.$store.state.user.userId}}">See your games</router-link>
+      <router-link :to = "{name: 'usersGames', params: {userid:this.$store.state.user.userId}}">See games you are participating in</router-link>
   </div>
 </template>
 

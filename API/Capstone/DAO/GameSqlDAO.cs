@@ -81,13 +81,13 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("select games.game_name, users.username, games.start_date, games.end_date from games join users on creator_id = users.USER_ID", conn);
+                    SqlCommand cmd = new SqlCommand("select games.game_id, games.game_name, users.username, games.start_date, games.end_date from games join users on creator_id = users.USER_ID", conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
                         Game readGame = new Game();
-                        //readGame.GameId = Convert.ToInt32(reader["game_id"]);
+                        readGame.GameId = Convert.ToInt32(reader["game_id"]);
                         readGame.GameName = Convert.ToString(reader["game_name"]);
                         readGame.StartDate = Convert.ToDateTime(reader["start_date"]);
                         readGame.EndDate = Convert.ToDateTime(reader["end_date"]);
