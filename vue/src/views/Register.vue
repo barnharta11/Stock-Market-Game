@@ -13,7 +13,8 @@
       <input type="password" id="box3-2" class="formclass" placeholder="Password..." v-model="user.password" required/>
       <input type="password" id="box3-3" class="formclass" placeholder="Confirm Password..." v-model="user.confirmPassword" required/>
       <label id="end" class="textclass"></label>
-      <router-link id="box4-1" :to="{ name: 'login' }">Have an account?</router-link>
+      <label id="box4-1" for="username" class="textclass">Have an account? <router-link :to="{ name: 'login' }">Log in</router-link></label>
+      <!-- <router-link id="box4-2" :to="{ name: 'login' }">Have an account?</router-link> -->
       <button id="button" class="btn" type="submit">Create Account</button>
     </form>
   </div>
@@ -80,7 +81,6 @@ export default {
 .form-register{
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 1fr;
-  /* grid-gap: 3px; */
   grid-template-areas: 
   ". header header ."
   ". usename usename ."
@@ -96,7 +96,6 @@ export default {
 
 .maintext{
   font-family: Consolas, Arial, Helvetica;
-  /* border-radius: 25px; */
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
   font-size: 50px;
@@ -105,7 +104,6 @@ export default {
   font-weight: bolder;
   line-height: 50px;
   background-color: lightgray;
-  /* margin-bottom: 15px; */
   margin-top: 10px;
   padding-bottom: 25px;
   padding-top: 15px;
@@ -115,7 +113,7 @@ export default {
   font-family: Consolas, Arial, Helvetica;
   padding-top: 15px;
   padding-bottom: 3px;
-  padding-left: 4px;
+  padding-left: 19px;
   font-size: 35px;
   text-align: left;
   color: rgb(105, 172, 105);
@@ -145,14 +143,21 @@ export default {
   color: rgb(13, 42, 13);
   background-color: lightgray;
   line-height: 20px;
+  padding-left: 15px;
 }
 
 #box4-1{
   grid-area: loginlink;
+  background-color: rgb(105, 172, 105);
+  color: lightgray;
   text-align: right;
   font-size: 25px;
   bottom: 0%;
-  margin-top: 20px;
+  margin-top: 10px;
+}
+#box4-1:link{
+  background-color: lightgray;
+  text-decoration: none;
 
 }
 
