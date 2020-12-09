@@ -21,7 +21,7 @@ namespace Capstone.Controllers
         }
 
 
-        [HttpPost("/invite")]
+        [HttpPost("/inviteusers")]
         public IActionResult PostInvite(Invite inviteRequest)
         {            
             IActionResult result; 

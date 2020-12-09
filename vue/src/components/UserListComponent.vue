@@ -1,8 +1,8 @@
 <template>
   <div>
-      <div v-for="user in this.$store.state.allUsers" v-bind:key="user.id">
+      <div v-for="user in this.$store.state.allUsers" v-bind:key="user.UserId">
           {{user.username}} | 
-          <button v-on:click='invitePlayer(2, 9)'>Invite Player</button>
+          <button v-on:click="invitePlayer(user.UserId, this.currentGame.gameId)">Invite Player</button>
           </div>
       
   </div>
@@ -14,6 +14,7 @@ import inviteService from '../services/InviteService.js'
 export default {
     data(){
         return{
+            currentUser:[],
             currentGame:[],
             invite: {
                 userId: "",
@@ -22,6 +23,9 @@ export default {
         }
     },
 methods:{
+    getCurrentUser(){
+        this.currentUser=this.$store.state.user
+    },
     getCurrentGame(){
         this.currentGame=this.$store.state.selectedGame
     },
@@ -35,11 +39,13 @@ methods:{
         this.invite.userId=userid
         this.invite.gameId=gameid
         inviteService.inviteUser(this.invite)
+        .then(alert(`Invite was sent to ${this.user.username}`))
     }
 },
 created(){
     this.loadUsers()
     this.getCurrentGame()
+    this.getCurrentUser()
 }
 }
 </script>
