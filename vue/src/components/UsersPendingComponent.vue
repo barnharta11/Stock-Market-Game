@@ -1,18 +1,17 @@
 <template>
   <div>
-      <div v-for="game in this.$store.state.userGames" v-bind:key="game.id">
-                    <router-link :to="{name:'gamedetails', params: {gameid:game.gameId}}">
+      <div v-for="game in pendingGames" v-bind:key="game.id">
+          <router-link :to="{name:'gamedetails', params: {gameid:game.gameId}}">
           <button v-on:click='SetSelectedGame(game)'>
-          <span>{{game.gameName}} | </span>
-                        </button>
+              {{game.gameName}} | 
+              </button>
               </router-link>
           <span>{{game.creatorName}} | </span>
           <span>{{game.startDate}} | </span>
           <span>{{game.endDate}} | </span>
-          <span>{{game.statusName}}</span>
-          <span>
-              <!-- <router-link :to -->
-          </span>
+          <span>{{game.statusName}} | </span>
+          <span>{{game.gameId}}</span>
+          
       </div>
   </div>
 </template>
@@ -20,14 +19,24 @@
 <script>
 import gameService from "../services/GameService.js"
 export default {
-methods:{
+data(){
+        return{
+            pendingGames: [],
+
+        }
+    },
+    methods:{
     SetSelectedGame(game){
         this.$store.commit("SET_SELECTED_GAME", game)
     },
     GetUsersGames(){
         gameService.getUsersGames(this.$store.state.user.userId)
         .then(response=>{
-            this.$store.commit("SET_USERSGAMES", response.data)
+            response.data.forEach(element => {
+                if(element.statusName=='Pending'){
+                    this.pendingGames.push(element)
+                }
+            });
         })
     }
 },
