@@ -61,5 +61,20 @@ Create Table user_games (
 --populate default data
 INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('user', 'makesomethingup@someplace.com', 'Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('admin', 'totallynotgamblingatwork@hotmail.com','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
+
 INSERT INTO	game_status (status_id, status_name) VALUES (0, 'Pending'), (1, 'Accepted'), (2, 'Completed');
+
+INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Wall St. Wolves', 1, 12/07/2020, 12/16/2020);
+INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Day Trading Daddies', 1, 12/08/2020, 12/17/2020);
+INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Martha Stewart Exchange', 2, 12/09/2020, 12/18/2020);
+INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Feds Keep Out', 2, 12/10/2020, 12/19/2020);
+
+INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 1, 100000, 1);
+INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 2, 100000, 1);
+INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 3, 100000, 0);
+INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 3, 100000, 1);
+INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 4, 100000, 1);
+INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 1, 100000, 0);
+
+
 GO
