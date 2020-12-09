@@ -44,23 +44,21 @@ CREATE TABLE games (
 );
 
 Create Table portfolio (
+	portfolio_id int IDENTITY(1,1) NOT NULL,
 	user_game_id int NOT NULL,
 	balance money NOT NULL,
-	portfolio_id int IDENTITY(1,1) NOT NULL,
 	Constraint pk_portfolio_portfolio_id Primary Key (portfolio_id),
 );	
 
 Create Table user_games (
+	user_game_id int IDENTITY(1,1) NOT NULL,
 	user_id int NOT NULL,
 	game_id int NOT NULL,
-	user_game_id int IDENTITY(1,1) NOT NULL,
 	status_code int NOT NULL,
-	portfolio_id int NOT NULL,
 	Constraint pk_user_game_id Primary Key (user_game_id),
 	Constraint fk_user_games_user_id Foreign Key (user_id) References users(user_id),
 	Constraint fk_user_games_game_id Foreign Key (game_id) References games (game_id),
 	Constraint fk_user_games_game_status Foreign Key (status_code) References game_status (status_id),
-	Constraint fk_user_games_portfolio Foreign Key (portfolio_id) References portfolio (portfolio_id),
 	Constraint ck_status_code check(status_code in (0,1))
 );
 
@@ -73,10 +71,10 @@ Create Table stocks (
 );
 
 Create Table portfolio_stocks (
+	portfolio_stocks_id int IDENTITY(1,1) NOT NULL,
 	portfolio_id int NOT NULL,
 	stock_id int NOT NULL,
 	quantity_held int NOT NULL,
-	portfolio_stocks_id int IDENTITY(1,1) NOT NULL,
 	Constraint pk_portfolio_stocks_portfolio_stocks_id Primary Key (portfolio_stocks_id),
 	Constraint fk_portfolio_stocks_portfolio Foreign Key (portfolio_id) References portfolio(portfolio_id),
 	Constraint fk_portfolio_stocks_stock Foreign Key (stock_id) References stocks(stock_id),
@@ -118,16 +116,16 @@ INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Feds Ke
 INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Nothing to SEC Here', 1, 12/11/2020, 12/20/2020);
 INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('I Like Big Bucks', 2, 12/11/2020, 12/20/2020);
 
-INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 1, 100000, 1);
-INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 2, 100000, 1);
-INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 3, 100000, 0);
-INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 3, 100000, 1);
-INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 4, 100000, 1);
-INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 1, 100000, 0);
-INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 5, 100000, 0);
-INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 5, 100000, 1);
-INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 6, 100000, 0);
-INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 6, 100000, 1);
+INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 1, 1);
+INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 2, 1);
+INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 3, 0);
+INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 3, 1);
+INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 4, 1);
+INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 1, 0);
+INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 5, 0);
+INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 5, 1);
+INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 6, 0);
+INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 6, 1);
 
 --table alterations
 
