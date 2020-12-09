@@ -14,7 +14,6 @@
       <input type="password" id="box3-3" class="formclass" placeholder="Confirm Password..." v-model="user.confirmPassword" required/>
       <label id="end" class="textclass"></label>
       <label id="box4-1" for="username" class="textclass">Have an account? <router-link :to="{ name: 'login' }">Log in</router-link></label>
-      <!-- <router-link id="box4-2" :to="{ name: 'login' }">Have an account?</router-link> -->
       <button id="button" class="btn" type="submit">Create Account</button>
     </form>
   </div>

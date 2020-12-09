@@ -1,10 +1,8 @@
 <template>
+<div id="creategamemain">
   <div id="create-game-form" class="text-center">
     <form class="form-create-game" @submit.prevent="createGame()">
       <h1 class="h3 mb-3 font-weight-normal">Create Game</h1>
-      <!-- <div class="alert alert-danger" role="alert" v-if="registrationErrors">
-        {{ registrationErrorMsg }}
-      </div> -->
       <label for="gamename" class="sr-only">Gamename</label>
       <input
         type="text"
@@ -39,6 +37,7 @@
       </button>
     </form>
   </div>
+</div>
 </template>
 
 <script>
@@ -70,4 +69,8 @@ methods:{
 
 <style>
 
+#creategamemain{
+  background-color: rgb(105,172,105);
+  
+}
 </style>
