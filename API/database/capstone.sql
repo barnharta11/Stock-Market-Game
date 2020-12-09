@@ -116,6 +116,7 @@ INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Day Tra
 INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Martha Stewart Exchange', 2, 12/09/2020, 12/18/2020);
 INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Feds Keep Out', 2, 12/10/2020, 12/19/2020);
 INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Nothing to SEC Here', 1, 12/11/2020, 12/20/2020);
+INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('I Like Big Bucks', 2, 12/11/2020, 12/20/2020);
 
 INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 1, 100000, 1);
 INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 2, 100000, 1);
@@ -125,6 +126,8 @@ INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 4, 10
 INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 1, 100000, 0);
 INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 5, 100000, 0);
 INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 5, 100000, 1);
+INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (1, 6, 100000, 0);
+INSERT INTO user_games (user_id, game_id, balance, status_code) VALUEs (2, 6, 100000, 1);
 
 --table alterations
 
