@@ -21,9 +21,14 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     allUsers:[],
-    allGames:[]
+    allGames:[],
+    userGames:[],
+    selectedGame:[]
   },
   mutations: {
+    SET_SELECTED_GAME(state, game){
+      state.selectedGame=game
+    },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);
@@ -45,6 +50,9 @@ export default new Vuex.Store({
     },
     SET_ALLGAMES(state, gamelist){
       state.allGames = gamelist
+    },
+    SET_USERSGAMES(state, gamelist){
+      state.userGames=gamelist
     }
   }
 })

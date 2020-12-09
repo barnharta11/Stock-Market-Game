@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Capstone.DAO;
+using Capstone.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,22 +21,14 @@ namespace Capstone.Controllers
         }
 
 
-        [HttpPost("/invite")]
-        public IActionResult InviteUser(int userId, int gameId)
-        {
-            //createGame.CreatorId = userDAO.GetUser(createGame.CreatorName).UserId;
-            IActionResult result;
-
-            //Game existingGame = gameDAO.GetGame(createGame.GameName);
-            //if (existingGame != null)
-            //{
-            //    return Conflict(new { message = "Game name already taken. Please choose a different game name." });
-            //}
-
-            string userGameId = Convert.ToString(userGameDAO.InviteUser(userId, gameId));
+        [HttpPost("/inviteusers")]
+        public IActionResult PostInvite(Invite inviteRequest)
+        {            
+            IActionResult result; 
+            int? userGameId = (userGameDAO.InviteUser(inviteRequest));
             if (userGameId != null)
             {
-                result = Created(userGameId, null);
+                result = Created(userGameId.ToString(), null);
             }
             else
             {

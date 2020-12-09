@@ -7,6 +7,10 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import CreateGame from '../views/CreateGame.vue'
 import GameList from "../views/GameList.vue"
+import UsersGames from "../views/UsersGames.vue"
+import CreatedGames from "../views/CreatedGames.vue"
+import GameDetailsPage from "../views/GameDetailsPage.vue"
+import DisplayUser from "../views/DisplayUser.vue"
 
 Vue.use(Router)
 
@@ -63,14 +67,14 @@ const router = new Router({
         requiresAuth:true
       }
     },
-    // {
-    //   path: "/:gameid",
-    //   name: "gamepage",
-    //   component: Game,
-    //   meta:{
-    //     requiresAuth:true
-    //   }
-    // },
+    {
+      path: "/:gameid",
+      name: "gamedetails",
+      component: GameDetailsPage,
+      meta:{
+        requiresAuth:true
+      }
+    },
     {
       path: "/games",
       name: "allgames",
@@ -78,7 +82,31 @@ const router = new Router({
       meta:{
         requiresAuth:true
       }
+    },
+    {
+      path: "/games/:userid",
+      name: "usersGames",
+      component: UsersGames,
+      meta:{
+        requiresAuth:true
+      }
+  },
+  {
+    path:"/inviteusers",
+    name:"displayusers",
+    component: DisplayUser,
+    meta:{
+      requiresAuth:true
     }
+  },
+  {
+    path: "/games/:userid/createdgames",
+    name: "createdgames",
+    component: CreatedGames,
+    meta:{
+      requiresAuth:true
+    }
+  }
   ]
 })
 

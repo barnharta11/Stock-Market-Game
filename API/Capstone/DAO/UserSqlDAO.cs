@@ -104,7 +104,7 @@ namespace Capstone.DAO
                     while (reader.Read()){
                         ReturnUser user = new ReturnUser();
                         user.UserId = Convert.ToInt32(reader["user_id"]);
-                        user.Username = Convert.ToString(reader["user_name"]);
+                        user.Username = Convert.ToString(reader["username"]);
                         returnList.Add(user);
                     }
                 }

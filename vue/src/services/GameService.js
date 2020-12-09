@@ -6,5 +6,8 @@ export default {
     },
     listAllGames(){
         return axios.get('/games')
+    },
+    getUsersGames(id){
+        return axios.get(`/games/${id}`)
     }
 }

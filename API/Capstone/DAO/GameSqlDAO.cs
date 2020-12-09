@@ -24,11 +24,13 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand command = new SqlCommand("INSERT INTO games ( game_name, creator_id, start_date, end_date) VALUES (@gamename, @creatorid, @startdate, @enddate)", conn);
+                    SqlCommand command = new SqlCommand("INSERT INTO games ( game_name, creator_id, start_date, end_date) VALUES (@gamename, @creatorid, @startdate, @enddate) INSERT INTO user_games ( user_id, game_id, balance, status_code) VALUES (@creatorid, @@IDENTITY, @balance, @statuscode)", conn);
                     command.Parameters.AddWithValue("@gamename", gameName);
                     command.Parameters.AddWithValue("@creatorid", creatorId);
                     command.Parameters.AddWithValue("@startdate", startDate);
                     command.Parameters.AddWithValue("@enddate", endDate);
+                    command.Parameters.AddWithValue("@balance", 100000);
+                    command.Parameters.AddWithValue("@statuscode", 1);
                     command.ExecuteNonQuery();
 
                 }
@@ -79,7 +81,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM games", conn);
+                    SqlCommand cmd = new SqlCommand("select games.game_id, games.game_name, users.username, games.start_date, games.end_date from games join users on creator_id = users.USER_ID", conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
@@ -89,8 +91,9 @@ namespace Capstone.DAO
                         readGame.GameName = Convert.ToString(reader["game_name"]);
                         readGame.StartDate = Convert.ToDateTime(reader["start_date"]);
                         readGame.EndDate = Convert.ToDateTime(reader["end_date"]);
-                        readGame.CreatorId = Convert.ToInt32(reader["creator_id"]);
-                        //readGame.WinnerId = Convert.ToInt32(reader["winner_id"]);                      
+                        //readGame.CreatorId = Convert.ToInt32(reader["creator_id"]);
+                        //readGame.WinnerId = Convert.ToInt32(reader["winner_id"]);
+                        readGame.CreatorName = Convert.ToString(reader["username"]);
                         returnList.Add(readGame);
                     }
                 }
@@ -112,19 +115,20 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("select games.game_id, games.game_name, users.username, games.start_date, games.end_date, game_status.status_name from user_games join games on user_games.game_id = games.game_id  join users as u on user_games.user_id = u.user_id join users on games.creator_id = users.user_id join game_status on user_games.status_code = game_status.status_id where user_games.user_id = @USERID order by user_games.status_code", conn);
+                    SqlCommand cmd = new SqlCommand("select games.game_id, games.game_name, users.username, games.start_date, games.end_date, game_status.status_name from user_games join games on user_games.game_id = games.game_id  join users as u on user_games.user_id = u.user_id join users on games.creator_id = users.user_id join game_status on user_games.status_code = game_status.status_id where user_games.user_id = @userId order by user_games.status_code", conn);
+                    cmd.Parameters.AddWithValue("@userId", userID);
                     SqlDataReader reader = cmd.ExecuteReader();
-                    cmd.Parameters.AddWithValue("@UserID", userID);
+                    
 
                     while (reader.Read())
-                    {
+                    {                        
                         Game readGame = new Game();
-                        readGame.GameId = Convert.ToInt32(reader["games.game_id"]);
-                        readGame.GameName = Convert.ToString(reader["games.game_name"]);
-                        readGame.StartDate = Convert.ToDateTime(reader["games.start_date"]);
-                        readGame.EndDate = Convert.ToDateTime(reader["games.end_date"]);
-                        readGame.CreatorName = Convert.ToString(reader["users.username"]);
-                        readGame.StatusName = Convert.ToString(reader["game_status.status_name"]);                      
+                        readGame.GameId = Convert.ToInt32(reader["game_id"]);
+                        readGame.GameName = Convert.ToString(reader["game_name"]);
+                        readGame.StartDate = Convert.ToDateTime(reader["start_date"]);
+                        readGame.EndDate = Convert.ToDateTime(reader["end_date"]);
+                        readGame.CreatorName = Convert.ToString(reader["username"]);
+                        readGame.StatusName = Convert.ToString(reader["status_name"]);                      
                         returnList.Add(readGame);
                     }
                 }
