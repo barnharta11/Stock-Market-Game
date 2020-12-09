@@ -10,6 +10,7 @@ import GameList from "../views/GameList.vue"
 import UsersGames from "../views/UsersGames.vue"
 import CreatedGames from "../views/CreatedGames.vue"
 import GameDetailsPage from "../views/GameDetailsPage.vue"
+import DisplayUser from "../views/DisplayUser.vue"
 
 Vue.use(Router)
 
@@ -89,6 +90,14 @@ const router = new Router({
       meta:{
         requiresAuth:true
       }
+  },
+  {
+    path:"/users",
+    name:"displayusers",
+    component: DisplayUser,
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: "/games/:userid/createdgames",

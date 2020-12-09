@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Capstone.DAO;
+using Capstone.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,13 +22,13 @@ namespace Capstone.Controllers
 
 
         [HttpPost("/invite")]
-        public IActionResult InviteUser(int userId, int gameId)
+        public IActionResult PostInvite(Invite inviteRequest)
         {            
             IActionResult result; 
-            string userGameId = Convert.ToString(userGameDAO.InviteUser(userId, gameId));
+            int? userGameId = (userGameDAO.InviteUser(inviteRequest));
             if (userGameId != null)
             {
-                result = Created(userGameId, null);
+                result = Created(userGameId.ToString(), null);
             }
             else
             {
