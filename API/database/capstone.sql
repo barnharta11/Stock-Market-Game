@@ -129,6 +129,6 @@ INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 6, 1);
 
 --table alterations
 
-Alter Table porfolio ADD Constraint fk_portfolio_user_games Foreign Key (user_game_id) References user_games(user_game_id)
+Alter Table portfolio ADD Constraint fk_portfolio_user_games Foreign Key (user_game_id) References user_games(user_game_id)
 
 GO
