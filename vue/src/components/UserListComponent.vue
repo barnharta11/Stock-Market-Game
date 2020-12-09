@@ -1,8 +1,8 @@
 <template>
   <div>
-      <div v-for="user in this.$store.state.allUsers" v-bind:key="user.UserId">
+      <div v-for="user in $store.state.allUsers" v-bind:key="user.userId">
           {{user.username}} | 
-          <button v-on:click="invitePlayer(user.UserId, this.currentGame.gameId)">Invite Player</button>
+          <button v-on:click="invitePlayer(user.userId, currentGame.gameId, user.username)">Invite Player</button>
           </div>
       
   </div>
@@ -35,11 +35,15 @@ methods:{
             this.$store.commit("SET_ALLUSERS", response.data)
         })
     },
-    invitePlayer(userid, gameid){
+    invitePlayer(userid, gameid, username){
         this.invite.userId=userid
         this.invite.gameId=gameid
         inviteService.inviteUser(this.invite)
-        .then(alert(`Invite was sent to ${this.user.username}`))
+        .then(alert(`Invite was sent to ${username}`))
+        .catch(err => {
+            console.log(err)
+            alert('There was an error')
+        })
     }
 },
 created(){
