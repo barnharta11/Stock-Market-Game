@@ -1,4 +1,5 @@
 <template>
+<body>
   <div id="app">
     <div id="nav">
       <router-link id="homebutton" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;&nbsp;|
@@ -6,16 +7,26 @@
     </div>
     <router-view />
   </div>
+</body>
 </template>
 
 <style>
+
+body{
+  margin: 0px;
+}
+
+#app{
+  background-color: rgb(105, 172, 105);
+  margin: 0px;
+}
+
 #nav{
   background-color: black; 
   font-family: Consolas, Arial, Helvetica;
   color: rgb(105, 172, 105);
   font-family: Consolas, Arial, Helvetica;
   font-size: 35px;
-
 }
 #homebutton:link{
   background-color: black;

@@ -12,7 +12,7 @@
       <label id="box3-1" for="password" class="textclass">Password</label>
       <input type="password" id="box3-2" class="formclass" placeholder="Password..." v-model="user.password" required/>
       <input type="password" id="box3-3" class="formclass" placeholder="Confirm Password..." v-model="user.confirmPassword" required/>
-      <label id="end" class="textclass"></label>
+      <label id="end" class="formfooter"></label>
       <label id="box4-1" for="username" class="textclass">Have an account? <router-link :to="{ name: 'login' }">Log in</router-link></label>
       <button id="button" class="btn" type="submit">Create Account</button>
     </form>
@@ -122,16 +122,6 @@ export default {
 
 #end{
   font-family: Consolas, Arial, Helvetica;
-  border-bottom-right-radius: 25px;
-  border-bottom-left-radius: 25px;
-  padding-top: 35px;
-  padding-bottom: 3px;
-  padding-left: 4px;
-  font-size: 35px;
-  text-align: left;
-  color: rgb(105, 172, 105);
-  line-height: 30px;
-  background-color: lightgray;
   grid-area: formbottom;
 }
 
@@ -204,6 +194,20 @@ export default {
 }
 #box3-3{
   grid-area: passcon;
+}
+
+.formfooter{
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  padding-top: 35px;
+  padding-bottom: 3px;
+  padding-left: 4px;
+  font-size: 35px;
+  text-align: left;
+  color: rgb(105, 172, 105);
+  line-height: 30px;
+  background-color: lightgray;
+
 }
 
 </style>
