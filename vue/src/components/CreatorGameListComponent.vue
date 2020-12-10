@@ -13,6 +13,7 @@
           <span id="gamelistenddate" class="smalltextclass">{{game.endDate}} </span>
           <span id="gameliststatus" class="smalltextclass">{{game.statusName}} </span>
           <span id="gamelistid" class="smalltextclass">{{game.gameId}}</span>
+          <router-link v-on:click="SetInviteGame(game)" :to="{name:'displayusers'}">Invite users</router-link>
           <!-- <label id="end" class="formfooter"></label> -->
 
       </div>
@@ -29,6 +30,9 @@ export default {
         }
     },
 methods:{
+    SetInviteGame(game){
+        this.$store.commit("SET_SELECTED_GAME", game)
+    },
     SetSelectedGame(game){
         this.$store.commit("SET_SELECTED_GAME", game)
         this.$router.push({name:'gamedetails', params: {gameid:game.gameId} })
