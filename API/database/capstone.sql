@@ -63,7 +63,7 @@ Create Table user_games (
 );
 
 Create Table stocks (
-	stock_id int NOT NULL,
+	stock_id int IDENTITY(1,1) NOT NULL,
 	stock_ticker varchar(50) NOT NULL,
 	company_name varchar(50) NOT NULL,
 	stock_price money NOT NULL,

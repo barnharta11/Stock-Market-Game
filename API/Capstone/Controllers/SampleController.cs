@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Capstone.DAO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,18 @@ namespace Capstone.Controllers
     [ApiController]
     public class SampleController : ControllerBase
     {
+        private IStockAPIDAO stockAPIDAO;
+        public SampleController(IStockAPIDAO stockAPIDAO)
+        {
+            this.stockAPIDAO = stockAPIDAO;
+        }
+
+        [HttpGet("/stocks")]
+        public ActionResult GetStocks()
+        {
+            return Ok(stockAPIDAO.GetStocks());
+        }
+
         [HttpGet]
         public ActionResult GetSamples()
         {
