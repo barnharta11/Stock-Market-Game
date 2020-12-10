@@ -117,15 +117,25 @@ INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Nothing
 INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('I Like Big Bucks', 2, 12/11/2020, 12/20/2020);
 
 INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 1, 1);
+INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);
 INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 2, 1);
+INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);
 INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 3, 0);
+INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);
 INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 3, 1);
+INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);
 INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 4, 1);
+INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);
 INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 1, 0);
+INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);
 INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 5, 0);
+INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);
 INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 5, 1);
+INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);
 INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 6, 0);
+INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);
 INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 6, 1);
+INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);
 
 --table alterations
 
