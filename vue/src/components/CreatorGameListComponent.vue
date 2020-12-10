@@ -1,17 +1,20 @@
 <template>
   <div class="mainbackground">
       <div id="contain" v-for="game in creatorGames" v-bind:key="game.id">
+          <!-- <label id="top" class="tabletop"></label> -->
+
           <!-- <router-link id="buttontogamedetails" class="gamebutton" :to="{name:'gamedetails', params: {gameid:game.gameId}}"> -->
-          <button class="buttontext" v-on:click='SetSelectedGame(game)'>
+          <button id="button2" v-on:click='SetSelectedGame(game)'>
               {{game.gameName}}  
               </button>
               <!-- </router-link> -->
-          <span id="gamelistcreatorname" class="smalltextclass">{{game.creatorName}} | </span>
-          <span id="gameliststartdate" class="smalltextclass">{{game.startDate}} | </span>
-          <span id="gamelistenddate" class="smalltextclass">{{game.endDate}} | </span>
-          <span id="gameliststatus" class="smalltextclass">{{game.statusName}} | </span>
+          <span id="gamelistcreatorname" class="smalltextclass">{{game.creatorName}} </span>
+          <span id="gameliststartdate" class="smalltextclass">{{game.startDate}} </span>
+          <span id="gamelistenddate" class="smalltextclass">{{game.endDate}} </span>
+          <span id="gameliststatus" class="smalltextclass">{{game.statusName}} </span>
           <span id="gamelistid" class="smalltextclass">{{game.gameId}}</span>
-          
+          <!-- <label id="end" class="formfooter"></label> -->
+
       </div>
   </div>
 </template>
@@ -52,24 +55,36 @@ created(){
 
 #contain{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-gap:5px;
+    grid-template-columns: 1fr 3fr 1fr 3fr 3fr 1fr .5fr 1fr;
     grid-template-areas: 
+    /* ". . top top top top top top ." */
     ". button creatorname startdate enddate status id .";
 }
 
+/* #top{
+    background-color: lightgray;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    grid-area: top;
+    
+} */
+
 .mainbackground{
+    padding-top: 25px;
     background-color: rgb(105,172,105);
     height: 100vh;
 }
 
 .smalltextclass{
   font-family: Consolas, Arial, Helvetica;
-  padding-top: 15px;
-  padding-bottom: 3px;
-  padding-left: 19px;
+    /* border-right: 3px, solid, rgb(105, 172, 105); */
+
+  /* padding-top: 15px; */
+  /* padding-bottom: 3px; */
+  /* padding-left: 19px; */
   font-size: 20px;
-  text-align: left;
+  text-align: center;
+  /* text-justify: auto; */
   color: rgb(105, 172, 105);
   line-height: 30px;
   background-color: lightgray;
@@ -78,18 +93,25 @@ created(){
 
 #gamelistcreatorname{
     grid-area: creatorname;
+    border-right: 2px solid rgb(105, 172, 105);
 }
 
 #gameliststartdate{
     grid-area: startdate;
+    border-right: 2px solid rgb(105, 172, 105);
+
 }
 
 #gamelistenddate{
     grid-area: enddate;
+    border-right: 2px solid rgb(105, 172, 105);
+
 }
 
 #gameliststatus{
-    grid-area: status;
+    grid-area: status; 
+    border-right: 2px solid rgb(105, 172, 105);
+
 }
 
 #gamelistid{
@@ -113,18 +135,18 @@ grid-area: createbutton;
   transition-duration: .4s;
 } */
 
-.buttontext{
+#button2{
   background-color: lightgray;
   font-family: Consolas, Arial, Helvetica;
   color: rgb(105, 172, 105);
   border: none;
   border-radius: 10px;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   font-size: 20px;
-  line-height: 20px;
-  width: 50%;
-  margin-top: 20px;
-  margin-bottom: 100%;
+  /* line-height: 20px; */
+  /* width: 50%; */
+  margin: 5px;
+  /* margin-bottom: 100%; */
   transition-duration: .4s;
   grid-area: button;
 
