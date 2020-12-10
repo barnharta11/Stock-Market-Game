@@ -1,11 +1,13 @@
 <template>
+<div class="mainbackground">
   <div>
-    <h1>Current Games</h1>
+    <div class="tableheader"> My Current Games</div>
     <users-games-component/>
-    <h1>All Games</h1>
+    <div class="tableheader">All Games</div>
     <game-list-component/>
-    <h1>Pending Invites</h1>
+    <div class="tableheader"> My Pending Invites</div>
     <users-pending-component/>
+  </div>
   </div>
 </template>
 
@@ -20,5 +22,21 @@ export default {
 </script>
 
 <style>
+
+.tableheader{
+  font-family: Consolas, Arial, Helvetica;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  font-size: 50px;
+  text-align: center;
+  color: rgb(105, 172, 105);
+  font-weight: bolder;
+  line-height: 50px;
+  background-color: lightgray;
+  margin-top: 10px;
+  padding-bottom: 25px;
+  padding-top: 15px;
+
+}
 
 </style>
