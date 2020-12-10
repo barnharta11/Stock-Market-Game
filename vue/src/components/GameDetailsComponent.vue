@@ -4,7 +4,7 @@
           <span>{{selectedGame.creatorName}} | </span>
           <span>{{selectedGame.startDate}} | </span>
           <span>{{selectedGame.endDate}}</span>
-          <router-link :to="{name:'displayusers'}">Invite users</router-link>
+          <!-- <router-link :to="{name:'displayusers'}">Invite users</router-link> -->
   </div>
 </template>
 
