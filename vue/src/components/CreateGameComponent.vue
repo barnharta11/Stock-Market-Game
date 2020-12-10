@@ -160,7 +160,6 @@ methods:{
   margin-top: 20px;
   margin-bottom: 100%;
   transition-duration: .4s;
-
 }
 
 </style>
