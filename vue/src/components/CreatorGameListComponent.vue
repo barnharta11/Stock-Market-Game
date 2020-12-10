@@ -1,11 +1,11 @@
 <template>
   <div class="mainbackground">
       <div id="contain" v-for="game in creatorGames" v-bind:key="game.id">
-          <router-link id="buttontogamedetails" class="gamebutton" :to="{name:'gamedetails', params: {gameid:game.gameId}}">
+          <!-- <router-link id="buttontogamedetails" class="gamebutton" :to="{name:'gamedetails', params: {gameid:game.gameId}}"> -->
           <button class="buttontext" v-on:click='SetSelectedGame(game)'>
               {{game.gameName}}  
               </button>
-              </router-link>
+              <!-- </router-link> -->
           <span id="gamelistcreatorname" class="smalltextclass">{{game.creatorName}} | </span>
           <span id="gameliststartdate" class="smalltextclass">{{game.startDate}} | </span>
           <span id="gamelistenddate" class="smalltextclass">{{game.endDate}} | </span>
@@ -28,6 +28,7 @@ export default {
 methods:{
     SetSelectedGame(game){
         this.$store.commit("SET_SELECTED_GAME", game)
+        this.$router.push({name:'gamedetails', params: {gameid:game.gameId} })
     },
     GetUsersGames(){
         gameService.getUsersGames(this.$store.state.user.userId)
