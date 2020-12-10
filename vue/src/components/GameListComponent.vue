@@ -49,8 +49,7 @@ created(){
 
 #allname{
     grid-area: name;
-            border-right: 2px solid rgb(105, 172, 105);
-
+    border-right: 2px solid rgb(105, 172, 105);
 }
 
 #allstart{

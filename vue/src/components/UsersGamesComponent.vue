@@ -3,13 +3,15 @@
       <div id="usersgamescontainer" v-for="game in this.$store.state.userGames" v-bind:key="game.id">
                     <!-- <router-link :to="{name:'gamedetails', params: {gameid:game.gameId}}"> -->
           <button class="buttondefault" v-on:click='SetSelectedGame(game)'>
-          <span>{{game.gameName}} </span>
+            <span>{{game.gameName}} </span>
           </button>
               <!-- </router-link> -->
-          <span id="currentname" class="textclass">{{game.creatorName}}</span>
-          <span id="currentstart" class="textclass">{{game.startDate}}</span>
-          <span id="currentend" class="textclass">{{game.endDate}}</span>
-          <span id="currentstatus" class="textclass">{{game.statusName}}</span>
+          <!-- <div> -->
+            <span id="currentname" class="textclass">{{game.creatorName}}</span>
+            <span id="currentstart" class="textclass">{{game.startDate}}</span>
+            <span id="currentend" class="textclass">{{game.endDate}}</span>
+            <span id="currentstatus" class="textclass">{{game.statusName}}</span>
+          <!-- </div> -->
           <!-- <span> -->
               <!-- <router-link :to -->
           <!-- </span> -->
@@ -41,12 +43,13 @@ created(){
 
 <style>
 
+
 #usersgamescontainer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 2.5fr 2.5fr 1fr 1fr;
     grid-template-areas: 
-    ". buttonslot name start end status ."
-    ;
+    ". buttonslot name start end status .";
+    /* padding: 100px; */
 }
 
 .buttondefault{
