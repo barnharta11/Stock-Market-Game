@@ -12,31 +12,20 @@ namespace Capstone.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class SampleController : ControllerBase
+    public class StocksController : ControllerBase
     {
         private IStockAPIDAO stockAPIDAO;
-        public SampleController(IStockAPIDAO stockAPIDAO)
+        public StocksController(IStockAPIDAO stockAPIDAO)
         {
             this.stockAPIDAO = stockAPIDAO;
         }
 
-        [HttpGet("/stocks")]
+        [HttpGet]
         public ActionResult GetStocks()
         {
             return Ok(stockAPIDAO.GetStocks());
         }
 
-        [HttpGet]
-        public ActionResult GetSamples()
-        {
-            return Ok(new Object[]
-            {
-                new { Code = "AZ", Name="Arizona"},
-                new { Code = "AK", Name="Alaska"},
-                new { Code = "NH", Name="New Hampshire"},
-                new { Code = "OH", Name="Ohio"},
-            });
-        }
 
         [Authorize]
         [HttpGet("auth")]

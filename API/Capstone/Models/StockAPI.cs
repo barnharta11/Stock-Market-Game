@@ -14,18 +14,16 @@ namespace Capstone.Models
         }
     
     }
-
-
-
-
     public class Quoteresponse
     {
         public List<Result> result { get; set; }
         public object error { get; set; }
     }
-
     public class Result
     {
+        public string symbol { get; set; }
+        public float regularMarketPrice { get; set; }
+        public string shortName { get; set; }
         //public string language { get; set; }
         //public string region { get; set; }
         //public string quoteType { get; set; }
@@ -66,7 +64,6 @@ namespace Capstone.Models
         //public float regularMarketChange { get; set; }
         //public float regularMarketChangePercent { get; set; }
         //public int regularMarketTime { get; set; }
-        public float regularMarketPrice { get; set; }
         //public float regularMarketDayHigh { get; set; }
         //public string regularMarketDayRange { get; set; }
         //public float regularMarketDayLow { get; set; }
@@ -83,7 +80,6 @@ namespace Capstone.Models
         //public string market { get; set; }
         //public string messageBoardId { get; set; }
         //public string fullExchangeName { get; set; }
-        public string shortName { get; set; }
         //public string longName { get; set; }
         //public float regularMarketOpen { get; set; }
         //public int averageDailyVolume3Month { get; set; }
@@ -122,8 +118,7 @@ namespace Capstone.Models
         //public float fiftyDayAverage { get; set; }
         //public float fiftyDayAverageChange { get; set; }
         //public float fiftyDayAverageChangePercent { get; set; }
-        //public string[] components { get; set; }
-        public string symbol { get; set; }
+        //public string[] components { get; set; }    
     }
 
     
