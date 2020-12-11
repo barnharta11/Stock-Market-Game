@@ -1,11 +1,13 @@
 <template>
   <div id="invitecontainer" class="mainbackground">
       <input id="searchInput" type=text v-model='currentSearch' placeholder="Search User Name" />
-    <div id="invitename" class="textclass" v-for="user in searchedUsers" v-bind:key="user.userId">
-        <span>{{user.username}} |</span>
-        <button id="invitebtn" class="buttondefault" v-on:click="invitePlayer(user.userId, currentGame.gameId, user.username)">Invite Player</button>
+        <div id="test">
+            <div id="invitename" class="textclass" v-for="user in searchedUsers" v-bind:key="user.userId">
+                <span>{{user.username}} |</span>
+                <button id="invitebtn" class="buttondefault" v-on:click="invitePlayer(user.userId, currentGame.gameId, user.username)">Invite Player</button>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -69,13 +71,14 @@ created(){
 </script>
 
 <style>
-/* 
+
+#test{
+    text-align: right;
+}
+
 #invitecontainer{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-areas: 
-    ". name btn .";
-} */
+    text-align: center;
+}
 
 #searchInput{
   font-family: Consolas, Arial, Helvetica;
@@ -85,13 +88,11 @@ created(){
   background-color: lightgray;
   line-height: 20px;
   padding-left: 15px;
-  margin-left: 41%;
-  align-content: center;
+  /* align-content: center; */
 }
 #invitename{
     grid-area: name;
     padding-right: 10px;
-    /* border-right: 5px solid lightgray; */
     color: lightgray;
     background-color: rgb(105,172,105);
     height:45px;

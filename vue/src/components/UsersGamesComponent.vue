@@ -1,22 +1,31 @@
 <template>
-  <div>
-      <div id="usersgamescontainer" v-for="game in this.$store.state.userGames" v-bind:key="game.id">
-                    <!-- <router-link :to="{name:'gamedetails', params: {gameid:game.gameId}}"> -->
-          <button class="buttondefault" v-on:click='SetSelectedGame(game)'>
-            <span>{{game.gameName}} </span>
-          </button>
-              <!-- </router-link> -->
-          <!-- <div> -->
-            <span id="currentname" class="textclass">{{game.creatorName}}</span>
-            <span id="currentstart" class="textclass">{{game.startDate}}</span>
-            <span id="currentend" class="textclass">{{game.endDate}}</span>
-            <span id="currentstatus" class="textclass">{{game.statusName}}</span>
-          <!-- </div> -->
-          <!-- <span> -->
-              <!-- <router-link :to -->
-          <!-- </span> -->
-      </div>
-  </div>
+
+<div class="mainbackground">
+    <div id="gamelistcontainer">
+        <h2>My Current Games</h2>
+        <table id="gamelistcreatorname" class="smalltextclass">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Creator</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="usersgamescontainer" v-for="game in this.$store.state.userGames" v-bind:key="game.id">
+                <tr>
+                    <td v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
+                    <td>{{game.creatorName}}</td>
+                    <td>{{game.startDate}}</td>
+                    <td>{{game.endDate}}</td>
+                    <td>{{game.statusName}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 </template>
 
 <script>
