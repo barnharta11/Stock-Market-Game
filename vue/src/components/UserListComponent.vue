@@ -56,12 +56,12 @@ created(){
 
 <style>
 
-#invitecontainer{
+/* #invitecontainer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas: 
     ". name btn .";
-}
+} */
 
 #invitename{
     grid-area: name;
