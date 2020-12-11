@@ -69,7 +69,8 @@ created(){
     color: lightgray;
     background-color: rgb(105,172,105);
     height:45px;
-    text-align: center;
+    text-align: right;
+    padding-right: 30%;
 }
 
 #invitebtn{
