@@ -18,6 +18,7 @@ if(currentToken != null) {
 
 export default new Vuex.Store({
   state: {
+    activePortfolio:[],
     token: currentToken || '',
     user: currentUser || {},
     allUsers:[],
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     selectedGame:[]
   },
   mutations: {
+    SET_SELECTED_PORTFOLIO(state, portfolio){
+      state.activePortfolio=portfolio
+    },
     SET_SELECTED_GAME(state, game){
       state.selectedGame=game
     },

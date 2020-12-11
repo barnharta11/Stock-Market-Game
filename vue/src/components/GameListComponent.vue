@@ -3,9 +3,9 @@
   <!-- <div class="mainbackground"> -->
       <div id="gamelistcontainer" v-for="game in this.$store.state.allGames" v-bind:key="game.id">
 <!-- <router-link :to="{name:'gamedetails', params: {gameid:game.gameId}}"> -->
-          <button class="buttondefault" v-on:click='SetSelectedGame(game)'>
+          <!-- <button class="buttondefault" v-on:click='SetSelectedGame(game)'> -->
           <span>{{game.gameName}}</span>
-            </button>
+            <!-- </button> -->
               <!-- </router-link> -->
           <span id="allname" class="textclass">{{game.creatorName}}</span>
           <span id="allstart" class="textclass">{{game.startDate}}</span>
