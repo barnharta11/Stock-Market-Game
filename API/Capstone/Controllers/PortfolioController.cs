@@ -20,7 +20,7 @@ namespace Capstone.Controllers
             this.portfolioDAO = portfolioDAO;
             
         }
-        [HttpGet("/portfolio")]
+        [HttpGet("/portfolio/{gameID}/{userID}")]
         public IActionResult ListUsersGames(int userID, int gameID)
         {
             return Ok(portfolioDAO.GetPortfolio(userID, gameID));
