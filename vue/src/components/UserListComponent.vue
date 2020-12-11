@@ -78,13 +78,15 @@ created(){
 } */
 
 #searchInput{
-      font-family: Consolas, Arial, Helvetica;
-  border-color: gray;
+  font-family: Consolas, Arial, Helvetica;
+  border: none;
   font-size: 28px;
   color: rgb(13, 42, 13);
   background-color: lightgray;
   line-height: 20px;
   padding-left: 15px;
+  margin-left: 41%;
+  align-content: center;
 }
 #invitename{
     grid-area: name;
