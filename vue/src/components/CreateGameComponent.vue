@@ -35,7 +35,8 @@ methods:{
         gameService.createGame(this.formgame)
         .then(response =>{
             if(response.status==201){
-                this.$router.push('/')
+                alert(`${this.formgame.gamename} has been created`)
+                this.$router.push('/games/:userid/createdgames')
             }
         })
     }
