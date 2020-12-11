@@ -1,7 +1,7 @@
 <template>
   <div id="invitecontainer" class="mainbackground">
-      <input type=text/ :bind='currentSearch'>
-    <div id="invitename" class="textclass" v-for="user in this.$store.state.allUsers" v-bind:key="user.userId">
+      <input id="searchInput" type=text v-model='currentSearch' placeholder="Search User Name" />
+    <div id="invitename" class="textclass" v-for="user in searchedUsers" v-bind:key="user.userId">
         <span>{{user.username}} |</span>
         <button id="invitebtn" class="buttondefault" v-on:click="invitePlayer(user.userId, currentGame.gameId, user.username)">Invite Player</button>
     </div>
@@ -15,7 +15,6 @@ export default {
     data(){
         return{
             currentSearch:"",
-            searchedUsers:[],
             currentUser:[],
             currentGame:[],
             invite: {
@@ -24,6 +23,19 @@ export default {
             }
         }
     },
+computed:{
+    searchedUsers(){
+        let filtered = this.$store.state.allUsers
+        if(this.currentSearch!=""){
+            filtered=filtered.filter((user)=>
+            user.username
+            .toLowerCase()
+            .includes(this.currentSearch.toLowerCase())
+            )
+        }
+        return filtered
+    }
+},
 methods:{
     getCurrentUser(){
         this.currentUser=this.$store.state.user
@@ -65,6 +77,15 @@ created(){
     ". name btn .";
 } */
 
+#searchInput{
+      font-family: Consolas, Arial, Helvetica;
+  border-color: gray;
+  font-size: 28px;
+  color: rgb(13, 42, 13);
+  background-color: lightgray;
+  line-height: 20px;
+  padding-left: 15px;
+}
 #invitename{
     grid-area: name;
     padding-right: 10px;
