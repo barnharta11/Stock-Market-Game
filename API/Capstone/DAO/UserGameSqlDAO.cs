@@ -29,7 +29,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand command = new SqlCommand("INSERT INTO user_games ( user_id, game_id, status_code) VALUES (@user_id, @game_id, @status_code); INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);", conn);
+                    SqlCommand command = new SqlCommand("INSERT INTO user_games ( user_id, game_id, status_code) VALUES (@user_id, @game_id, @status_code); INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY); INSERT INTO portfolio_assets(portfolio_id, asset_id, quantity_held) Values (@@IDENTITY, 1, 100000)", conn);
                     command.Parameters.AddWithValue("@user_id", inviteRequest.UserId);
                     command.Parameters.AddWithValue("@game_id", inviteRequest.GameId);
                     command.Parameters.AddWithValue("@status_code", 0);//0 is pending
