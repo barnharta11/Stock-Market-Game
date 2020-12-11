@@ -35,10 +35,20 @@ methods:{
         gameService.createGame(this.formgame)
         .then(response =>{
             if(response.status==201){
-                alert(`${this.formgame.gamename} has been created`)
+                alert(`${this.formgame.gamename} has been created.`)
                 this.$router.push('/games/:userid/createdgames')
             }
-        })
+          })
+         .catch(error=>{
+           if(error.response.status==409){
+               alert(`${this.formgame.gamename} has already been used, please try another.`)
+             }
+             else{
+              alert('There has been an error, please contact support or try again at a later time.')
+            }
+          }
+         )
+                 
     }
 }
 }
