@@ -17,7 +17,7 @@ namespace Capstone.DAO
             connectionString = dbConnectionString;
         }
 
-        public Portfolio GetPortfolio(int userGameID)
+        public Portfolio GetPortfolio(int userID, int gameID)
         {
 
             Portfolio returnPortfolio = null;
@@ -28,9 +28,12 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("Select balance, quantity_held, stock_ticker, company_name, stock_price, price, time from portfolio left join portfolio_stocks on portfolio.portfolio_id = portfolio_stocks.portfolio_id left join stocks on portfolio_stocks.stock_id = stocks.stock_id left join transactions on stocks.stock_id = transactions.stock_id  Where portfolio.user_game_id = @usergameID", conn);
-                    cmd.Parameters.AddWithValue("@usergameID", userGameID);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    SqlCommand cmd = new SqlCommand("Select balance, quantity_held, stock_ticker, company_name, current_price, cost_basis, time from portfolio left join portfolio_stocks on portfolio.portfolio_id = portfolio_stocks.portfolio_id left join stocks on portfolio_stocks.stock_id = stocks.stock_id left join transactions on stocks.stock_id = transactions.stock_id  left join user_games on portfolio.user_game_id=user_games.user_game_id Where user_id=@user_id and game_id=@game_id", conn);
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    cmd.Parameters.AddWithValue("@gameID", gameID);
+              
+                    
+                   SqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.HasRows && reader.Read())
                     {
@@ -54,8 +57,8 @@ namespace Capstone.DAO
                 QuantityHeld = Convert.ToInt32(reader["quantity_held"]),
                 StockTicker = Convert.ToString(reader["stock_ticker"]),
                 CompanyName = Convert.ToString(reader["company_name"]),
-                StockPrice = Convert.ToDecimal(reader["stock_price"]),
-                PurchasedPrice = Convert.ToDecimal(reader["price"]),
+                CurrentPrice = Convert.ToDecimal(reader["current_price"]),
+                CostBasis = Convert.ToDecimal(reader["cost_basis"]),
                 Time = Convert.ToDateTime(reader["time"])
 
 
