@@ -2,9 +2,9 @@
   <div>
       <div id="userspendingcontainer" v-for="game in pendingGames" v-bind:key="game.id">
           <!-- <router-link :to="{name:'gamedetails', params: {gameid:game.gameId}}"> -->
-          <!-- <button class="buttondefault" v-on:click='SetSelectedGame(game)'> -->
+          <button class="buttondefault" v-on:click='SetSelectedGame(game)'>
               {{game.gameName}}
-              <!-- </button> -->
+              </button>
               <!-- </router-link> -->
           <span id="pendingname" class="textclass">{{game.creatorName}}</span>
           <span id="pendingstart" class="textclass">{{game.startDate}}</span>
