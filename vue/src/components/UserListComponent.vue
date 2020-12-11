@@ -1,10 +1,9 @@
 <template>
   <div id="invitecontainer" class="mainbackground">
-      <div id="invitename" class="textclass" v-for="user in this.$store.state.allUsers" v-bind:key="user.userId">
-          <span>{{user.username}}</span>
-          <button id="invitebtn" class="buttondefault" v-on:click="invitePlayer(user.userId, currentGame.gameId, user.username)">Invite Player</button>
-          </div>
-      
+    <div id="invitename" class="textclass" v-for="user in this.$store.state.allUsers" v-bind:key="user.userId">
+        <span>{{user.username}} |</span>
+        <button id="invitebtn" class="buttondefault" v-on:click="invitePlayer(user.userId, currentGame.gameId, user.username)">Invite Player</button>
+    </div>
   </div>
 </template>
 
@@ -55,8 +54,8 @@ created(){
 </script>
 
 <style>
-
-/* #invitecontainer{
+/* 
+#invitecontainer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas: 
@@ -66,18 +65,18 @@ created(){
 #invitename{
     grid-area: name;
     padding-right: 10px;
-    border-right: 5px solid lightgray;
+    /* border-right: 5px solid lightgray; */
     color: lightgray;
     background-color: rgb(105,172,105);
     height:45px;
-    text-align: right;
-    
+    text-align: center;
 }
 
 #invitebtn{
     grid-area: btn;
     height: 45px;
     font-size: 35px;
+    width: 30%
 }
 
 </style>
