@@ -23,3 +23,22 @@
         </table>
     </div>
 </div>
+
+<div>
+    <div id="usersgamescontainer" v-for="game in this.$store.state.userGames" v-bind:key="game.id">
+                  <!-- <router-link :to="{name:'gamedetails', params: {gameid:game.gameId}}"> -->
+        <button class="buttondefault" v-on:click='SetSelectedGame(game)'>
+          <span>{{game.gameName}} </span>
+        </button>
+            <!-- </router-link> -->
+        <!-- <div> -->
+          <span id="currentname" class="textclass">{{game.creatorName}}</span>
+          <span id="currentstart" class="textclass">{{game.startDate}}</span>
+          <span id="currentend" class="textclass">{{game.endDate}}</span>
+          <span id="currentstatus" class="textclass">{{game.statusName}}</span>
+        <!-- </div> -->
+        <!-- <span> -->
+            <!-- <router-link :to -->
+        <!-- </span> -->
+    </div>
+</div>
