@@ -1,7 +1,7 @@
 <template>
   <div>
       <span>{{this.$store.state.activePortfolio.balance}}</span>
-      <span>{{netWorth}}</span>
+      
   </div>
 </template>
 
@@ -14,11 +14,6 @@ export default {
             .then(response=>{
                 this.$store.state.activePortfolio=response.data
             })
-        }
-    },
-    calculated:{
-        netWorth(){
-            return "We will add this later"
         }
     },
     created(){
