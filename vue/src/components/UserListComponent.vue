@@ -1,5 +1,6 @@
 <template>
   <div id="invitecontainer" class="mainbackground">
+      <input type=text/ :bind='currentSearch'>
     <div id="invitename" class="textclass" v-for="user in this.$store.state.allUsers" v-bind:key="user.userId">
         <span>{{user.username}} |</span>
         <button id="invitebtn" class="buttondefault" v-on:click="invitePlayer(user.userId, currentGame.gameId, user.username)">Invite Player</button>
@@ -13,6 +14,8 @@ import inviteService from '../services/InviteService.js'
 export default {
     data(){
         return{
+            currentSearch:"",
+            searchedUsers:[],
             currentUser:[],
             currentGame:[],
             invite: {
