@@ -13,8 +13,7 @@
           <span id="gamelistenddate" class="smalltextclass">{{game.endDate}} </span>
           <span id="gameliststatus" class="smalltextclass">{{game.statusName}} </span>
           <span id="gamelistid" class="smalltextclass">{{game.gameId}}</span>
-          <!-- <label id="end" class="formfooter"></label> -->
-
+          <!-- move here button that feeds selected game -->
       </div>
   </div>
 </template>
