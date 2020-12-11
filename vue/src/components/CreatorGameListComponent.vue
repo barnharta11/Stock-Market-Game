@@ -1,24 +1,33 @@
 <template>
-  <div class="mainbackground">
-      <div id="contain" v-for="game in creatorGames" v-bind:key="game.id">
-          <!-- <label id="top" class="tabletop"></label> -->
 
-          <!-- <router-link id="buttontogamedetails" class="gamebutton" :to="{name:'gamedetails', params: {gameid:game.gameId}}"> -->
-          <button id="button2" v-on:click='SetSelectedGame(game)'>
-              {{game.gameName}}  
-              </button>
-              <!-- </router-link> -->
-          <span id="gamelistcreatorname" class="smalltextclass">{{game.creatorName}} </span>
-          <span id="gameliststartdate" class="smalltextclass">{{game.startDate}} </span>
-          <span id="gamelistenddate" class="smalltextclass">{{game.endDate}} </span>
-          <span id="gameliststatus" class="smalltextclass">{{game.statusName}} </span>
-          <span id="gamelistid" class="smalltextclass">{{game.gameId}}</span>
-          <!-- move here button that feeds selected game -->
-          <router-link v-on:click="SetInviteGame(game)" :to="{name:'displayusers'}">Invite users</router-link>
-          <!-- <label id="end" class="formfooter"></label> -->
+<div class="mainbackground">
+    <div id="contain">
+        <h2>My Created Games</h2>
+        <table id="gamelistcreatorname" class="smalltextclass">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Creator</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Add Others</th>
+                </tr>
+            </thead>
+            <tbody v-for="game in creatorGames" v-bind:key="game.id">
+                <tr>
+                    <td id="routegamename" class="route" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
+                    <td>{{game.creatorName}}</td>
+                    <td>{{game.startDate}}</td>
+                    <td>{{game.endDate}}</td>
+                    <td>{{game.statusName}}</td>
+                    <router-link class="route" v-on:click="SetInviteGame(game)" :to="{name:'displayusers'}"><td>Invite users</td></router-link>
+                </tr>
+            </tbody>
+        </table>
+    </div>  
+</div>
 
-      </div>
-  </div>
 </template>
 
 <script>
@@ -65,14 +74,6 @@ created(){
     /* ". . top top top top top top ." */
     ". button creatorname startdate enddate status id .";
 }
-
-/* #top{
-    background-color: lightgray;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    grid-area: top;
-    
-} */
 
 .mainbackground{
     padding-top: 25px;
@@ -123,23 +124,6 @@ created(){
     grid-area: id;
 }
 
-
-/* .gamebutton{
-grid-area: createbutton;
-  background-color: lightgray;
-  font-family: Consolas, Arial, Helvetica;
-  color: rgb(105, 172, 105);
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-size: 20px;
-  line-height: 20px;
-  width: 50%;
-  margin-top: 20px;
-  margin-bottom: 100%;
-  transition-duration: .4s;
-} */
-
 #button2{
   background-color: lightgray;
   font-family: Consolas, Arial, Helvetica;
@@ -154,6 +138,21 @@ grid-area: createbutton;
   /* margin-bottom: 100%; */
   transition-duration: .4s;
   grid-area: button;
-
 }
+
+#routegamename{
+    text-decoration: underline;
+}
+
+.route:link, .route:visited{
+    color: rgb(105, 172, 105);
+    text-decoration: underline;
+}
+
+.route:hover{
+    color: black;
+    text-decoration: underline;
+}
+
 </style>
+

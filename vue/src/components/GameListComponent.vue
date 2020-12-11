@@ -13,7 +13,9 @@
       </div>
       
   </div>
-</template>
+
+
+</template> -->
 
 <script>
 import gameService from "../services/GameService.js"
