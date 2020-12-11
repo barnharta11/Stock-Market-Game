@@ -66,7 +66,7 @@ Create Table stocks (
 	stock_id int IDENTITY(1,1) NOT NULL,
 	stock_ticker varchar(50) NOT NULL,
 	company_name varchar(50) NOT NULL,
-	stock_price money NOT NULL,
+	current_price money NOT NULL,
 	Constraint pk_stocks_stock_id Primary Key (stock_id),
 );
 
@@ -90,7 +90,7 @@ Create Table transaction_names (
 Create Table transactions (
 	transaction_id int IDENTITY(1,1) NOT NULL,
 	trans_type_id int NOT NULL,
-	price money NOT NULL,
+	cost_basis money NOT NULL,
 	time datetime  NOT NULL,
 	user_game_id int NOT NULL,
 	stock_id int NOT NULL,
