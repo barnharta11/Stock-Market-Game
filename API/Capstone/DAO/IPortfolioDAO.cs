@@ -4,6 +4,6 @@ namespace Capstone.DAO
 {
     public interface IPortfolioDAO
     {
-        Portfolio GetPortfolio(int userGameID);
+        Portfolio GetPortfolio(int userID, int gameID);
     }
 }
