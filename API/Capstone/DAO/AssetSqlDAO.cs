@@ -19,8 +19,8 @@ namespace Capstone.DAO
 
         public List<Asset> GetAssets(int userID, int gameID)
         {
-            List<Asset> returnAssets = new List<Asset>();
-            Asset returnAsset = null;
+            List<Asset> returnList = new List<Asset>();
+
 
             try
             {
@@ -32,15 +32,16 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@userID", userID);
                     cmd.Parameters.AddWithValue("@gameID", gameID);
                     SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.HasRows && reader.Read())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        if (reader.HasRows)
                         {
+
+                            Asset returnAsset = new Asset();
                             returnAsset = GetAssetFromReader(reader);
-                            returnAssets.Add(returnAsset);
+                            returnList.Add(returnAsset);
                         }
-                        
+
                     }
                 }
             }
@@ -49,20 +50,20 @@ namespace Capstone.DAO
                 throw;
             }
 
-            return returnAssets;
+            return returnList;
         }
 
-     
+
         private Asset GetAssetFromReader(SqlDataReader reader)
         {
             Asset a = new Asset()
             {
-             
+
                 QuantityHeld = Convert.ToInt32(reader["quantity_held"]),
-                Symbol = Convert.ToString(reader["stock_ticker"]),
+                Symbol = Convert.ToString(reader["symbol"]),
                 CompanyName = Convert.ToString(reader["company_name"]),
                 CurrentPrice = Convert.ToDecimal(reader["current_price"]),
-              
+
             };
 
             return a;

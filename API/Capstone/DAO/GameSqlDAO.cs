@@ -24,7 +24,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand command = new SqlCommand("INSERT INTO games ( game_name, creator_id, start_date, end_date) VALUES (@gamename, @creatorid, @startdate, @enddate); INSERT INTO user_games ( user_id, game_id, status_code) VALUES (@creatorid, @@IDENTITY, @statuscode); INSERT INTO portfolio (user_game_id ,balance) VALUEs (@@IDENTITY ,100000);", conn);
+                    SqlCommand command = new SqlCommand("INSERT INTO games ( game_name, creator_id, start_date, end_date) VALUES (@gamename, @creatorid, @startdate, @enddate); INSERT INTO user_games ( user_id, game_id, status_code) VALUES (@creatorid, @@IDENTITY, @statuscode); INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY); INSERT INTO portfolio_assets(portfolio_id, asset_id, quantity_held) Values (@@IDENTITY, 1, 100000)", conn);
                     command.Parameters.AddWithValue("@gamename", gameName);
                     command.Parameters.AddWithValue("@creatorid", creatorId);
                     command.Parameters.AddWithValue("@startdate", startDate);
