@@ -4,7 +4,7 @@
       
   </div>
   
-      <div class="mainbackground">
+      <!-- <div class="mainbackground"> -->
     <!-- <div id="" >
         <h2> {username}'s Portfolio</h2>
         <table id="gamelistcreatorname" class="smalltextclass">
@@ -46,7 +46,7 @@
             </tbody>
         </table>
     </div> -->
-</div> 
+<!-- </div>  -->
 
 </template>
 
