@@ -2,6 +2,7 @@
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,9 +15,15 @@ namespace Capstone.DAO
         string API_KEY = "95b93fc1b3mshd730d053c0ba189p109c00jsn36d6d75341d3";
         string HOST_HEADER = "apidojo-yahoo-finance-v1.p.rapidapi.com";
 
+        private readonly string connectionString;
+
+        public StockAPIDAO(string dbConnectionString)
+        {
+            connectionString = dbConnectionString;
+        }
         private RestClient client;
 
-        public StockAPI GetStocks()
+        public List<Asset> GetStocks()
         {
             client = new RestClient(host);
             client.AddDefaultHeader("X-Rapidapi-Host", HOST_HEADER);
@@ -36,8 +43,45 @@ namespace Capstone.DAO
             }
             else
             {
-                return response.Data;
+                return LoadThenReturnStocks(response.Data.quoteResponse.result);
             }
+        }
+        public List<Asset> LoadThenReturnStocks(List<Result> stockAPIList)
+        {
+            List<Asset> returnList = new List<Asset>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    foreach (Result toInsert in stockAPIList)
+                    {
+                        SqlCommand command = new SqlCommand("INSERT INTO assets (symbol, company_name, current_price) Values(@symbol, @company_name, @current_price)", conn);
+                        command.Parameters.AddWithValue("@symbol", toInsert.symbol);
+                        command.Parameters.AddWithValue("@company_name", toInsert.shortName);
+                        command.Parameters.AddWithValue("@current_price", toInsert.regularMarketPrice);
+                        command.ExecuteNonQuery();
+                    }
+                    SqlCommand cmd = new SqlCommand("Select * from assets", conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Asset readAsset = new Asset();
+                        readAsset.AssetId = Convert.ToInt32(reader["asset_id"]);
+                        readAsset.CompanyName = Convert.ToString(reader["company_name"]);
+                        readAsset.CurrentPrice = Convert.ToDecimal(reader["current_price"]);
+                        readAsset.Symbol = Convert.ToString(reader["symbol"]);
+                        returnList.Add(readAsset);
+                    }
+
+
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            return returnList;
         }
     }
 }

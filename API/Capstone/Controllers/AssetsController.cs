@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Capstone.DAO;
+using Capstone.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,11 +23,13 @@ namespace Capstone.Controllers
             this.stockAPIDAO = stockAPIDAO;
         }
         [HttpGet("/assets/{userID}/{gameID}")]
-        public List<IActionResult> ListAssets(int userID, int gameID)
+        public List<List<Asset>> ListAssets(int userID, int gameID)
         {
-            List<IActionResult> returnResults = new List<IActionResult>();
-            returnResults.Add(Ok(assetsDAO.GetAssets(userID, gameID)));
-            returnResults.Add(Ok(stockAPIDAO.GetStocks()));
+            List<List<Asset>> returnResults = new List<List<Asset>>();
+            returnResults.Add(stockAPIDAO.GetStocks());
+            returnResults.Add(assetsDAO.GetAssets(userID, gameID));
+            
+            
             return returnResults;
         }
     }

@@ -1,9 +1,11 @@
 ﻿using Capstone.Models;
+using System.Collections.Generic;
 
 namespace Capstone.DAO
 {
     public interface IStockAPIDAO
     {
-        StockAPI GetStocks();
+        List<Asset> GetStocks();
+        List<Asset> LoadThenReturnStocks(List<Result> stockAPIList);
     }
 }

@@ -102,7 +102,7 @@ export default {
         SetUserAssets(){
             assetService.getUserAssets(this.$store.state.user.userId, this.$store.state.selectedGame.gameId)
             .then(response=>{
-                this.$store.commit("SET_SELECTED_ASSETS", response.data);
+                this.$store.commit("SET_SELECTED_ASSETS", response.data[1]);
             })
         },
         TotalEquity(asset){
