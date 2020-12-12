@@ -1,18 +1,18 @@
 <template>
   <div>
     <game-details-component/>
-    <portfolio-component/>
+    <asset-component/>
   </div>
 </template>
 
 <script>
 import GameDetailsComponent from "../components/GameDetailsComponent"
-import PortfolioComponent from '../components/PortfolioComponent.vue'
+import AssetComponent from '../components/AssetComponent.vue'
 export default {
     props:{
         game:[]
     },
-components:{GameDetailsComponent,PortfolioComponent}
+components:{GameDetailsComponent,AssetComponent}
 }
 </script>
 

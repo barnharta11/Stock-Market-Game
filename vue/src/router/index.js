@@ -7,7 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import CreateGame from '../views/CreateGame.vue'
 import GameList from "../views/GameList.vue"
-import UsersGames from "../views/UsersGames.vue"
+// import UsersGames from "../views/UsersGames.vue"
 import CreatedGames from "../views/CreatedGames.vue"
 import GameDetailsPage from "../views/GameDetailsPage.vue"
 import DisplayUser from "../views/DisplayUser.vue"
@@ -67,14 +67,14 @@ const router = new Router({
         requiresAuth:true
       }
     },
-    {
-      path: "/portfolio/:userid/:gameid",
-      name: "gamedetails",
-      component: GameDetailsPage,
-      meta:{
-        requiresAuth:true
-      }
-    },
+    // {
+    //   path: "/portfolio/:userid/:gameid",
+    //   name: "gamedetails",
+    //   component: GameDetailsPage,
+    //   meta:{
+    //     requiresAuth:true
+    //   }
+    // },
     {
       path: "/games",
       name: "allgames",
@@ -83,14 +83,14 @@ const router = new Router({
         requiresAuth:true
       }
     },
-    {
-      path: "/games/:userid",
-      name: "usersGames",
-      component: UsersGames,
-      meta:{
-        requiresAuth:true
-      }
-  },
+  //   {
+  //     path: "/games/:userid",
+  //     name: "usersGames",
+  //     component: UsersGames,
+  //     meta:{
+  //       requiresAuth:true
+  //     }
+  // },
   {
     path:"/inviteusers",
     name:"displayusers",
@@ -103,6 +103,14 @@ const router = new Router({
     path: "/games/:userid/createdgames",
     name: "createdgames",
     component: CreatedGames,
+    meta:{
+      requiresAuth:true
+    }
+  },
+  {
+    path: "/assets/:userid/:gameid",
+    name: "assetdisplay",
+    component: GameDetailsPage,
     meta:{
       requiresAuth:true
     }
