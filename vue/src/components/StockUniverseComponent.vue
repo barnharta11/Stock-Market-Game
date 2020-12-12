@@ -14,10 +14,10 @@
             <tbody v-for="stock in $store.state.allStocks" v-bind:key="stock.assetId">
                 <!-- <tbody> -->
                 <tr>
-                    <td>{{symbol}}</td>
-                    <td>{{companyName}}</td>
-                    <td>{{currentPrice}}</td>
-                    <td>{{buttonToBuy}}</td>
+                    <td>{{stock.symbol}}</td>
+                    <td>{{stock.companyName}}</td>
+                    <td>{{stock.currentPrice}}</td>
+                    <td>{{stock.buttonToBuy}}</td>
                 </tr>
             </tbody>
         </table>
@@ -26,20 +26,10 @@
 </template>
 
 <script>
-import assetService from '../services/AssetService.vue'
+
 export default {
-    methods:{
-        getAllStocks(){
-            assetService.getAllStocks
-            .then( result =>{
-                this.$store.commit('SET_ALL_STOCKS', result.data)
-            }
-            )
-        }
-    },
-    created(){
-        this.getAllStocks()
-    }
+
+   
 
 }
 </script>

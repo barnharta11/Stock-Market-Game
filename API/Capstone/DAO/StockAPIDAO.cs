@@ -49,21 +49,36 @@ namespace Capstone.DAO
         public List<Asset> LoadThenReturnStocks(List<Result> stockAPIList)
         {
             List<Asset> returnList = new List<Asset>();
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
+                    SqlCommand selectCommand = new SqlCommand("select asset_id from assets where asset_id=2", conn);
+                    int? assetOne = Convert.ToInt32(selectCommand.ExecuteScalar());
+
                     foreach (Result toInsert in stockAPIList)
                     {
-                        SqlCommand command = new SqlCommand("INSERT INTO assets (symbol, company_name, current_price) Values(@symbol, @company_name, @current_price)", conn);
-                        command.Parameters.AddWithValue("@symbol", toInsert.symbol);
-                        command.Parameters.AddWithValue("@company_name", toInsert.shortName);
-                        command.Parameters.AddWithValue("@current_price", toInsert.regularMarketPrice);
-                        command.ExecuteNonQuery();
+                        if (assetOne == 0)
+                        {
+                            SqlCommand insertCommand = new SqlCommand("INSERT INTO assets (symbol, company_name, current_price) Values(@symbol, @company_name, @current_price)", conn);
+                            insertCommand.Parameters.AddWithValue("@symbol", toInsert.symbol);
+                            insertCommand.Parameters.AddWithValue("@company_name", toInsert.shortName);
+                            insertCommand.Parameters.AddWithValue("@current_price", toInsert.regularMarketPrice);
+                            insertCommand.ExecuteNonQuery();
+                        }
+                        else
+                        {
+                            SqlCommand updateCommand = new SqlCommand("select symbol from assets where symbol=@symbol;Update assets Set current_price = @current_price where asset_id=@@identity", conn);
+                            updateCommand.Parameters.AddWithValue("@current_price", toInsert.regularMarketPrice);
+                            updateCommand.Parameters.AddWithValue("@symbol", toInsert.symbol);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                        
                     }
-                    SqlCommand cmd = new SqlCommand("Select * from assets", conn);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    SqlCommand returnCommand = new SqlCommand("Select * from assets", conn);
+                    SqlDataReader reader = returnCommand.ExecuteReader();
                     while (reader.Read())
                     {
                         Asset readAsset = new Asset();
