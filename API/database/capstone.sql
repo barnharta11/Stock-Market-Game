@@ -73,7 +73,7 @@ Create Table portfolio_assets (
 	portfolio_assets_id int IDENTITY(1,1) NOT NULL,
 	portfolio_id int NOT NULL,
 	asset_id int NOT NULL,
-	quantity_held int NOT NULL,
+	quantity_held decimal NOT NULL,
 	Constraint pk_portfolio_assets_portfolio_assets_id Primary Key (portfolio_assets_id),
 	Constraint fk_portfolio_assets_portfolio Foreign Key (portfolio_id) References portfolio(portfolio_id),
 	Constraint fk_portfolio_assets_asset Foreign Key (asset_id) References assets(asset_id),
@@ -108,12 +108,12 @@ INSERT INTO	game_status (status_id, status_name) VALUES (0, 'Pending'), (1, 'Acc
 INSERT INTO assets (symbol, company_name, current_price) VALUES('USD', 'United States Dollar', 1)
 INSERT INTO	transaction_names (trans_id, trans_name) VALUES (0, 'Buy'), (1, 'Sell');
 
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Wall St. Wolves', 1, 12/07/2020, 12/16/2020);
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Day Trading Daddies', 1, 12/08/2020, 12/17/2020);
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Martha Stewart Exchange', 2, 12/09/2020, 12/18/2020);
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Feds Keep Out', 2, 12/10/2020, 12/19/2020);
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Nothing to SEC Here', 1, 12/11/2020, 12/20/2020);
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('I Like Big Bucks', 2, 12/11/2020, 12/20/2020);
+INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Wall St. Wolves', 1, '12/07/2020', '12/16/2020');
+INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Day Trading Daddies', 1, '12/08/2020', '12/17/2020');
+INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Martha Stewart Exchange', 2, '12/09/2020', '12/18/2020');
+INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Feds Keep Out', 2, '12/10/2020', '12/19/2020');
+INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Nothing to SEC Here', 1, '12/11/2020', '12/20/2020');
+INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('I Like Big Bucks', 2, '12/11/2020', '12/20/2020');
 
 INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 1, 1);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);

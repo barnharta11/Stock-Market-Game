@@ -60,7 +60,7 @@ namespace Capstone.DAO
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("update portfolio_stocks set quantity_held += @input where portfolio_id = @portfolio_id AND asset_id = @asset_id; update portfolio_stocks set quantity_held += @adjustment where portfolio_id = @portfolio_id AND asset_id = 1;", conn);
+                SqlCommand cmd = new SqlCommand("update portfolio_assets set quantity_held += @input where portfolio_id = @portfolio_id AND asset_id = @asset_id; update portfolio_assets set quantity_held += @adjustment where portfolio_id = @portfolioid AND asset_id = 1;", conn);
                 cmd.Parameters.AddWithValue("@input", updateAsset.QuantityAdjustment);
                 cmd.Parameters.AddWithValue("@portfolio_id", updateAsset.PortfolioID);
                 cmd.Parameters.AddWithValue("@asset_id", updateAsset.AssetId);
@@ -80,7 +80,7 @@ namespace Capstone.DAO
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("INSERT INTO portfolio_stocks (portfolio_id, asset_id, quantity_held) VALUES (@portfolioID, @assetID, @quantityHeld); update portfolio_stocks set quantity_held += @adjustment where portfolio_id = @portfolio_id AND asset_id = 1;", conn);
+                SqlCommand cmd = new SqlCommand("INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUES (@portfolioID, @assetID, @quantityHeld); update portfolio_assets set quantity_held += @adjustment where portfolio_id = @portfolioid AND asset_id = 1;", conn);
                 cmd.Parameters.AddWithValue("@portfolioID", newAsset.PortfolioID);
                 cmd.Parameters.AddWithValue("@assetID", newAsset.AssetId);
                 cmd.Parameters.AddWithValue("@quantityHeld", newAsset.QuantityAdjustment);
