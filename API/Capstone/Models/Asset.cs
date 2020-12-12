@@ -12,6 +12,7 @@ namespace Capstone.Models
         public string Symbol { get; set; }
         public string CompanyName { get; set; }
         public decimal CurrentPrice { get; set; }
+        public int AssetId { get; set; }
 
 
 

@@ -114,7 +114,13 @@ const router = new Router({
     meta:{
       requiresAuth:true
     }
-  }
+  },
+  // {
+  //   path:"/stocks",
+  //   name: "stockdisplay",
+  //   component: 
+  // }
+ 
   ]
 })
 

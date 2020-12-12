@@ -24,9 +24,13 @@ export default new Vuex.Store({
     allUsers:[],
     allGames:[],
     userGames:[],
-    selectedGame:[]
+    selectedGame:[],
+    allStocks:[]
   },
   mutations: {
+    SET_ALL_STOCKS(state, stocks){
+      state.allStocks=stocks
+    },
     SET_SELECTED_ASSETS(state, assets){
       state.activeAssets=assets
     },

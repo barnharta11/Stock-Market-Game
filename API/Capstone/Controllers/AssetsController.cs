@@ -14,16 +14,20 @@ namespace Capstone.Controllers
     {
 
         private readonly IAssetsDAO assetsDAO;
-        
-        public AssetsController(IAssetsDAO assetsDAO)
+        private IStockAPIDAO stockAPIDAO;
+
+        public AssetsController(IAssetsDAO assetsDAO, IStockAPIDAO stockAPIDAO)
         {
             this.assetsDAO = assetsDAO;
-            
+            this.stockAPIDAO = stockAPIDAO;
         }
         [HttpGet("/assets/{userID}/{gameID}")]
-        public IActionResult ListAssets(int userID, int gameID)
+        public List<IActionResult> ListAssets(int userID, int gameID)
         {
-            return Ok(assetsDAO.GetAssets(userID, gameID));
+            List<IActionResult> returnResults = new List<IActionResult>();
+            returnResults.Add(Ok(assetsDAO.GetAssets(userID, gameID)));
+            returnResults.Add(Ok(stockAPIDAO.GetStocks()));
+            return returnResults;
         }
     }
 }

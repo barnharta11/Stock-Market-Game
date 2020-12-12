@@ -11,7 +11,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>All the money you won good job | </td>
+                    <td>{{NetWorth()}} | </td>
                     <td>{{$store.state.selectedGame.endDate}}</td>
                 </tr>
             </tbody>
@@ -23,8 +23,9 @@
                     <th>Stock Ticker</th>
                     <th>Company Name</th>
                     <th>Current Price</th>
-                    <th>Purchased Price</th>
+                    <!-- <th>Purchased Price</th> -->
                     <th>Quantity Held</th>
+                    <th>Total Value</th>
                     <th>Buy/Sell</th>
                 </tr>
             </thead>
@@ -32,9 +33,9 @@
                 <tr>
                     <td>{{asset.symbol}}</td>
                     <td>{{asset.companyName}}</td>
-                    <td>{{asset.quantityHeld}}</td>
                     <td>{{asset.currentPrice}}</td>
-                    <td>${{totalEquity(asset)}}</td>
+                    <td>{{asset.quantityHeld}}</td>
+                    <td>${{TotalEquity(asset)}}</td>
                     <!-- <td>{{- purchased price -}}</td> -->
                     <!-- <td>{{- buy/sell pop up -}}</td> -->
                 </tr>
@@ -92,6 +93,11 @@
 <script>
 import assetService from '../services/AssetService.js'
 export default {
+    data(){
+        return{
+            
+        }
+    },
     methods:{
         SetUserAssets(){
             assetService.getUserAssets(this.$store.state.user.userId, this.$store.state.selectedGame.gameId)
@@ -99,8 +105,17 @@ export default {
                 this.$store.commit("SET_SELECTED_ASSETS", response.data);
             })
         },
-                totalEquity(asset){
-            return (asset.quantityHeld * (asset.currentPrice))
+        TotalEquity(asset){
+            let assetEquity=(asset.quantityHeld * asset.currentPrice)
+            this.netWorth+=assetEquity
+            return assetEquity
+        },
+        NetWorth(){
+            let returnWorth=""
+            this.$store.state.activeAssets.forEach(element => {
+                returnWorth += element.quantityHeld*element.currentPrice
+            });
+            return returnWorth
         }
     },
     computed:{
