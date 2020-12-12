@@ -8,7 +8,6 @@
                     <th>Standing</th>
                     <th>Username</th>
                     <th>Net Worth</th>
-                    <th>Outstanding Cash</th>
                     <th>Game Ends</th>
                 </tr>
             </thead>
@@ -17,7 +16,6 @@
                     <td>{{- standing -}}</td>
                     <td v-on:click='-see user portfolio -'>{{- username -}}</td>
                     <td>{{- net worth -}}</td>
-                    <td>{{- outstanding cash -}}</td>
                     <td>{{- game ends -}}</td>
                 </tr>
             </tbody>
