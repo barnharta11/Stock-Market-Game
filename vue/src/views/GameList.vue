@@ -1,6 +1,6 @@
 <template>
 <div class="bigbackground">
-  <div >
+  <div>
     <div id="mycurrentgamesheader" class="tableheader"> My Current Games</div>
     <users-games-component/>
     <div id="allgamesheader" class="tableheader">All Games</div>
@@ -31,7 +31,6 @@ export default {
 #mycurrentgamesheader{
   margin-right: 10%;
   margin-left: 20%;
-  /* border-bottom-left-radius: 25px; */
 }
 
 #allgamesheader{

@@ -2,8 +2,8 @@
 
 <div class="mainbackground">
     <div id="gamelistcontainer">
-        <h2>My Current Games</h2>
-        <table id="gamelistcreatorname" class="smalltextclass">
+        <h2 class="tableheader1">My Current Games</h2>
+        <table class="tablebody">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -13,7 +13,7 @@
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody id="usersgamescontainer" v-for="game in this.$store.state.userGames" v-bind:key="game.id">
+            <tbody v-for="game in this.$store.state.userGames" v-bind:key="game.id">
                 <tr>
                     <td v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
                     <td>{{game.creatorName}}</td>
@@ -52,8 +52,20 @@ created(){
 
 <style>
 
+.tableheader1{
+    margin: 0;
+    padding: 0;
+    background-color: lightgray;
+    color: rgb(105, 172, 105);
+}
 
-#usersgamescontainer{
+.tablebody{
+    margin: 0;
+    background-color: lightgray;
+    color: rgb(105, 172, 105);
+}
+
+#gamelistcontainer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 2.5fr 2.5fr 1fr 1fr;
     grid-template-areas: 
