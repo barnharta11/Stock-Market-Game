@@ -34,7 +34,7 @@ export default {
 methods:{
     SetSelectedGame(game){
         this.$store.commit("SET_SELECTED_GAME", game)
-        this.$router.push({name:'assetdisplay', params: {gameid:game.gameId, userid:this.$store.state.user.userid} })
+        this.$router.push(`/assets/${this.$store.state.user.userId}/${game.gameId}`)
     },
     GetUsersGames(){
         gameService.getUsersGames(this.$store.state.user.userId)
