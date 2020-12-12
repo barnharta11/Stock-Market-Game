@@ -63,7 +63,7 @@ namespace Capstone.DAO
                 Symbol = Convert.ToString(reader["symbol"]),
                 CompanyName = Convert.ToString(reader["company_name"]),
                 CurrentPrice = Convert.ToDecimal(reader["current_price"]),
-
+                PortfolioID = Convert.ToInt32(reader["portfolio_id"])
             };
 
             return a;
