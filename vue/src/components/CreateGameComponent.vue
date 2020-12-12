@@ -66,6 +66,7 @@ methods:{
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 1fr;
   grid-template-areas: 
+  
   ". header header ."
   ". gamename gamename ."
   ". createin createin ."

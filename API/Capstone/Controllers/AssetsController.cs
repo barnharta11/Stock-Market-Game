@@ -32,5 +32,22 @@ namespace Capstone.Controllers
             
             return returnResults;
         }
+
+        [HttpPut("/assets/{userID}/{gameID}")]
+        public IActionResult UpdateQuantity(UpdateAsset updateAsset)
+        {
+
+
+            assetsDAO.UpdateQuantity(updateAsset);
+            return Ok();
+            
+        }
+
+        [HttpPost("/assets/{userID}/{gameID}")]
+        public IActionResult BuySellAsset(UpdateAsset newAsset)
+        {
+            assetsDAO.BuySellAsset(newAsset);
+            return Created("it was created", null);
+        }
     }
 }
