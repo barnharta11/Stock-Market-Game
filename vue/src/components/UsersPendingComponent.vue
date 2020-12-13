@@ -1,28 +1,29 @@
 <template>
 <div class="mainbackground">
-    <div id="gamelistcontainer" >
-        <h2>My Pending Games</h2>
-        <table id="gamelistcreatorname" class="smalltextclass">
+    <div id="pendingcontainer">
+        <h2 id="tablehead3" class="tableheader1">My Pending Games</h2>
+        <table id="pendingtable" class="tablebody">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Creator</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Status</th>
+                    <th class="columnheader">Name</th>
+                    <th class="columnheader">Creator</th>
+                    <th class="columnheader">Start Date</th>
+                    <th class="columnheader">End Date</th>
+                    <th class="columnheaderend">Status</th>
                 </tr>
             </thead>
-            <tbody id="userspendingcontainer" v-for="game in pendingGames" v-bind:key="game.id">
+            <tbody v-for="game in pendingGames" v-bind:key="game.id">
                 <tr>
-                    <td v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
-                    <td>{{game.creatorName}}</td>
-                    <td>{{game.startDate}}</td>
-                    <td>{{game.endDate}}</td>
-                    <td>{{game.statusName}}</td>
-                    <td><button class="buttondefault" >Accept</button></td>
+                    <td class="itemstyle" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
+                    <td class="itemstyle">{{game.creatorName}}</td>
+                    <td class="itemstyle">{{game.startDate}}</td>
+                    <td class="itemstyle">{{game.endDate}}</td>
+                    <td class="itemstyle">{{game.statusName}}</td>
+                    <td class="itemstyleend"><button class="buttondefault" >Accept</button></td>
                 </tr>
             </tbody>
         </table>
+        <label id="end3" class="tablefoot"></label>
     </div>
 </div>
 </template>
@@ -63,42 +64,35 @@ created(){
 
 <style>
 
-#userspendingcontainer{
+#pendingcontainer{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 2fr 2fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 8fr 1fr;
     grid-template-areas:
-    ". buttonslot name start end status id ."
-    ;
+    ". thead ."
+    ". tbody ."
+    ". footer .";
 }
 
-#pendingname{
-    grid-area: name;
-    border-right: 2px solid rgb(105, 172, 105);
-
+#tablehead3{
+    grid-area: thead;
 }
 
-#pendingstart{
-    grid-area: start;
-    border-right: 2px solid rgb(105, 172, 105);
-
+#pendingtable{
+    grid-area: tbody;
 }
 
-#pendingend{
-    grid-area: end;
-    border-right: 2px solid rgb(105, 172, 105);
-
+#end3{
+    grid-area: footer;
 }
 
-#pendingstatus{
-    grid-area: status;
-    border-right: 2px solid rgb(105, 172, 105);
-
+.tablefoot{
+  padding-top: 25px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  text-align: left;
+  color: rgb(105, 172, 105);
+  line-height: 30px;
+  background-color: lightgray;
 }
-
-#pendingid{
-    grid-area: id;
-}
-
-
 
 </style>

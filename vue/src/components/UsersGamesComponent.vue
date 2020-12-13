@@ -23,6 +23,7 @@
                 </tr>
             </tbody>
         </table>
+        <label id="end1" class="tablefoot"></label>
     </div>
 </div>
 
@@ -103,8 +104,9 @@ created(){
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
     grid-template-areas: 
-    ". thead  ."
-    ". tbody .";
+    ". thead ."
+    ". tbody ."
+    ". foot .";
 }
 
 .buttondefault{
@@ -119,4 +121,22 @@ created(){
   margin: 10px;
   transition-duration: .4s;
 }
+
+.formfoot{
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  padding-top: 35px;
+  padding-bottom: 3px;
+  padding-left: 4px;
+  font-size: 35px;
+  text-align: left;
+  color: rgb(105, 172, 105);
+  line-height: 30px;
+  background-color: lightgray;
+}
+
+#end1{
+    grid-area: foot;
+}
+
 </style>

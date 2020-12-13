@@ -1,15 +1,14 @@
 <template>
 <div class="mainbackground">
-    <div id="allgamestablecontainer" >
+    <div id="allgamescontainer">
         <h2 id="tablehead2" class="tableheader1">All Games</h2>
-        <table id="gamelistcreatorname" class="tablebody">
+        <table id="allgamelisttable" class="tablebody">
             <thead>
                 <tr>
                     <th class="columnheader">Name</th>
                     <th class="columnheader">Creator</th>
                     <th class="columnheader">Start Date</th>
-                    <th class="columnheader">End Date</th>
-                    <th class="columnheaderend">Status</th>
+                    <th class="columnheaderend">End Date</th>
                 </tr>
             </thead>
             <tbody v-for="game in this.$store.state.allGames" v-bind:key="game.id">
@@ -17,11 +16,11 @@
                     <td class="itemstyle" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
                     <td class="itemstyle">{{game.creatorName}}</td>
                     <td class="itemstyle">{{game.startDate}}</td>
-                    <td class="itemstyle">{{game.endDate}}</td>
-                    <td class="itemstyleend">{{game.statusName}}</td>
+                    <td class="itemstyleend">{{game.endDate}}</td>
                 </tr>
             </tbody>
         </table>
+                <label id="end2" class="tablefoot"></label>
     </div>
 </div>
 
@@ -51,21 +50,25 @@ created(){
 
 <style>
 
-#allgamestablecontainer{
+#allgamescontainer{
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
     grid-template-areas: 
-    ". thead2  ."
-    ". tbody2 .";
-
+    ". thead ."
+    ". tbody ."
+    ". foot .";
 }
 
 #tablehead2{
-    grid-area: thead2;
+    grid-area: thead;
 }
 
-.tablebody{
-    grid-area: tbody2;
+#allgamelisttable{
+    grid-area: tbody;
+}
+
+#end2{
+    grid-area: foot;
 }
 
 </style>
