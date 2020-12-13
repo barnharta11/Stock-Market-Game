@@ -59,9 +59,9 @@ namespace Capstone.DAO
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("update portfolio_assets set quantity_held += @input where portfolio_id = @portfolio_id AND asset_id = @asset_id; update portfolio_assets set quantity_held += @adjustment where portfolio_id = @portfolioid AND asset_id = 1;", conn);
+                SqlCommand cmd = new SqlCommand("update portfolio_assets set quantity_held += @input where portfolio_id = @portfolioid AND asset_id = @asset_id; update portfolio_assets set quantity_held += @adjustment where portfolio_id = @portfolioid AND asset_id = 1;", conn);
                 cmd.Parameters.AddWithValue("@input", updateAsset.QuantityAdjustment);
-                cmd.Parameters.AddWithValue("@portfolio_id", updateAsset.PortfolioID);
+                cmd.Parameters.AddWithValue("@portfolioid", updateAsset.PortfolioID);
                 cmd.Parameters.AddWithValue("@asset_id", updateAsset.AssetId);
                 cmd.Parameters.AddWithValue("@adjustment", updateAsset.USDAdjustment);
                 cmd.ExecuteScalar();
