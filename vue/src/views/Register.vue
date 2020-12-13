@@ -208,7 +208,6 @@ export default {
   color: rgb(105, 172, 105);
   line-height: 30px;
   background-color: lightgray;
-
 }
 
 </style>
