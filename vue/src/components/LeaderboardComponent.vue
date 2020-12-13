@@ -11,12 +11,12 @@
                     <th>Game Ends</th>
                 </tr>
             </thead>
-            <tbody v-for="player in this.$store.state.currentGameLeaderBoard" v-bind:key="player.UserGameID">
+            <tbody v-for="player in sortedBoard" v-bind:key="player.gameId">
                 <tr>
-                    <td>standing</td>
-                    <td> {{player.username}}</td>
-                    <td>net worth</td>
-                    <td>game ends</td>
+                    <td></td>
+                    <td>{{player.userName}}</td>
+                    <td>{{player.netWorth}}</td>
+                    <td>{{$store.state.selectedGame.endDate}}</td>
                 </tr>
             </tbody>
         </table>
@@ -26,7 +26,22 @@
 
 <script>
 export default {
+    data(){
+        return{
+            sortedBoard:[]
+        }
+    },
+    methods:{
+        SortBoard(){
+            this.sortedBoard=this.$store.state.currentGameLeaderBoard
+            // this.sortedBoard.forEach(player=>{
 
+            // })
+        }
+    },
+    created(){
+        this.SortBoard()
+    }
 }
 </script>
 

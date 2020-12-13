@@ -30,6 +30,15 @@ namespace Capstone.Models
         public string Symbol { get; set; }
         public string CompanyName { get; set; }
         public decimal CurrentPrice { get; set; }
+        public string UserName { get; set; }
+        public decimal NetWorth
+        {
+            get
+            {
+                return CurrentPrice * QuantityHeld;
+            }
+            
+        }
       
     }
 }
