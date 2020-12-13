@@ -11,9 +11,9 @@
                     <th>Game Ends</th>
                 </tr>
             </thead>
-            <tbody v-for="player in sortedBoard" v-bind:key="player.gameId">
+            <tbody v-for="player in sortedBoard" v-bind:key="player.userID">
                 <tr>
-                    <td></td>
+                    <td>{{PlayerStanding(player)}}</td>
                     <td>{{player.userName}}</td>
                     <td>{{player.netWorth}}</td>
                     <td>{{$store.state.selectedGame.endDate}}</td>
@@ -37,6 +37,9 @@ export default {
             // this.sortedBoard.forEach(player=>{
 
             // })
+        },
+        PlayerStanding(player){
+            return (this.sortedBoard.indexOf(player))+1
         }
     },
     created(){

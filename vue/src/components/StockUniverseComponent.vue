@@ -18,7 +18,11 @@
                     <td>{{stock.symbol}}</td>
                     <td>{{stock.companyName}}</td>
                     <td>{{stock.currentPrice}}</td>
-                    <td>{{stock.buttonToBuy}}</td>
+                    <td>
+                   
+                                test text
+                        
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -32,6 +36,7 @@ export default {
     data(){
         return{
             currentSearch:"",
+            popupActive:false
         }
         
     },
