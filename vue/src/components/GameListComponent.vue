@@ -20,7 +20,7 @@
                 </tr>
             </tbody>
         </table>
-                <label id="end2" class="tablefoot"></label>
+        <label id="end2" class="tablefoot"></label>
     </div>
 </div>
 
