@@ -20,7 +20,7 @@ namespace Capstone.Models
 
     public class Leaderboard
     {
-        public int StatusCode { get; set; }
+        public decimal NetWorth{ get; set; }
         public int GameID { get; set; }
         public int UserID { get; set; }
         public int UserGameID { get; set; }
@@ -31,14 +31,14 @@ namespace Capstone.Models
         public string CompanyName { get; set; }
         public decimal CurrentPrice { get; set; }
         public string UserName { get; set; }
-        public decimal NetWorth
-        {
-            get
-            {
-                return CurrentPrice * QuantityHeld;
-            }
+        //public decimal NetWorth
+        //{
+        //    get
+        //    {
+        //        return CurrentPrice * QuantityHeld;
+        //    }
             
-        }
+        //}
       
     }
 }

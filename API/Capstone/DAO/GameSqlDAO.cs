@@ -114,23 +114,21 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("select * from portfolio left join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id left join assets on portfolio_assets.asset_id = assets.asset_id left join user_games on portfolio.user_game_id = user_games.user_game_id left join users on user_games.user_id=users.user_id where game_id = @gameID", conn);
+                    SqlCommand cmd = new SqlCommand("Select SUM(quantity_held * current_price) AS 'net_worth', users.user_id, users.username From portfolio left join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id left join assets on portfolio_assets.asset_id = assets.asset_id left join user_games on portfolio.user_game_id = user_games.user_game_id left join users on user_games.user_id = users.user_id where game_id = @gameid Group By users.user_id", conn);
                     cmd.Parameters.AddWithValue("@gameid", gameID);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
                         Leaderboard readLeaderboard = new Leaderboard();
-                        readLeaderboard.AssetsID = Convert.ToInt32(reader["asset_id"]);
-                        readLeaderboard.PortfolioID = Convert.ToInt32(reader["portfolio_id"]);
-                        readLeaderboard.UserGameID = Convert.ToInt32(reader["user_game_id"]);
+                        //readLeaderboard.AssetsID = Convert.ToInt32(reader["asset_id"]);
+                        //readLeaderboard.PortfolioID = Convert.ToInt32(reader["portfolio_id"]);
+                        //readLeaderboard.UserGameID = Convert.ToInt32(reader["user_game_id"]);
                         readLeaderboard.GameID = Convert.ToInt32(reader["game_id"]);
                         readLeaderboard.UserID = Convert.ToInt32(reader["user_id"]);
-                        readLeaderboard.StatusCode = Convert.ToInt32(reader["status_code"]);
-                        readLeaderboard.QuantityHeld = Convert.ToDecimal(reader["quantity_held"]);
-                        readLeaderboard.Symbol = Convert.ToString(reader["symbol"]);
-                        readLeaderboard.CompanyName = Convert.ToString(reader["company_name"]);
-                        readLeaderboard.CurrentPrice = Convert.ToDecimal(reader["current_price"]);
+                        readLeaderboard.NetWorth = Convert.ToDecimal(reader["net_worth"]);
+                        //readLeaderboard.QuantityHeld = Convert.ToDecimal(reader["quantity_held"]);
+                        //readLeaderboard.CurrentPrice = Convert.ToDecimal(reader["current_price"]);
                         readLeaderboard.UserName = Convert.ToString(reader["username"]);
                         returnList.Add(readLeaderboard);
                     }
