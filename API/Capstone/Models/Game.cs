@@ -16,6 +16,20 @@ namespace Capstone.Models
         public string CreatorName { get; set; }
         public string StatusName { get; set; }
 
+    }
 
+    public class Leaderboard
+    {
+        public int StatusCode { get; set; }
+        public int GameID { get; set; }
+        public int UserID { get; set; }
+        public int UserGameID { get; set; }
+        public int AssetsID { get; set; }
+        public int PortfolioID { get; set; }
+        public decimal QuantityHeld { get; set; }
+        public string Symbol { get; set; }
+        public string CompanyName { get; set; }
+        public decimal CurrentPrice { get; set; }
+      
     }
 }

@@ -55,7 +55,6 @@ namespace Capstone.DAO
 
         public void UpdateQuantity(UpdateAsset updateAsset)
         {
-            
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -66,8 +65,6 @@ namespace Capstone.DAO
                 cmd.Parameters.AddWithValue("@asset_id", updateAsset.AssetId);
                 cmd.Parameters.AddWithValue("@adjustment", updateAsset.USDAdjustment);
                 cmd.ExecuteScalar();
-
-
 
             }
                     
