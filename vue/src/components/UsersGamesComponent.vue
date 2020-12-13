@@ -3,7 +3,7 @@
 <div class="mainbackground">
     <div id="gamelistcontainer">
         <h2 id="tablehead1" class="tableheader1">My Current Games</h2>
-        <table id="tablebod" class="tablebody">
+        <table class="tablebody">
             <thead>
                 <tr>
                     <th class="columnheader">Name</th>
@@ -119,24 +119,4 @@ created(){
   margin: 10px;
   transition-duration: .4s;
 }
-
-#currentname{
-    grid-area: name;
-    border-right: 2px solid rgb(105, 172, 105);
-}
-
-#currentstart{
-    grid-area: start;
-    border-right: 2px solid rgb(105, 172, 105);
-}
-
-#currentend{
-    grid-area: end;
-    border-right: 2px solid rgb(105, 172, 105);
-}
-
-#currentstatus{
-    grid-area: status;
-}
-
 </style>

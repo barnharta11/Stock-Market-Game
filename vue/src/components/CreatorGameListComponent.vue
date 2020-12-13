@@ -6,12 +6,12 @@
         <table id="gamelistcreatorname" class="smalltextclass">
             <thead>
                 <tr>
-                    <th class="columnheader">Name</th>
-                    <th class="columnheader">Creator</th>
-                    <th class="columnheader">Start Date</th>
-                    <th class="columnheader">End Date</th>
-                    <th class="columnheader">Status</th>
-                    <th class="columnheaderend">Add Others</th>
+                    <th>Name</th>
+                    <th>Creator</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Add Others</th>
                 </tr>
             </thead>
             <tbody v-for="game in creatorGames" v-bind:key="game.id">

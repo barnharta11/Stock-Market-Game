@@ -1,7 +1,7 @@
 <template>
 <div class="mainbackground">
-    <div id="gamelistcontainer" >
-        <h2>All Games</h2>
+    <div id="allgamestablecontainer" >
+        <h2 id="tablehead2" class="tableheader1">All Games</h2>
         <table id="gamelistcreatorname" class="tablebody">
             <thead>
                 <tr>
@@ -14,11 +14,11 @@
             </thead>
             <tbody v-for="game in this.$store.state.allGames" v-bind:key="game.id">
                 <tr>
-                    <td v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
-                    <td>{{game.creatorName}}</td>
-                    <td>{{game.startDate}}</td>
-                    <td>{{game.endDate}}</td>
-                    <td>{{game.statusName}}</td>
+                    <td class="itemstyle" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
+                    <td class="itemstyle">{{game.creatorName}}</td>
+                    <td class="itemstyle">{{game.startDate}}</td>
+                    <td class="itemstyle">{{game.endDate}}</td>
+                    <td class="itemstyleend">{{game.statusName}}</td>
                 </tr>
             </tbody>
         </table>
@@ -51,28 +51,21 @@ created(){
 
 <style>
 
-#gamelistcontainer{
-    background-color: rgb(105,172,105);
+#allgamestablecontainer{
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr 2.5fr 2.5fr 1fr;
+    grid-template-columns: 1fr 8fr 1fr;
     grid-template-areas: 
-    ". buttonslot name start end ."
-    ;
-}
-
-#allname{
-    grid-area: name;
-    border-right: 2px solid rgb(105, 172, 105);
-}
-
-#allstart{
-    grid-area: start;
-            border-right: 2px solid rgb(105, 172, 105);
+    ". thead2  ."
+    ". tbody2 .";
 
 }
 
-#allend{
-    grid-area: end;
+#tablehead2{
+    grid-area: thead2;
+}
+
+.tablebody{
+    grid-area: tbody2;
 }
 
 </style>
