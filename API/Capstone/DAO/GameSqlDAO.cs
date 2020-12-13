@@ -115,13 +115,13 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("select * from portfolio left join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id left join assets on portfolio_assets.asset_id = assets.asset_id left join user_games on portfolio.user_game_id = user_games.user_game_id where game_id = @gameID", conn);
-                    cmd.Parameters.AddWithValue("@game_id", gameID);
+                    cmd.Parameters.AddWithValue("@gameid", gameID);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
                         Leaderboard readLeaderboard = new Leaderboard();
-                        readLeaderboard.AssetsID = Convert.ToInt32(reader["assets_id"]);
+                        readLeaderboard.AssetsID = Convert.ToInt32(reader["asset_id"]);
                         readLeaderboard.PortfolioID = Convert.ToInt32(reader["portfolio_id"]);
                         readLeaderboard.UserGameID = Convert.ToInt32(reader["user_game_id"]);
                         readLeaderboard.GameID = Convert.ToInt32(reader["game_id"]);

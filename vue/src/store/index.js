@@ -25,9 +25,13 @@ export default new Vuex.Store({
     allGames:[],
     userGames:[],
     selectedGame:[],
-    allStocks:[]
+    allStocks:[],
+    currentGameLeaderBoard:[]
   },
   mutations: {
+    SET_CURRENT_LEADER_BOARD(state, leaderboard){
+      state.currentGameLeaderBoard=leaderboard
+    },
     SET_ALL_STOCKS(state, stocks){
       state.allStocks=stocks
     },

@@ -71,7 +71,7 @@ namespace Capstone.Controllers
             return Ok(gameDAO.GetGameList());
         }
 
-        [HttpGet("/leaderboard")]
+        [HttpGet("/games/leaderboard/{gameID}")]
         public IActionResult ListLeaderboard(int gameID)
         {
             return Ok(gameDAO.GetLeaderboard(gameID));

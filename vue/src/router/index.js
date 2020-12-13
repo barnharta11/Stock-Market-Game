@@ -7,7 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import CreateGame from '../views/CreateGame.vue'
 import GameList from "../views/GameList.vue"
-// import UsersGames from "../views/UsersGames.vue"
+import Leaderboard from "../views/Leaderboard.vue"
 import CreatedGames from "../views/CreatedGames.vue"
 import GameDetailsPage from "../views/GameDetailsPage.vue"
 import DisplayUser from "../views/DisplayUser.vue"
@@ -67,14 +67,14 @@ const router = new Router({
         requiresAuth:true
       }
     },
-    // {
-    //   path: "/portfolio/:userid/:gameid",
-    //   name: "gamedetails",
-    //   component: GameDetailsPage,
-    //   meta:{
-    //     requiresAuth:true
-    //   }
-    // },
+    {
+      path: "/games/leaderboard/:gameid",
+      name: "leaderboard",
+      component: Leaderboard,
+      meta:{
+        requiresAuth:true
+      }
+    },
     {
       path: "/games",
       name: "allgames",
