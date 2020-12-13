@@ -1,6 +1,6 @@
 <template>
   <div class="mainbackground">
-    <!-- <div id="" >
+    <div id="" >
         <h2>Leaderboard</h2>
         <table id="gamelistcreatorname" class="smalltextclass">
             <thead>
@@ -11,16 +11,16 @@
                     <th>Game Ends</th>
                 </tr>
             </thead>
-            <tbody v-for="" v-bind:key="">
+            <tbody v-for="player in this.$store.state.currentGameLeaderBoard" v-bind:key="player.UserGameID">
                 <tr>
-                    <td>{{- standing -}}</td>
-                    <td v-on:click='-see user portfolio -'>{{- username -}}</td>
-                    <td>{{- net worth -}}</td>
-                    <td>{{- game ends -}}</td>
+                    <td>standing</td>
+                    <td> {{player.username}}</td>
+                    <td>net worth</td>
+                    <td>game ends</td>
                 </tr>
             </tbody>
         </table>
-    </div> -->
+    </div>
 </div> 
 </template>
 
