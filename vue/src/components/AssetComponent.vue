@@ -35,7 +35,7 @@
                     <td>{{asset.companyName}}</td>
                     <td>{{asset.currentPrice}}</td>
                     <td>{{asset.quantityHeld}}</td>
-                    <td>${{TotalEquity(asset)}}</td>
+                    <td>${{TotalEquity(asset).toFixed(2)}}</td>
                     <!-- <td>{{- purchased price -}}</td> -->
                     <!-- <td>{{- buy/sell pop up -}}</td> -->
                 </tr>
@@ -112,11 +112,11 @@ export default {
             return assetEquity
         },
         NetWorth(){
-            let returnWorth=""
+            let returnWorth=0
             this.$store.state.activeAssets.forEach(element => {
-                returnWorth += element.quantityHeld*element.currentPrice
+                returnWorth += (element.quantityHeld*element.currentPrice)
             });
-            return returnWorth
+            return returnWorth.toFixed(2)
         }
     },
     computed:{

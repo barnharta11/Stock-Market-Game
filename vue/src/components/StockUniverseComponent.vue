@@ -13,7 +13,7 @@
                     <th>Last Purchase</th>
                 </tr>
             </thead>
-            <tbody v-for="stock in searchedStocks" v-bind:key="stock.assetId">
+            <tbody v-for="stock in arrayByPage" v-bind:key="stock.assetId">
                 <!-- <tbody> -->
                 <tr>
                     <td>{{stock.symbol}}</td>
@@ -27,6 +27,8 @@
                 </tr>
             </tbody>
         </table>
+        <button v-on:click ="DecreaseIndex()" v-show="showPrevious">Previous Page</button>
+        <button v-on:click="IncrementIndex()" v-show="showNext">Next Page</button>
     </div>  
 </div>
 </template>
@@ -45,7 +47,10 @@ export default {
                 USDAdjustment:'',
                 assetId:''
             },
-            existed:false
+            existed:false,
+            startIndex:0,
+            endIndex:10,
+            
         }
         
     },
@@ -71,20 +76,39 @@ export default {
                     assetService.buyNewStocks(this.$store.state.user.userId, this.$store.state.selectedGame.gameId, this.transactionRequest)
                 }
                 assetService.getUserAssets(this.$store.state.user.userId, this.$store.state.selectedGame.gameId)
+                .then(response=>
+                this.$store.commit("SET_SELECTED_ASSETS", response.data[1]))
             }
+        },
+        IncrementIndex(){
+            this.startIndex+=10
+            this.endIndex+=10
+        },
+        DecreaseIndex(){
+            this.startIndex-=10
+            this.endIndex-=10
         }
     },
     computed:{
         searchedStocks(){
-            let filtered = this.$store.state.allStocks
+            let filtered = this.$store.state.allStocks.slice(1)
             if(this.currentSearch!=""){
                 filtered=filtered.filter((stock)=>
                 stock.companyName
                 .toLowerCase()
                 .includes(this.currentSearch.toLowerCase()))
-            }
+                }        
             return filtered
-        }
+        },
+        arrayByPage(){
+           return  this.searchedStocks.slice(this.startIndex, this.endIndex)
+        },
+       showPrevious(){
+        return this.startIndex>0
+       },
+       showNext(){
+           return this.endIndex<this.searchedStocks.length-1
+       }
     }
 
    
