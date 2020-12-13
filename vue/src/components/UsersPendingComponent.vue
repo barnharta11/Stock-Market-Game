@@ -9,7 +9,7 @@
                     <th class="columnheader">Creator</th>
                     <th class="columnheader">Start Date</th>
                     <th class="columnheader">End Date</th>
-                    <th class="columnheaderend">Status</th>
+                    <th class="columnheader">Status</th>
                 </tr>
             </thead>
             <tbody v-for="game in pendingGames" v-bind:key="game.id">

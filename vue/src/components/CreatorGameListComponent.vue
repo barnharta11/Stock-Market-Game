@@ -3,7 +3,7 @@
 <div class="mainbackground">
     <div id="mycreatedgamescontainer">
         <h2 id="tablehead4" class="tableheader1">My Created Games</h2>
-        <table class="tablebody">
+        <table id="createdgamestable" class="tablebody">
             <thead>
                 <tr>
                     <th class="columnheader">Name</th>
@@ -21,10 +21,11 @@
                     <td class="itemstyle">{{game.startDate}}</td>
                     <td class="itemstyle">{{game.endDate}}</td>
                     <td class="itemstyle">{{game.statusName}}</td>
-                    <router-link class="route" v-on:click="SetInviteGame(game)" :to="{name:'displayusers'}"><td>Invite users</td></router-link>
+                    <router-link class="itemstyleend" v-on:click="SetInviteGame(game)" :to="{name:'displayusers'}"><td>Invite users</td></router-link>
                 </tr>
             </tbody>
         </table>
+        <label id="end4" class="tablefoot"></label>
     </div>  
 </div>
 
@@ -67,12 +68,26 @@ created(){
 
 <style>
 
-#contain{
+#mycreatedgamescontainer{
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr 3fr 3fr 1fr .5fr 1fr;
+    grid-template-columns: 1fr 8fr 1fr;
     grid-template-areas: 
-    /* ". . top top top top top top ." */
-    ". button creatorname startdate enddate status id .";
+    ". thead ."
+    ". tbody ."
+    ". footer ."
+    ;
+}
+
+#tablehead4{
+    grid-area: thead;
+}
+
+#createdgamestable{
+    grid-area: tbody;
+}
+
+#end4{
+    grid-area: footer;
 }
 
 .mainbackground{
