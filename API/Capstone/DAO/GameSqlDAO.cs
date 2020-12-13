@@ -123,10 +123,10 @@ namespace Capstone.DAO
                         Leaderboard readLeaderboard = new Leaderboard();
                         readLeaderboard.AssetsID = Convert.ToInt32(reader["assets_id"]);
                         readLeaderboard.PortfolioID = Convert.ToInt32(reader["portfolio_id"]);
-                        readLeaderboard.UserGameID = Convert.ToInt32(reader["assets_id"]);
-                        readLeaderboard.GameID = Convert.ToInt32(reader["portfolio_id"]);
-                        readLeaderboard.UserID = Convert.ToInt32(reader["portfolio_id"]);
-                        readLeaderboard.StatusCode = Convert.ToInt32(reader["portfolio_id"]);
+                        readLeaderboard.UserGameID = Convert.ToInt32(reader["user_game_id"]);
+                        readLeaderboard.GameID = Convert.ToInt32(reader["game_id"]);
+                        readLeaderboard.UserID = Convert.ToInt32(reader["user_id"]);
+                        readLeaderboard.StatusCode = Convert.ToInt32(reader["status_code"]);
                         readLeaderboard.QuantityHeld = Convert.ToDecimal(reader["quantity_held"]);
                         readLeaderboard.Symbol = Convert.ToString(reader["symbol"]);
                         readLeaderboard.CompanyName = Convert.ToString(reader["company_name"]);
