@@ -15,11 +15,11 @@
             </thead>
             <tbody v-for="game in this.$store.state.userGames" v-bind:key="game.id">
                 <tr>
-                    <td class="itemstyle" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
                     <td class="itemstyle">{{game.creatorName}}</td>
                     <td class="itemstyle">{{game.startDate}}</td>
                     <td class="itemstyle">{{game.endDate}}</td>
                     <td class="itemstyleend">{{game.statusName}}</td>
+                    <td class="itemstyle" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
                 </tr>
             </tbody>
         </table>

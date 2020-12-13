@@ -1,26 +1,26 @@
 <template>
 
 <div class="mainbackground">
-    <div id="contain">
-        <h2>My Created Games</h2>
-        <table id="gamelistcreatorname" class="smalltextclass">
+    <div id="mycreatedgamescontainer">
+        <h2 id="tablehead4" class="tableheader1">My Created Games</h2>
+        <table class="tablebody">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Creator</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Status</th>
-                    <th>Add Others</th>
+                    <th class="columnheader">Name</th>
+                    <th class="columnheader">Creator</th>
+                    <th class="columnheader">Start Date</th>
+                    <th class="columnheader">End Date</th>
+                    <th class="columnheader">Status</th>
+                    <th class="columnheaderend">Add Others</th>
                 </tr>
             </thead>
             <tbody v-for="game in creatorGames" v-bind:key="game.id">
                 <tr>
-                    <td id="routegamename" class="route" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
-                    <td>{{game.creatorName}}</td>
-                    <td>{{game.startDate}}</td>
-                    <td>{{game.endDate}}</td>
-                    <td>{{game.statusName}}</td>
+                    <td class="itemstyle" id="routegamename" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
+                    <td class="itemstyle">{{game.creatorName}}</td>
+                    <td class="itemstyle">{{game.startDate}}</td>
+                    <td class="itemstyle">{{game.endDate}}</td>
+                    <td class="itemstyle">{{game.statusName}}</td>
                     <router-link class="route" v-on:click="SetInviteGame(game)" :to="{name:'displayusers'}"><td>Invite users</td></router-link>
                 </tr>
             </tbody>
