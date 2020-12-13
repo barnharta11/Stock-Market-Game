@@ -1,11 +1,11 @@
 <template>
 <div class="bigbackground">
   <div>
-    <div id="mycurrentgamesheader" class="tableheader"> My Current Games</div>
+    <!-- <div id="mycurrentgamesheader" class="tableheader"> My Current Games</div> -->
     <users-games-component/>
-    <div id="allgamesheader" class="tableheader">All Games</div>
+    <!-- <div id="allgamesheader" class="tableheader">All Games</div> -->
     <game-list-component/>
-    <div id="mypendinginvitesheader" class="tableheader"> My Pending Invites</div>
+    <!-- <div id="mypendinginvitesheader" class="tableheader"> My Pending Invites</div> -->
     <users-pending-component/>
   </div>
   </div>

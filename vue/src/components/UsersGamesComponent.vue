@@ -2,24 +2,24 @@
 
 <div class="mainbackground">
     <div id="gamelistcontainer">
-        <h2 class="tableheader1">My Current Games</h2>
-        <table class="tablebody">
+        <h2 id="tablehead1" class="tableheader1">My Current Games</h2>
+        <table id="tablebod" class="tablebody">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Creator</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Status</th>
+                    <th class="columnheader">Name</th>
+                    <th class="columnheader">Creator</th>
+                    <th class="columnheader">Start Date</th>
+                    <th class="columnheader">End Date</th>
+                    <th class="columnheaderend">Status</th>
                 </tr>
             </thead>
             <tbody v-for="game in this.$store.state.userGames" v-bind:key="game.id">
                 <tr>
-                    <td v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
-                    <td>{{game.creatorName}}</td>
-                    <td>{{game.startDate}}</td>
-                    <td>{{game.endDate}}</td>
-                    <td>{{game.statusName}}</td>
+                    <td class="itemstyle" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
+                    <td class="itemstyle">{{game.creatorName}}</td>
+                    <td class="itemstyle">{{game.startDate}}</td>
+                    <td class="itemstyle">{{game.endDate}}</td>
+                    <td class="itemstyleend">{{game.statusName}}</td>
                 </tr>
             </tbody>
         </table>
@@ -52,25 +52,59 @@ created(){
 
 <style>
 
+.columnheaderend{
+    text-align: center;
+    font-size: 30px;
+}
+
+.columnheader{
+    padding-bottom: 10px;
+    text-align: center;
+    border-right: 2px solid rgb(105, 172, 105);
+    font-size: 30px;
+}
+
+.itemstyle{
+    margin: 0%;
+    padding-top: 0;
+    font-size: 20px;
+    text-align: center;
+    border-right: 2px solid rgb(105, 172, 105);
+}
+
+.itemstyleend{
+    font-size: 20px;
+    text-align: center;
+}
+
 .tableheader1{
+    font-size: 45px;
+    font-family: Consolas, Arial, Helvetica;
     margin: 0;
     padding: 0;
     background-color: lightgray;
     color: rgb(105, 172, 105);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding-top: 1%;
+    text-align: center;
+    grid-area: thead;
 }
 
 .tablebody{
     margin: 0;
     background-color: lightgray;
     color: rgb(105, 172, 105);
+    border-right: rgb(105, 172, 105);
+    grid-area: tbody;
 }
 
 #gamelistcontainer{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 2.5fr 2.5fr 1fr 1fr;
+    grid-template-columns: 1fr 8fr 1fr;
     grid-template-areas: 
-    ". buttonslot name start end status .";
-    /* padding: 100px; */
+    ". thead  ."
+    ". tbody .";
 }
 
 .buttondefault{
@@ -80,19 +114,15 @@ created(){
   color: rgb(105, 172, 105);
   border: none;
   border-radius: 10px;
-  /* padding: 10px 20px; */
   font-size: 20px;
-  /* line-height: 20px; */
   width: 80%;
   margin: 10px;
-  /* margin-bottom: 10px ; */
   transition-duration: .4s;
 }
 
 #currentname{
     grid-area: name;
-        border-right: 2px solid rgb(105, 172, 105);
-
+    border-right: 2px solid rgb(105, 172, 105);
 }
 
 #currentstart{

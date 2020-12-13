@@ -2,14 +2,14 @@
 <div class="mainbackground">
     <div id="gamelistcontainer" >
         <h2>All Games</h2>
-        <table id="gamelistcreatorname" class="smalltextclass">
+        <table id="gamelistcreatorname" class="tablebody">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Creator</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Status</th>
+                    <th class="columnheader">Name</th>
+                    <th class="columnheader">Creator</th>
+                    <th class="columnheader">Start Date</th>
+                    <th class="columnheader">End Date</th>
+                    <th class="columnheaderend">Status</th>
                 </tr>
             </thead>
             <tbody v-for="game in this.$store.state.allGames" v-bind:key="game.id">
