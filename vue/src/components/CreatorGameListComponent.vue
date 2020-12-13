@@ -21,7 +21,8 @@
                     <td class="itemstyle">{{game.startDate}}</td>
                     <td class="itemstyle">{{game.endDate}}</td>
                     <td class="itemstyle">{{game.statusName}}</td>
-                    <router-link class="itemstyleend" v-on:click="SetInviteGame(game)" :to="{name:'displayusers'}"><td>Invite users</td></router-link>
+                    <button v-on:click="SetInviteGame(game)">Invite Users</button>
+                    <!-- <td><router-link class="itemstyleend" v-on:click="SetInviteGame(game)" :to="{name:'displayusers'}">Invite users</router-link></td> -->
                 </tr>
             </tbody>
         </table>
@@ -43,6 +44,7 @@ export default {
 methods:{
     SetInviteGame(game){
         this.$store.commit("SET_SELECTED_GAME", game)
+        this.$router.push('/inviteusers')
     },
     SetSelectedGame(game){
         this.$store.commit("SET_SELECTED_GAME", game);
