@@ -1,7 +1,7 @@
 <template>
   <div>
-    <leaderboard-component/>
     <game-details-component/>
+    <leaderboard-component/>    
     <asset-component/>
     <stock-universe-component/>
   </div>
