@@ -38,7 +38,7 @@ body {
   color: rgb(105, 172, 105);
   font-family: Consolas, Arial, Helvetica;
   font-size: 35px;
-  grid-template-columns:  1fr 1fr 1fr 5fr 5fr;
+  grid-template-columns:  1fr 1fr 1fr 1fr 16fr;
   grid-template-areas: 
   "homebtn sep logoutbtn . title";
   padding-bottom: 0;
