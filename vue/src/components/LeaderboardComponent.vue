@@ -1,5 +1,5 @@
 <template>
-  <div class="mainbackground">
+  <div class="testfix">
     <div id="leaderboardcontainer">
       <h2 id="leaderboardhead" class="tableheader1">Leaderboard</h2>
       <table id="leaderboardbody" class="tablebody">
@@ -52,6 +52,11 @@ export default {
 </script>
 
 <style>
+
+.testfix{
+  margin-top: 20px;
+}
+
 #leaderboardhead {
   grid-area: thead;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="mainbackground">
+  <div class="testfix">
     <div id="portfoliocontainer">
       <h2 id="leaderboardhead" class="tableheader1">{{ $store.state.user.username }}'s Portfolio</h2>
       <table id="portfoliobody" class="tablebody">
