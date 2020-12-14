@@ -1,15 +1,15 @@
 <template>
   <div class="mainbackground">
-    <div id="tbd" >
+    <div id="user-portfolio" >
         <h2> {{$store.state.user.username}}'s Portfolio</h2>
-        <table id="gamelistcreatorname" class="smalltextclass">
-            <thead>
+        <table id="gametable-portfolio" class="smalltextclass">
+            <thead id="head-details">
                 <tr>
                     <th>Net Worth</th>
                     <th>Game Ends</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="body-details">
                 <tr>
                     <td>{{NetWorth()}} | </td>
                     <td>{{$store.state.selectedGame.endDate}}</td>
@@ -17,7 +17,7 @@
             </tbody>
         </table>
         <h3> {{$store.state.user.username}}'s Stocks</h3>
-        <table id="gamelistcreatorname" class="smalltextclass">
+        <table id="gametable-stocks" class="smalltextclass">
             <thead>
                 <tr>
                     <th>Stock Ticker</th>
@@ -131,5 +131,21 @@ export default {
 </script>
 
 <style>
-
+thead #head-details{
+    grid-area: headdetails
+}
+tbody #body-details{
+    grid-area: bodydetails
+}
+#gametime-portfolio{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 50% 50%;
+    grid-gap: 20px;
+    grid-template-areas: 
+    "headdetails headdetails"
+    "bodydetails bodydetails";
+/* }div .head-details{ */
+    /* grid-auto-columns: 50% 50%; */
+} 
 </style>

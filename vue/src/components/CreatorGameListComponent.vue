@@ -48,7 +48,7 @@ methods:{
     },
     SetSelectedGame(game){
         this.$store.commit("SET_SELECTED_GAME", game);
-        this.$router.push(`/assets/${this.$store.state.user.userId}/${game.gameId}` );
+        this.$router.push(`/games/leaderboard/${this.$store.state.selectedGame.gameId}` );
     },
     GetUsersGames(){
         gameService.getUsersGames(this.$store.state.user.userId)
