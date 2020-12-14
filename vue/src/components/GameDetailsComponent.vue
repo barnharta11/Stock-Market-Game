@@ -1,55 +1,58 @@
 <template>
   <div id="gamedetailscontainer">
-          <table>
-            <thead id="gamedetailshead">
-              <th>Game Name</th>
-              <th>Game Creator</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-            </thead>
-            <tbody id="gamedetailsbody">
-              <tr>
-                <td>{{selectedGame.gameName}}</td>
-                <td>{{selectedGame.creatorName}}</td>
-                <td>{{selectedGame.startDate}}</td>
-                <td>{{selectedGame.endDate}}</td>
-              </tr>
-            </tbody>
-          </table>
+    <h2 id="gamedetailshead" class="tableheader1">Details</h2>
+    <table id="gamedetailsbody" class="tablebody">
+      <thead>
+        <tr>
+          <th class="columnheader">Game Name</th>
+          <th class="columnheader">Game Creator</th>
+          <th class="columnheader">Start Date</th>
+          <th class="columnheaderend">End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="itemstyle">{{ selectedGame.gameName }}</td>
+          <td class="itemstyle">{{ selectedGame.creatorName }}</td>
+          <td class="itemstyle">{{ selectedGame.startDate }}</td>
+          <td class="itemstyleend">{{ selectedGame.endDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <label id="end6" class="tablefoot"></label>
   </div>
 </template>
 
 <script>
-
 export default {
- 
-  data(){
-    return{
-      selectedGame:[]
-    }    
+  data() {
+    return {
+      selectedGame: [],
+    };
   },
-  created(){
-    this.selectedGame=this.$store.state.selectedGame
-  }
-  }
-
-
+  created() {
+    this.selectedGame = this.$store.state.selectedGame;
+  },
+};
 </script>
 
 <style>
-#gamedetailscontainer{
+#gamedetailscontainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 8fr 1fr;
   grid-template-areas:
-  "head head head head"
-  "data data data data";
-  width: 100vw;
+    ". head ."
+    ". data ."
+    ". footer .";
 }
-.gamedetailshead{
+#gamedetailshead {
   grid-area: head;
 }
-.gamedetailsbody{
+#gamedetailsbody {
   grid-area: data;
 }
 
+#end6{
+  grid-area: footer;
+}
 </style>

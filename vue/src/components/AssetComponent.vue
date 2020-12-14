@@ -1,135 +1,128 @@
 <template>
   <div class="mainbackground">
-    <div id="tbd" >
-        <h2> {{$store.state.user.username}}'s Portfolio</h2>
-        <table id="gamelistcreatorname" class="smalltextclass">
-            <thead>
-                <tr>
-                    <th>Net Worth</th>
-                    <th>Game Ends</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{NetWorth()}} | </td>
-                    <td>{{$store.state.selectedGame.endDate}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <h3> {{$store.state.user.username}}'s Stocks</h3>
-        <table id="gamelistcreatorname" class="smalltextclass">
-            <thead>
-                <tr>
-                    <th>Stock Ticker</th>
-                    <th>Company Name</th>
-                    <th>Current Price</th>
-                    <!-- <th>Purchased Price</th> -->
-                    <th>Quantity Held</th>
-                    <th>Total Value</th>
-                    <th>Buy/Sell</th>
-                </tr>
-            </thead>
-            <tbody v-for="asset in $store.state.activeAssets" v-bind:key="asset.portfolioId">
-                <tr>
-                    <td>{{asset.symbol}}</td>
-                    <td>{{asset.companyName}}</td>
-                    <td>{{asset.currentPrice}}</td>
-                    <td>{{asset.quantityHeld}}</td>
-                    <td>${{TotalEquity(asset).toFixed(2)}}</td>
-                    <!-- <td>{{- purchased price -}}</td> -->
-                    <!-- <td>{{- buy/sell pop up -}}</td> -->
-                </tr>
-            </tbody>
-        </table>
+    <div id="portfoliocontainer">
+      <h2 id="leaderboardhead" class="tableheader1">{{ $store.state.user.username }}'s Portfolio</h2>
+      <table id="portfoliobody" class="tablebody">
+        <thead>
+          <tr>
+            <th class="columnheader">Net Worth</th>
+            <th class="columnheaderend">Game Ends</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="itemstyle">{{ NetWorth() }}</td>
+            <td class="itemstyleend">{{ $store.state.selectedGame.endDate }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id="stockshead" class="tableheader1">{{ $store.state.user.username }}'s Stocks</h3>
+      <table id="stocksbody" class="tablebody">
+        <thead>
+          <tr>
+            <th class="columnheader">Stock Ticker</th>
+            <th class="columnheader">Company Name</th>
+            <th class="columnheader">Current Price</th>
+            <!-- <th>Purchased Price</th> -->
+            <th class="columnheader">Quantity Held</th>
+            <th class="columnheader">Total Value</th>
+            <th class="columnheaderend">Buy/Sell</th>
+          </tr>
+        </thead>
+        <tbody
+          v-for="asset in $store.state.activeAssets"
+          v-bind:key="asset.portfolioId"
+        >
+          <tr>
+            <td class="itemstyle">{{ asset.symbol }}</td>
+            <td class="itemstyle">{{ asset.companyName }}</td>
+            <td class="itemstyle">{{ asset.currentPrice }}</td>
+            <td class="itemstyle">{{ asset.quantityHeld }}</td>
+            <td class="itemstyle">${{ TotalEquity(asset).toFixed(2) }}</td>
+            <!-- <td>{{- purchased price -}}</td> -->
+            <!-- <td>{{- buy/sell pop up -}}</td> -->
+          </tr>
+        </tbody>
+      </table>
+      <label id="end7" class="tablefoot"></label>
     </div>
   </div>
-  
-
-    <!-- <div id="" >
-        <h2> {username}'s Portfolio</h2>
-        <table id="gamelistcreatorname" class="smalltextclass">
-            <thead>
-                <tr>
-                    <th>Net Worth</th>
-                    <th>Outstanding Cash</th>
-                    <th>Game Ends</th>
-                </tr>
-            </thead>
-            <tbody v-for="" v-bind:key="">
-                <tr>
-                    <td {{this.$store.state.activePortfolio.balance}}>{{netWorth}}</td>
-                    <td>{{- outstanding cash -}}</td>
-                    <td>{{- game ends -}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <h3> {username}'s Stocks</h3>
-        <table id="gamelistcreatorname" class="smalltextclass">
-            <thead>
-                <tr>
-                    <th>Stock Ticker</th>
-                    <th>Company Name</th>
-                    <th>Current Price</th>
-                    <th>Purchased Price</th>
-                    <th>Quantity Held</th>
-                    <th>Buy/Sell</th>
-                </tr>
-            </thead>
-            <tbody v-for="" v-bind:key="">
-                <tr>
-                    <td>{{- stock ticker -}}</td>
-                    <td>{{- company name -}}</td>
-                    <td>{{- current price -}}</td>
-                    <td>{{- purchased price -}}</td>
-                    <td>{{- buy/sell pop up -}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
-<!-- </div>  -->
 
 </template>
 
 <script>
-import assetService from '../services/AssetService.js'
+import assetService from "../services/AssetService.js";
 export default {
-    data(){
-        return{
-            
-        }
+  data() {
+    return {};
+  },
+  methods: {
+    SetUserAssets() {
+      assetService
+        .getUserAssets(
+          this.$store.state.user.userId,
+          this.$store.state.selectedGame.gameId
+        )
+        .then((response) => {
+          this.$store.commit("SET_ALL_STOCKS", response.data[0]);
+          this.$store.commit("SET_SELECTED_ASSETS", response.data[1]);
+        });
     },
-    methods:{
-        SetUserAssets(){
-            assetService.getUserAssets(this.$store.state.user.userId, this.$store.state.selectedGame.gameId)
-            .then(response=>{
-                this.$store.commit('SET_ALL_STOCKS', response.data[0])
-                this.$store.commit("SET_SELECTED_ASSETS", response.data[1]);
-            })
-        },
-        TotalEquity(asset){
-            let assetEquity=(asset.quantityHeld * asset.currentPrice)
-            this.netWorth+=assetEquity
-            return assetEquity
-        },
-        NetWorth(){
-            let returnWorth=0
-            this.$store.state.activeAssets.forEach(element => {
-                returnWorth += (element.quantityHeld*element.currentPrice)
-            });
-            return returnWorth.toFixed(2)
-        }
+    TotalEquity(asset) {
+      let assetEquity = asset.quantityHeld * asset.currentPrice;
+      this.netWorth += assetEquity;
+      return assetEquity;
     },
-    computed:{
-
+    NetWorth() {
+      let returnWorth = 0;
+      this.$store.state.activeAssets.forEach((element) => {
+        returnWorth += element.quantityHeld * element.currentPrice;
+      });
+      return returnWorth.toFixed(2);
     },
-    created(){
-        this.SetUserAssets()
-        // this.$store.state.user.userId, this.$store.state.selectedGame.gameId
-    }
-
-}
+  },
+  computed: {},
+  created() {
+    this.SetUserAssets();
+    // this.$store.state.user.userId, this.$store.state.selectedGame.gameId
+  },
+};
 </script>
 
 <style>
+
+#portfoliocontainer{
+    display:grid;
+    grid-auto-columns: 1fr 8fr 1fr;
+    grid-template-areas:
+    ". thead ."
+    ". tbody ."
+    ". thead2 ."
+    ". tbody2 ."
+    ". foot .";
+
+}
+
+#leaderboardhead{
+    grid-area: thead;
+}
+
+#portfoliobody{
+    grid-area: tbody;
+}
+
+#stockshead{
+    grid-area: thead2;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+#stocksbody{
+    grid-area: tbody2;
+}
+
+#end7{
+    grid-area: foot;
+}
 
 </style>
