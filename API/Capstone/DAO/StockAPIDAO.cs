@@ -70,7 +70,7 @@ namespace Capstone.DAO
                         }
                         else
                         {
-                            SqlCommand updateCommand = new SqlCommand("select symbol from assets where symbol=@symbol;Update assets Set current_price = @current_price where asset_id=@@identity", conn);
+                            SqlCommand updateCommand = new SqlCommand("Update assets Set current_price = @current_price where symbol=@symbol", conn);
                             updateCommand.Parameters.AddWithValue("@current_price", toInsert.regularMarketPrice);
                             updateCommand.Parameters.AddWithValue("@symbol", toInsert.symbol);
                             updateCommand.ExecuteNonQuery();
