@@ -79,6 +79,27 @@ body{
     height: 100vh;
 }
 
+.tableheader{
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  color: rgb(105, 172, 105);
+  background-color: black;
+  font-family: Consolas, Arial, Helvetica;
+  font-weight: bolder;
+  font-size: 50px;
+  text-align: center;
+  margin-top: 15px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
 
+.tablefooter{
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  background-color: lightgray;
+  padding-top: 25px;
+  font-size: 35px;
+  line-height: 30px;
+}
 
 </style>

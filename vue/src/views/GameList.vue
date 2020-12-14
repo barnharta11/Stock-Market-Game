@@ -43,18 +43,4 @@ export default {
   margin-left: 20%;
 }
 
-.tableheader{
-  font-family: Consolas, Arial, Helvetica;
-  border-top-right-radius: 25px;
-  border-top-left-radius: 25px;
-  font-size: 50px;
-  text-align: center;
-  color: rgb(105, 172, 105);
-  font-weight: bolder;
-  line-height: 50px;
-  background-color: lightgray;
-  margin-top: 10px;
-  padding-bottom: 25px;
-  padding-top: 15px;
-}
 </style>
