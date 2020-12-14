@@ -108,31 +108,9 @@ export default {
   padding-top: 15px;
 }
 
-.textclass{
-  font-family: Consolas, Arial, Helvetica;
-  padding-top: 15px;
-  padding-bottom: 3px;
-  padding-left: 19px;
-  font-size: 35px;
-  text-align: left;
-  color: rgb(105, 172, 105);
-  line-height: 30px;
-  background-color: lightgray;
-}
-
 #end{
   font-family: Consolas, Arial, Helvetica;
   grid-area: formbottom;
-}
-
-.formclass{
-  font-family: Consolas, Arial, Helvetica;
-  border-color: gray;
-  font-size: 28px;
-  color: rgb(13, 42, 13);
-  background-color: lightgray;
-  line-height: 20px;
-  padding-left: 15px;
 }
 
 #box4-1{
