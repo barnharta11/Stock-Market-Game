@@ -1,5 +1,5 @@
 <template>
-<div class="mainbackground">
+<!-- <div class="mainbackground"> -->
     <div id="pendingcontainer">
         <h2 id="tablehead3" class="tableheader1">My Pending Games</h2>
         <table id="pendingtable" class="tablebody">
@@ -25,7 +25,7 @@
         </table>
         <label id="end3" class="tablefoot"></label>
     </div>
-</div>
+<!-- </div> -->
 </template>
 
 <script>
@@ -40,7 +40,7 @@ data(){
     methods:{
     SetSelectedGame(game){
         this.$store.commit("SET_SELECTED_GAME", game)
-        this.$router.push(`/assets/${this.$store.state.user.userId}/${game.gameId}`)
+        this.$router.push(`/games/leaderboard/${this.$store.state.selectedGame.gameId}`)
 
     },
     GetUsersGames(){
@@ -65,6 +65,7 @@ created(){
 <style>
 
 #pendingcontainer{
+    
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
     grid-template-areas:

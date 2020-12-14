@@ -73,7 +73,7 @@ Create Table portfolio_assets (
 	portfolio_assets_id int IDENTITY(1,1) NOT NULL,
 	portfolio_id int NOT NULL,
 	asset_id int NOT NULL,
-	quantity_held decimal NOT NULL,
+	quantity_held money NOT NULL,
 	Constraint pk_portfolio_assets_portfolio_assets_id Primary Key (portfolio_assets_id),
 	Constraint fk_portfolio_assets_portfolio Foreign Key (portfolio_id) References portfolio(portfolio_id),
 	Constraint fk_portfolio_assets_asset Foreign Key (asset_id) References assets(asset_id),
