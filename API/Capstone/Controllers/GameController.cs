@@ -16,10 +16,12 @@ namespace Capstone.Controllers
 
         private readonly IGameDAO gameDAO;
         private readonly IUserDAO userDAO;
-        public GameController(IGameDAO _gameDAO, IUserDAO _userDAO)
+        private readonly IUserGameDAO userGameDAO;
+        public GameController(IGameDAO _gameDAO, IUserDAO _userDAO, IUserGameDAO _userGameDAO)
         {
             userDAO = _userDAO;
             gameDAO = _gameDAO;
+            userGameDAO = _userGameDAO;
         }
 
         [HttpGet("/gameName")]
@@ -64,6 +66,12 @@ namespace Capstone.Controllers
             }
 
             return result;
+        }
+        [HttpPut("/games")]
+        public IActionResult AcceptInvite(Invite acceptRequest)
+        {
+            userGameDAO.AcceptInvite(acceptRequest);
+            return Ok();
         }
         [HttpGet("/games")]
         public IActionResult ListAllGames()

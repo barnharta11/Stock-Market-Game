@@ -15,9 +15,22 @@ namespace Capstone.DAO
         {
             connectionString = dbConnectionString;
         }
-        public void AcceptInvite(int userGameId)
+        public void AcceptInvite(Invite invite)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand command = new SqlCommand("update user_games set user_games.status_code = 1 where user_games.game_id=@gameid and user_games.user_id=@userid", conn);
+                    command.Parameters.AddWithValue("@userid", invite.UserId);
+                    command.Parameters.AddWithValue("@gameid", invite.GameId);
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         public int InviteUser(Invite inviteRequest)

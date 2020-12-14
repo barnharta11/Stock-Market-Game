@@ -15,7 +15,7 @@ namespace Capstone.Models
         public int WinnerId { get; set; }
         public string CreatorName { get; set; }
         public string StatusName { get; set; }
-
+        public List<Leaderboard> LeaderboardList { get; set; }
     }
 
     public class Leaderboard
@@ -31,6 +31,8 @@ namespace Capstone.Models
         public string CompanyName { get; set; }
         public decimal CurrentPrice { get; set; }
         public string UserName { get; set; }
+        public List<Asset> PlayersAssets { get; set; }
+        
         //public decimal NetWorth
         //{
         //    get

@@ -151,28 +151,59 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("select games.game_id, games.game_name, users.username, games.start_date, games.end_date, game_status.status_name from user_games join games on user_games.game_id = games.game_id  join users as u on user_games.user_id = u.user_id join users on games.creator_id = users.user_id join game_status on user_games.status_code = game_status.status_id where user_games.user_id = @userId order by user_games.status_code", conn);
-                    cmd.Parameters.AddWithValue("@userId", userID);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    
+                    SqlCommand gamecmd = new SqlCommand("select games.game_id, games.game_name, users.username, games.start_date, games.end_date, game_status.status_name from user_games join games on user_games.game_id = games.game_id  join users as u on user_games.user_id = u.user_id join users on games.creator_id = users.user_id join game_status on user_games.status_code = game_status.status_id where user_games.user_id = @userId order by user_games.status_code", conn);
+                    gamecmd.Parameters.AddWithValue("@userId", userID);
+                    SqlDataReader gameReader = gamecmd.ExecuteReader();
 
-                    while (reader.Read())
-                    {                        
+
+                    while (gameReader.Read())
+                    {
                         Game readGame = new Game();
-                        readGame.GameId = Convert.ToInt32(reader["game_id"]);
-                        readGame.GameName = Convert.ToString(reader["game_name"]);
-                        readGame.StartDate = Convert.ToDateTime(reader["start_date"]);
-                        readGame.EndDate = Convert.ToDateTime(reader["end_date"]);
-                        readGame.CreatorName = Convert.ToString(reader["username"]);
-                        readGame.StatusName = Convert.ToString(reader["status_name"]);                      
+                        readGame.GameId = Convert.ToInt32(gameReader["game_id"]);
+                        readGame.GameName = Convert.ToString(gameReader["game_name"]);
+                        readGame.StartDate = Convert.ToDateTime(gameReader["start_date"]);
+                        readGame.EndDate = Convert.ToDateTime(gameReader["end_date"]);
+                        readGame.CreatorName = Convert.ToString(gameReader["username"]);
+                        readGame.StatusName = Convert.ToString(gameReader["status_name"]);
                         returnList.Add(readGame);
                     }
+                    gameReader.Close();
+
+                    foreach (Game element in returnList)
+                    {
+                        SqlCommand leadercmd = new SqlCommand("Select SUM(quantity_held * current_price) AS 'net_worth', users.user_id, users.username From portfolio left join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id left join assets on portfolio_assets.asset_id = assets.asset_id left join user_games on portfolio.user_game_id = user_games.user_game_id left join users on user_games.user_id = users.user_id where game_id = @gameid Group By users.user_id, users.username order by 'net_worth' desc", conn);
+                        leadercmd.Parameters.AddWithValue("@gameid", element.GameId);
+                        SqlDataReader leaderReader = leadercmd.ExecuteReader();
+                        List<Leaderboard> readLeaderboard = new List<Leaderboard>();
+                        while (leaderReader.Read())
+                        {
+                            Leaderboard leaderBoard = new Leaderboard();
+                            //readLeaderboard.AssetsID = Convert.ToInt32(reader["asset_id"]);
+                            //readLeaderboard.PortfolioID = Convert.ToInt32(reader["portfolio_id"]);
+                            //readLeaderboard.UserGameID = Convert.ToInt32(reader["user_game_id"]);
+                            //readLeaderboard.GameID = Convert.ToInt32(reader["game_id"]);
+                            leaderBoard.UserID = Convert.ToInt32(leaderReader["user_id"]);
+                            leaderBoard.NetWorth = Convert.ToDecimal(leaderReader["net_worth"]);
+                            //readLeaderboard.QuantityHeld = Convert.ToDecimal(reader["quantity_held"]);
+                            //readLeaderboard.CurrentPrice = Convert.ToDecimal(reader["current_price"]);
+                            leaderBoard.UserName = Convert.ToString(leaderReader["username"]);
+                            readLeaderboard.Add(leaderBoard);
+                            
+                        }
+                        element.LeaderboardList = readLeaderboard;
+                        leaderReader.Close();
+                    }
+
+
+
                 }
             }
             catch (SqlException)
             {
                 throw;
             }
+
+
 
             return returnList;
         }

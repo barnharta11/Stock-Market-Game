@@ -19,7 +19,7 @@
                     <td class="itemstyle">{{game.startDate}}</td>
                     <td class="itemstyle">{{game.endDate}}</td>
                     <td class="itemstyle">{{game.statusName}}</td>
-                    <td class="itemstyleend"><button class="buttondefault" >Accept</button></td>
+                    <td class="itemstyleend"><button class="buttondefault" v-on:click="AcceptInvite(game.gameId)" >Accept</button></td>
                 </tr>
             </tbody>
         </table>
@@ -29,15 +29,27 @@
 </template>
 
 <script>
+import inviteService from '../services/InviteService.js'
 import gameService from "../services/GameService.js"
 export default {
 data(){
         return{
             pendingGames: [],
-
+            invite: {
+                userId: "",
+                gameId: ""
+            }
         }
     },
     methods:{
+    AcceptInvite(gameid){
+        this.invite.userId=this.$store.state.user.userId
+        this.invite.gameId=gameid
+        inviteService.acceptInvite(this.invite)
+        .then(
+            this.GetUsersGames()
+        )
+    },
     SetSelectedGame(game){
         this.$store.commit("SET_SELECTED_GAME", game)
         this.$router.push(`/games/leaderboard/${this.$store.state.selectedGame.gameId}`)

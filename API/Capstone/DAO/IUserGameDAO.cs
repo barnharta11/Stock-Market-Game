@@ -9,6 +9,6 @@ namespace Capstone.DAO
     public interface IUserGameDAO
     {
         int InviteUser(Invite inviteRequest);
-        void AcceptInvite(int userGameId);
+        void AcceptInvite(Invite invite);
     }
 }
