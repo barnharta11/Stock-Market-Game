@@ -96,7 +96,7 @@ namespace Capstone.DAO
             Asset a = new Asset()
             {
                 AssetId = Convert.ToInt32(reader["asset_id"]),
-                QuantityHeld = Convert.ToInt32(reader["quantity_held"]),
+                QuantityHeld = Convert.ToDecimal(reader["quantity_held"]),
                 Symbol = Convert.ToString(reader["symbol"]),
                 CompanyName = Convert.ToString(reader["company_name"]),
                 CurrentPrice = Convert.ToDecimal(reader["current_price"]),
