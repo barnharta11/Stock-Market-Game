@@ -1,5 +1,5 @@
 <template>
-  <div id="mainhome">
+  <div class="mainbackground">
     <div class="home">
       <h1 id="homeheader" class="tableheader">Home</h1>
       <router-link id="creategamelink" :to="{ name: 'creategame' }"
@@ -39,10 +39,10 @@ export default {
     ". footer .";
 }
 
-#mainhome {
+/* #mainhome {
   height: 100vh;
   background-color: rgb(105, 172, 105);
-}
+} */
 
 #homeheader {
   grid-area: head;
