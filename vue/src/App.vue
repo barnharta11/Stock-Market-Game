@@ -2,15 +2,10 @@
   <body>
     <div id="app">
       <div id="nav">
-        <router-link id="homebutton" v-bind:to="{ name: 'home' }"
-          >Home</router-link
-        >&nbsp;&nbsp;|
-        <router-link
-          id="logoutbutton"
-          v-bind:to="{ name: 'logout' }"
-          v-if="$store.state.token != ''"
-          >Logout</router-link
-        >
+        <router-link id="homebutton" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;&nbsp;
+        <span id="seperator">|</span>
+        <router-link id="logoutbutton" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+        <span id="title">Poor Inve$tment of Time</span>
       </div>
       <router-view />
     </div>
@@ -22,19 +17,35 @@ body {
   margin: 0px;
 }
 
+#title{
+  grid-area: title;
+  text-align: right;
+}
+
+#seperator{
+  grid-area: sep;
+  text-align: center;
+}
+
 #app {
   background-color: rgb(105, 172, 105);
-  margin: 0px;
 }
 
 #nav {
+  display: grid;
   background-color: black;
   font-family: Consolas, Arial, Helvetica;
   color: rgb(105, 172, 105);
   font-family: Consolas, Arial, Helvetica;
   font-size: 35px;
+  grid-template-columns:  1fr 1fr 1fr 5fr 5fr;
+  grid-template-areas: 
+  "homebtn sep logoutbtn . title";
+  padding-bottom: 0;
+  margin: 0;
 }
 #homebutton:link {
+  grid-area: homebtn;
   background-color: black;
   color: rgb(105, 172, 105);
   font-family: Consolas, Arial, Helvetica;
@@ -57,6 +68,7 @@ body {
 }
 
 #logoutbutton:link {
+  grid-area: logoutbtn;
   background-color: black;
   color: rgb(105, 172, 105);
   font-family: Consolas, Arial, Helvetica;
