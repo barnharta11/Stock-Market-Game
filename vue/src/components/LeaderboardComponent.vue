@@ -1,6 +1,6 @@
 <template>
   <div class="mainbackground">
-    <div id="" >
+    <div id="leaderboardcontainer">
         <h2 id="leaderboardhead" class="tableheader1">Leaderboard</h2>
         <table id="leaderboardbody" class="tablebody">
             <thead>
@@ -20,6 +20,7 @@
                 </tr>
             </tbody>
         </table>
+        <label id="end5" class="tablefoot"></label>
     </div>
 </div> 
 </template>
@@ -50,6 +51,25 @@ export default {
 
 <style>
 
+#leaderboardhead{
+    grid-area: thead;
+}
 
+#leaderboardbody{
+    grid-area: tbody;
+}
+
+#end5{
+    grid-area: foot;
+}
+
+#leaderboardcontainer{
+    display: grid;
+    grid-auto-columns: 1fr 8fr 1fr;
+    grid-template-areas: 
+    ". thead ."
+    ". tbody ."
+    ". foot .";
+}
 
 </style>
