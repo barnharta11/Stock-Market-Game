@@ -28,6 +28,7 @@ export default {
 </script>
 
 <style>
+
 .home {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -38,11 +39,6 @@ export default {
     ". created ."
     ". footer .";
 }
-
-/* #mainhome {
-  height: 100vh;
-  background-color: rgb(105, 172, 105);
-} */
 
 #homeheader {
   grid-area: head;

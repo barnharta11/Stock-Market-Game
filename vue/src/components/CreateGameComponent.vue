@@ -1,15 +1,15 @@
 <template>
-<div id="creategamemain">
-  <div id="create-game-form" class="text-center">
-    <form class="form-create-game" @submit.prevent="createGame()">
-      <h1 id="createheader">Create Game</h1>
+<div class="mainbackground">
+  <div>
+    <form id="creategamecontainer" @submit.prevent="createGame()">
+      <h1 id="createheader" class="tableheader">Create Game</h1>
       <label id="creategamename" for="gamename" class="textclass">Gamename</label>
       <input type="text" id="gamenamein" class="formclass" placeholder="Gamename..." v-model="formgame.gamename" required autofocus/>
       <label id="createstartdate" for="start-date" class="textclass">Start Date</label>
       <input type="date" id="startdatein" class="formclass" placeholder="Start Date..." v-model="formgame.startdate" required autofocus/>
       <label id="createenddate" for="end-date" class="textclass">End Date</label>
       <input type="date" id="enddatein" class="formclass" placeholder="End Date..." v-model="formgame.enddate" required/>
-      <label id="createend" class="form"></label>
+      <label id="createfooter" class="tablefooter"></label>
       <button id="createbutton" class="btn" type="submit">Create Game</button>
     </form>
   </div>
@@ -56,17 +56,10 @@ methods:{
 
 <style>
 
-#creategamemain{
-  background-color: rgb(105,172,105);
-  height: 100vh;
-  margin-top: 0px;
-}
-
-.form-create-game{
+#creategamecontainer{
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 1fr;
-  grid-template-areas: 
-  
+  grid-template-areas:
   ". header header ."
   ". gamename gamename ."
   ". createin createin ."
@@ -75,54 +68,26 @@ methods:{
   ". end end ."
   ". endin endin ."
   ". createfooter createfooter ."
-  ". createbut . ."
-
-
-  ;
+  ". createbut . .";
 }
 
 #createheader{
   grid-area: header;
-  font-family: Consolas, Arial, Helvetica;
-  border-top-right-radius: 25px;
-  border-top-left-radius: 25px;
-  font-size: 50px;
-  text-align: center;
-  color: rgb(105, 172, 105);
-  font-weight: bolder;
-  line-height: 50px;
-  background-color: lightgray;
-  margin-top: 10px;
-  margin-bottom: 0px;
-  padding-bottom: 25px;
-  padding-top: 15px;
-
+  margin: 0;
 }
 
 #creategamename{
   grid-area: gamename;
-  font-family: Consolas, Arial, Helvetica;
-  padding-top: 15px;
-  padding-bottom: 3px;
-  padding-left: 19px;
-  font-size: 35px;
-  text-align: left;
-  color: rgb(105, 172, 105);
-  line-height: 30px;
-  background-color: lightgray;
-
 }
 
 #gamenamein{
   grid-area: createin;
   font-family: Consolas, Arial, Helvetica;
   border-color: gray;
-  font-size: 28px;
-  color: rgb(13, 42, 13);
+  color: rgb(0, 65, 0);
   background-color: lightgray;
   line-height: 20px;
   padding-left: 15px;
-
 }
 
 #createstartdate{
@@ -141,22 +106,9 @@ methods:{
   grid-area: endin;
 }
 
-#createend{
-  grid-area: createfooter;  border-bottom-right-radius: 25px;
-  border-bottom-left-radius: 25px;
-  padding-top: 35px;
-  padding-bottom: 3px;
-  padding-left: 4px;
-  font-size: 35px;
-  text-align: left;
-  color: rgb(105, 172, 105);
-  line-height: 30px;
-  background-color: lightgray;
-
+#createfooter{
+  grid-area: createfooter;
 }
-
-
-
 
 #createbutton{
   grid-area: createbut;
