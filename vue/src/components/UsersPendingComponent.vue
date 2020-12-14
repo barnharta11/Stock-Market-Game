@@ -1,5 +1,5 @@
 <template>
-<!-- <div class="mainbackground"> -->
+<div class="mainbackground">
     <div id="pendingcontainer">
         <h2 id="tablehead3" class="tableheader1">My Pending Games</h2>
         <table id="pendingtable" class="tablebody">
@@ -9,7 +9,7 @@
                     <th class="columnheader">Creator</th>
                     <th class="columnheader">Start Date</th>
                     <th class="columnheader">End Date</th>
-                    <th class="columnheader">Status</th>
+                    <th class="columnheaderend">Status</th>
                 </tr>
             </thead>
             <tbody v-for="game in pendingGames" v-bind:key="game.id">
@@ -25,7 +25,7 @@
         </table>
         <label id="end3" class="tablefoot"></label>
     </div>
-<!-- </div> -->
+</div>
 </template>
 
 <script>

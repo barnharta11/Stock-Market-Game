@@ -1,5 +1,5 @@
 <template>
-<div class="mainbackground">
+<div class="testfix">
     <div id="allgamescontainer">
         <h2 id="tablehead2" class="tableheader1">All Games</h2>
         <table id="allgamelisttable" class="tablebody">

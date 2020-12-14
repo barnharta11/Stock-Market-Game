@@ -1,6 +1,6 @@
 <template>
 
-<div class="mainbackground">
+<div class="testfix">
     <div id="gamelistcontainer">
         <h2 id="tablehead1" class="tableheader1">My Current Games</h2>
         <table class="tablebody">
