@@ -140,4 +140,21 @@ body {
   background-color: lightgray;
 }
 
+.label{
+  background-color: black;
+  color: rgb(105, 172, 105);
+  border-radius: 25px;
+  text-align: center;
+  line-height: 25px;
+  font-family: Consolas, Arial, Helvetica;
+  font-weight: bolder;
+  font-size: 50px;
+  text-align: center;
+  line-height: 100%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
 </style>
