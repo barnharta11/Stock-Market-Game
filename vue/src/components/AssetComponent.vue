@@ -12,7 +12,7 @@
         <tbody>
           <tr>
             <td class="itemstyle">{{ NetWorth() }}</td>
-            <td class="itemstyleend">{{ $store.state.selectedGame.endDate }}</td>
+            <td class="itemstyleend">{{ $store.state.selectedGame.formattedEndDate }}</td>
           </tr>
         </tbody>
       </table>
