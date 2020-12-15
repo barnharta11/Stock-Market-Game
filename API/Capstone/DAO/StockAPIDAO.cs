@@ -122,7 +122,7 @@ namespace Capstone.DAO
                         {
 
 
-                            SqlCommand updateCommand = new SqlCommand("Update assets Set current_price = @current_price and time_updated=@time_updated where symbol=@symbol", conn);
+                            SqlCommand updateCommand = new SqlCommand("Update assets Set current_price = @current_price, time_updated=@time_updated where symbol=@symbol", conn);
                             updateCommand.Parameters.AddWithValue("@current_price", toInsert.regularMarketPrice);
                             updateCommand.Parameters.AddWithValue("@symbol", toInsert.symbol);
                             updateCommand.Parameters.AddWithValue("@time_updated", DateTime.Now);
