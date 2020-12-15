@@ -40,7 +40,7 @@
             <td class="itemstyle">{{ asset.quantityHeld }}</td>
             <td class="itemstyle">${{ TotalEquity(asset).toFixed(2) }}</td>
             <!-- <td>{{- purchased price -}}</td> -->
-            <!-- <td>{{- buy/sell pop up -}}</td> -->
+            <td><button v-on:click ="PromptForPurchase(asset)">Buy Stock</button> <button v-on:click ="PromptForSale(asset)">Sell Stock</button></td>
           </tr>
         </tbody>
       </table>
@@ -54,7 +54,14 @@
 import assetService from "../services/AssetService.js";
 export default {
   data() {
-    return {};
+    return {
+        transactionRequest:{
+            portfolioId:"",
+            quantityAdjustment:"",
+            USDAdjustment:"",
+            assetId:""
+        }
+    };
   },
   methods: {
     SetUserAssets() {
@@ -79,6 +86,52 @@ export default {
         returnWorth += element.quantityHeld * element.currentPrice;
       });
       return returnWorth.toFixed(2);
+    },
+    PromptForPurchase(stock) {
+      this.quantityToBuy = prompt("How many would you like to purchase?", "");
+      if (
+        stock.currentPrice * this.quantityToBuy <=
+        this.$store.state.activeAssets[0].quantityHeld
+      ) {
+        this.transactionRequest.portfolioId = this.$store.state.activeAssets[0].portfolioID;
+        this.transactionRequest.quantityAdjustment = this.quantityToBuy;
+        this.transactionRequest.USDAdjustment =
+          stock.currentPrice * this.quantityToBuy * -1;
+        this.transactionRequest.assetId = stock.assetId;
+
+       
+          
+            assetService.buyExistingStocks(
+              this.$store.state.user.userId,
+              this.$store.state.selectedGame.gameId,
+              this.transactionRequest
+            );
+
+          
+        
+           assetService
+          .getUserAssets(
+            this.$store.state.user.userId,
+            this.$store.state.selectedGame.gameId
+          )
+          .then((response) =>
+            this.$store.commit("SET_SELECTED_ASSETS", response.data[1])
+          );
+      }
+    },
+    PromptForSale(stock) {
+      this.quantityToSell = prompt("How many would you like to sell?", "");
+      if (stock.quantityHeld >= this.quantityToSell) {
+        this.transactionRequest.portfolioId = this.$store.state.activeAssets[0].portfolioID;
+        this.transactionRequest.quantityAdjustment = (this.quantityToSell*-1);
+        this.transactionRequest.USDAdjustment = (stock.currentPrice * this.quantityToSell);
+        this.transactionRequest.assetId = stock.assetId;
+        assetService.buyExistingStocks(this.$store.state.user.userId, this.$store.state.selectedGame.gameId, this.transactionRequest);
+        assetService.getUserAssets(this.$store.state.user.userId, this.$store.state.selectedGame.gameId)
+          .then((response) =>
+            this.$store.commit("SET_SELECTED_ASSETS", response.data[1])
+          );
+      }
     },
   },
   computed: {},
