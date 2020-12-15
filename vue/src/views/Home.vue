@@ -17,16 +17,14 @@
         >
         <router-link
           id="createdgameslink"
-          :to="{
-            name: 'createdgames',
+          :to="{ name: 'createdgames',
             params: { userid: this.$store.state.user.userId },
           }"
           >List Games You Created</router-link
         >
         <router-link
           id="pendinglink"
-          :to="{
-            name: 'createdgames',
+          :to="{ name: 'pendinginvites',
             params: { userid: this.$store.state.user.userId },
           }"
           >Pending Invites</router-link
