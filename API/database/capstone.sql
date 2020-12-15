@@ -26,9 +26,9 @@ CREATE TABLE users (
 );
 
 Create Table game_status (
-	status_id int NOT NULL,
-	status_name varchar(50) NOT NULL,
-	Constraint pk_status_id Primary Key (status_id),
+	game_status_id int NOT NULL,
+	game_status_name varchar(50) NOT NULL,
+	Constraint pk_game_status_id Primary Key (game_status_id),
 );
 
 CREATE TABLE games (
@@ -37,10 +37,12 @@ CREATE TABLE games (
 	creator_id int NOT NULL,
 	start_date date NOT NULL,
 	end_date date NOT NULL,
-	--winner_id int,
+	game_status_code int NOT NULL,
+	Constraint fk_games_game_status Foreign Key (game_status_code) References game_status (game_status_id),
 	Constraint fk_games_users_creator Foreign Key (creator_id) References users(user_id), 
 	--Constraint fk_games_users_winner Foreign Key (winner_id) References users (user_id),
-	constraint pk_games Primary Key (game_id)
+	constraint pk_games Primary Key (game_id),
+	Constraint ck_status_code check(game_status_code in (0, 1, 2, 3))
 );
 
 Create Table portfolio (
@@ -49,16 +51,22 @@ Create Table portfolio (
 	Constraint pk_portfolio_portfolio_id Primary Key (portfolio_id),
 );	
 
+Create Table player_status (
+	player_status_id int NOT NULL,
+	player_status_name varchar(50) NOT NULL,
+	Constraint pk_player_status_player_status_id Primary Key (player_status_id),
+);
+
 Create Table user_games (
 	user_game_id int IDENTITY(1,1) NOT NULL,
 	user_id int NOT NULL,
 	game_id int NOT NULL,
-	status_code int NOT NULL,
+	player_status_code int NOT NULL,
 	Constraint pk_user_game_id Primary Key (user_game_id),
 	Constraint fk_user_games_user_id Foreign Key (user_id) References users(user_id),
 	Constraint fk_user_games_game_id Foreign Key (game_id) References games (game_id),
-	Constraint fk_user_games_game_status Foreign Key (status_code) References game_status (status_id),
-	Constraint ck_status_code check(status_code in (0, 1, 2, 3))
+	Constraint fk_user_games_player_status Foreign Key (player_status_code) References player_status (player_status_id),
+	
 );
 
 Create Table assets (
@@ -85,7 +93,6 @@ Create Table transaction_names (
 	trans_id int NOT NULL,
 	trans_name varchar(25) NOT NULL,
 	Constraint pk_transactions_names_trans_id Primary Key (trans_id),
-	
 );
 
 Create Table transactions (
@@ -110,45 +117,46 @@ INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('Ric
 INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('TiercelCap', 'brad.grasl@gmail.com', 'v6Dr5iJQD/S7J21sblFM2ZdHeMw=', 'v3iL2Wcq8nE=', 'user');
 INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('alicia', 'aliciambarnhart@gmail.com', 'xxtiEUohNZYPs9U3gkrTEqBC9LM=', 'p+2HGbb6gE0=', 'user');
 
-INSERT INTO	game_status (status_id, status_name) VALUES (0, 'Pending'), (1, 'Accepted'), (2, 'Active'), (3, 'Completed');
-INSERT INTO assets (symbol, company_name, current_price, time_updated) VALUES('USD', 'United States Dollar', 1, GETDATE())
+INSERT INTO	game_status (game_status_id, game_status_name) VALUES (0, 'Pending'), (1, 'Accepted'), (2, 'Active'), (3, 'Completed');
+INSERT INTO	player_status (player_status_id, player_status_name) VALUES (0, 'Pending'), (1, 'Accepted');
+INSERT INTO assets (symbol, company_name, current_price, time_updated) VALUES('USD', 'United States Dollar', 1, GETDATE());
 INSERT INTO	transaction_names (trans_id, trans_name) VALUES (0, 'Buy'), (1, 'Sell');
 
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Wall St. Wolves', 1, '12/07/2020', '12/16/2020');
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Day Trading Daddies', 1, '12/08/2020', '12/17/2020');
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Martha Stewart Exchange', 2, '12/09/2020', '12/18/2020');
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Feds Keep Out', 2, '12/10/2020', '12/19/2020');
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Nothing to SEC Here', 1, '12/11/2020', '12/20/2020');
-INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('I Like Big Bucks', 2, '12/11/2020', '12/20/2020');
+INSERT INTO games (game_name, creator_id, start_date, end_date, game_status_code) VALUEs ('Wall St. Wolves', 1, '12/07/2020', '12/16/2020', 1);
+INSERT INTO games (game_name, creator_id, start_date, end_date, game_status_code) VALUEs ('Day Trading Daddies', 1, '12/08/2020', '12/17/2020', 1);
+INSERT INTO games (game_name, creator_id, start_date, end_date, game_status_code) VALUEs ('Martha Stewart Exchange', 2, '12/09/2020', '12/18/2020', 1);
+INSERT INTO games (game_name, creator_id, start_date, end_date, game_status_code) VALUEs ('Feds Keep Out', 2, '12/10/2020', '12/19/2020', 1);
+INSERT INTO games (game_name, creator_id, start_date, end_date, game_status_code) VALUEs ('Nothing to SEC Here', 1, '12/11/2020', '12/20/2020', 1);
+INSERT INTO games (game_name, creator_id, start_date, end_date, game_status_code) VALUEs ('I Like Big Bucks', 2, '12/11/2020', '12/20/2020', 1);
 
-INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 1, 1);
+INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (1, 1, 1);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
-INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 2, 1);
+INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (1, 2, 1);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
-INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 3, 0);
+INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (1, 3, 0);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
-INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 3, 1);
+INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (2, 3, 1);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
-INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 4, 1);
+INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (2, 4, 1);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
-INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 1, 0);
+INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (2, 1, 0);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
-INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 5, 0);
+INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (2, 5, 0);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
-INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 5, 1);
+INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (1, 5, 1);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
-INSERT INTO user_games (user_id, game_id, status_code) VALUEs (1, 6, 0);
+INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (1, 6, 0);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
-INSERT INTO user_games (user_id, game_id, status_code) VALUEs (2, 6, 1);
+INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (2, 6, 1);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
 
