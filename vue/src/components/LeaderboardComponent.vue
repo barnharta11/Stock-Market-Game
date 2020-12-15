@@ -1,24 +1,24 @@
 <template>
   <div class="testfix">
     <div id="leaderboardcontainer">
-      <h2 id="leaderboardhead" class="tableheader1">Leaderboard</h2>
+      <h2 id="leaderboardhead" class="tableheader">Leaderboard</h2>
       <table id="leaderboardbody" class="tablebody">
         <thead>
           <tr>
             <th class="columnheader">Standing</th>
             <th class="columnheader">Username</th>
-            <th class="columnheader">Net Worth</th>
-            <th class="columnheaderend">Game Ends</th>
+            <th class="columnheaderend">Net Worth</th>
+            <!-- <th class="columnheaderend">Game Ends</th> -->
           </tr>
         </thead>
         <tbody v-for="player in sortedBoard" v-bind:key="player.userID">
           <tr>
             <td class="itemstyle">{{ PlayerStanding(player) }}</td>
             <td class="itemstyle">{{ player.userName }}</td>
-            <td class="itemstyle">${{ player.netWorth }}</td>
-            <td class="itemstyleend">
+            <td class="itemstyleend">${{ player.netWorth }}</td>
+            <!-- <td class="itemstyleend">
               {{ $store.state.selectedGame.formattedEndDate }}
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </table>
