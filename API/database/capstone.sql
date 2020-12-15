@@ -75,6 +75,7 @@ Create Table portfolio_assets (
 	portfolio_id int NOT NULL,
 	asset_id int NOT NULL,
 	quantity_held decimal(8,2) NOT NULL,
+	final_networth decimal NULL,
 	Constraint pk_portfolio_assets_portfolio_assets_id Primary Key (portfolio_assets_id),
 	Constraint fk_portfolio_assets_portfolio Foreign Key (portfolio_id) References portfolio(portfolio_id),
 	Constraint fk_portfolio_assets_asset Foreign Key (asset_id) References assets(asset_id),
@@ -104,6 +105,10 @@ Create Table transactions (
 --populate default data
 INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('user', 'makesomethingup@someplace.com', 'Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('admin', 'totallynotgamblingatwork@hotmail.com','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
+INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('alwaysSaves', 'demo@demo.com', 'WVPEyXYY/Wj/shQki85RQWyGrF4=', 'Eu6A5Mtv+JA=', 'user');
+INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('RichieRich', 'richieRich@rich.com', '0XkvLICHdsx3a/WJjXo3DrUdH/U=', '0yU1wWbuPPE=', 'user');
+INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('TiercelCap', 'brad.grasl@gmail.com', 'v6Dr5iJQD/S7J21sblFM2ZdHeMw=', 'v3iL2Wcq8nE=', 'user');
+INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('alicia', 'aliciambarnhart@gmail.com', 'xxtiEUohNZYPs9U3gkrTEqBC9LM=', 'p+2HGbb6gE0=', 'user');
 
 INSERT INTO	game_status (status_id, status_name) VALUES (0, 'Pending'), (1, 'Accepted'), (2, 'Active'), (3, 'Completed');
 INSERT INTO assets (symbol, company_name, current_price, time_updated) VALUES('USD', 'United States Dollar', 1, GETDATE())

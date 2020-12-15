@@ -22,6 +22,7 @@ namespace Capstone.Models
     public class UpdateAsset
     {
         public int PortfolioID { get; set; }
+        
         public decimal QuantityAdjustment { get; set; }
         public int AssetId { get; set; }
         public decimal USDAdjustment { get; set; }
