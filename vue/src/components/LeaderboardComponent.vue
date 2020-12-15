@@ -17,7 +17,7 @@
             <td class="itemstyle">{{ player.userName }}</td>
             <td class="itemstyle">{{ player.netWorth }}</td>
             <td class="itemstyleend">
-              {{ $store.state.selectedGame.endDate }}
+              {{ $store.state.selectedGame.formattedEndDate }}
             </td>
           </tr>
         </tbody>

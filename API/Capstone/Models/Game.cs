@@ -16,6 +16,20 @@ namespace Capstone.Models
         public string CreatorName { get; set; }
         public string StatusName { get; set; }
         public List<Leaderboard> LeaderboardList { get; set; }
+        public string FormattedStartDate
+        {
+            get
+            {
+                return StartDate.ToString("MM/dd/yyyy");
+            }
+        }
+        public string FormattedEndDate
+        {
+            get
+            {
+                return EndDate.ToString("MM/dd/yyyy");
+            }
+        }
     }
 
     public class Leaderboard

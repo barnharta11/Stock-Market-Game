@@ -66,6 +66,7 @@ Create Table assets (
 	symbol varchar(50) NOT NULL,
 	company_name varchar(50) NOT NULL,
 	current_price money NOT NULL,
+	time_updated datetime not null,
 	Constraint pk_assets_asset_id Primary Key (asset_id),
 );
 
@@ -73,7 +74,7 @@ Create Table portfolio_assets (
 	portfolio_assets_id int IDENTITY(1,1) NOT NULL,
 	portfolio_id int NOT NULL,
 	asset_id int NOT NULL,
-	quantity_held money NOT NULL,
+	quantity_held decimal(8,2) NOT NULL,
 	Constraint pk_portfolio_assets_portfolio_assets_id Primary Key (portfolio_assets_id),
 	Constraint fk_portfolio_assets_portfolio Foreign Key (portfolio_id) References portfolio(portfolio_id),
 	Constraint fk_portfolio_assets_asset Foreign Key (asset_id) References assets(asset_id),

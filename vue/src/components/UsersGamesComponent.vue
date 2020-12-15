@@ -17,8 +17,8 @@
                 <tr>
                     <td class="itemstyle" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
                     <td class="itemstyle">{{game.creatorName}}</td>
-                    <td class="itemstyle">{{game.startDate}}</td>
-                    <td class="itemstyle">{{game.endDate}}</td>
+                    <td class="itemstyle">{{game.formattedStartDate}}</td>
+                    <td class="itemstyle">{{game.formattedEndDate}}</td>
                     <td class="itemstyleend">{{game.statusName}}</td>
                 </tr>
             </tbody>

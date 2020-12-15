@@ -40,7 +40,7 @@
             <td class="itemstyle">{{ asset.quantityHeld }}</td>
             <td class="itemstyle">${{ TotalEquity(asset).toFixed(2) }}</td>
             <!-- <td>{{- purchased price -}}</td> -->
-            <td><button v-on:click ="PromptForPurchase(asset)">Buy Stock</button> <button v-on:click ="PromptForSale(asset)">Sell Stock</button></td>
+            <td><button v-on:click ="PromptForPurchase(asset)" v-show=IsDollar(asset.symbol)>Buy Stock</button> <button v-on:click ="PromptForSale(asset)" v-show=IsDollar(asset.symbol)>Sell Stock</button></td>
           </tr>
         </tbody>
       </table>
@@ -64,6 +64,9 @@ export default {
     };
   },
   methods: {
+      IsDollar(symbol){
+          return (symbol!='USD')
+      },
     SetUserAssets() {
       assetService
         .getUserAssets(
@@ -118,6 +121,9 @@ export default {
             this.$store.commit("SET_SELECTED_ASSETS", response.data[1])
           );
       }
+      else{
+          alert("Insufficient funds, try liquidating some assets")
+      }
     },
     PromptForSale(stock) {
       this.quantityToSell = prompt("How many would you like to sell?", "");
@@ -131,6 +137,9 @@ export default {
           .then((response) =>
             this.$store.commit("SET_SELECTED_ASSETS", response.data[1])
           );
+      }
+      else{
+          alert("You don't have that many, please try again")
       }
     },
   },

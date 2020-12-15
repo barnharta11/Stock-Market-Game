@@ -16,8 +16,8 @@
                 <tr>
                     <td class="itemstyle" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
                     <td class="itemstyle">{{game.creatorName}}</td>
-                    <td class="itemstyle">{{game.startDate}}</td>
-                    <td class="itemstyle">{{game.endDate}}</td>
+                    <td class="itemstyle">{{game.formattedStartDate}}</td>
+                    <td class="itemstyle">{{game.formattedEndDate}}</td>
                     <td class="itemstyle">{{game.statusName}}</td>
                     <td class="itemstyleend"><button class="buttondefault" v-on:click="AcceptInvite(game.gameId)" >Accept</button></td>
                 </tr>

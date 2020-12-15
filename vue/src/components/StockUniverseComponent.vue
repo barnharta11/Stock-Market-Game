@@ -102,6 +102,9 @@ export default {
             this.$store.commit("SET_SELECTED_ASSETS", response.data[1])
           );
       }
+        else{
+            alert("Insufficient funds, try liquidating some assets")
+            }
     },
     IncrementIndex() {
       this.startIndex += 10;

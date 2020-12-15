@@ -1,9 +1,9 @@
 <template>
   <div>
     <game-details-component/>
-    <leaderboard-component/>    
-    <asset-component/>
-    <stock-universe-component/>
+    <leaderboard-component />    
+    <asset-component v-show="IsInGame()"/>
+    <stock-universe-component v-show="IsInGame()"/>
   </div>
 </template>
 
@@ -15,6 +15,11 @@ import LeaderboardComponent from '../components/LeaderboardComponent.vue'
 export default {
     props:{
         game:[]
+    },
+    methods:{
+      IsInGame(){
+        return (this.$store.state.selectedGame.statusName=="Accepted")
+      }
     },
 components:{GameDetailsComponent,AssetComponent, StockUniverseComponent, LeaderboardComponent}
 }

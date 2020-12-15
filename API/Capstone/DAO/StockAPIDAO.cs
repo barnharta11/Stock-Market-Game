@@ -25,26 +25,75 @@ namespace Capstone.DAO
 
         public List<Asset> GetStocks()
         {
-            client = new RestClient(host);
-            client.AddDefaultHeader("X-Rapidapi-Host", HOST_HEADER);
-            client.AddDefaultHeader("X-Rapidapi-Key", API_KEY);
-
-            RestRequest request = new RestRequest(URL);
-            IRestResponse<StockAPI> response = client.Get<StockAPI>(request);
-            //IRestResponse response = client.Get(request);
-
-            if (response.ResponseStatus != ResponseStatus.Completed)
+            bool notUpToDate = false;
+            try
             {
-                throw new Exception("Error occurred - unable to reach server.", response.ErrorException);
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand selectCommand = new SqlCommand("select time_updated from assets where asset_id=2", conn);
+                    DateTime assetOneTime = Convert.ToDateTime(selectCommand.ExecuteScalar());
+                    if ((DateTime.Compare(DateTime.Now, assetOneTime.AddHours(1))) > 0)
+                    {
+                        notUpToDate = true;
+                    }
+                }
             }
-            else if (!response.IsSuccessful)
+            catch (SqlException)
             {
-                throw new Exception("Error occurred - received non-success response: " + (int)response.StatusCode);
+                throw;
+            }
+
+            if (notUpToDate)
+            {
+                client = new RestClient(host);
+                client.AddDefaultHeader("X-Rapidapi-Host", HOST_HEADER);
+                client.AddDefaultHeader("X-Rapidapi-Key", API_KEY);
+
+                RestRequest request = new RestRequest(URL);
+                IRestResponse<StockAPI> response = client.Get<StockAPI>(request);
+                //IRestResponse response = client.Get(request);
+
+                if (response.ResponseStatus != ResponseStatus.Completed)
+                {
+                    throw new Exception("Error occurred - unable to reach server.", response.ErrorException);
+                }
+                else if (!response.IsSuccessful)
+                {
+                    throw new Exception("Error occurred - received non-success response: " + (int)response.StatusCode);
+                }
+
+                else
+                {
+                    return LoadThenReturnStocks(response.Data.quoteResponse.result);
+                }
             }
             else
             {
-                return LoadThenReturnStocks(response.Data.quoteResponse.result);
+                return ReturnStocks();
             }
+
+        }
+        public List<Asset> ReturnStocks()
+        {
+            List<Asset> returnList = new List<Asset>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand returnCommand = new SqlCommand("Select * from assets", conn);
+                SqlDataReader reader = returnCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    Asset readAsset = new Asset();
+                    readAsset.AssetId = Convert.ToInt32(reader["asset_id"]);
+                    readAsset.CompanyName = Convert.ToString(reader["company_name"]);
+                    readAsset.CurrentPrice = Convert.ToDecimal(reader["current_price"]);
+                    readAsset.Symbol = Convert.ToString(reader["symbol"]);
+                    returnList.Add(readAsset);
+                }
+            }
+
+            return returnList;
         }
         public List<Asset> LoadThenReturnStocks(List<Result> stockAPIList)
         {
@@ -62,20 +111,26 @@ namespace Capstone.DAO
                     {
                         if (assetOne == 0)
                         {
-                            SqlCommand insertCommand = new SqlCommand("INSERT INTO assets (symbol, company_name, current_price) Values(@symbol, @company_name, @current_price)", conn);
+                            SqlCommand insertCommand = new SqlCommand("INSERT INTO assets (symbol, company_name, current_price, time_updated) Values(@symbol, @company_name, @current_price, @time_updated)", conn);
                             insertCommand.Parameters.AddWithValue("@symbol", toInsert.symbol);
                             insertCommand.Parameters.AddWithValue("@company_name", toInsert.shortName);
                             insertCommand.Parameters.AddWithValue("@current_price", toInsert.regularMarketPrice);
+                            insertCommand.Parameters.AddWithValue("@time_updated", DateTime.Now);
                             insertCommand.ExecuteNonQuery();
                         }
                         else
                         {
-                            SqlCommand updateCommand = new SqlCommand("Update assets Set current_price = @current_price where symbol=@symbol", conn);
+
+
+                            SqlCommand updateCommand = new SqlCommand("Update assets Set current_price = @current_price and time_updated=@time_updated where symbol=@symbol", conn);
                             updateCommand.Parameters.AddWithValue("@current_price", toInsert.regularMarketPrice);
                             updateCommand.Parameters.AddWithValue("@symbol", toInsert.symbol);
+                            updateCommand.Parameters.AddWithValue("@time_updated", DateTime.Now);
                             updateCommand.ExecuteNonQuery();
+
+
                         }
-                        
+
                     }
                     SqlCommand returnCommand = new SqlCommand("Select * from assets", conn);
                     SqlDataReader reader = returnCommand.ExecuteReader();

@@ -14,8 +14,8 @@
         <tr>
           <td class="itemstyle">{{ selectedGame.gameName }}</td>
           <td class="itemstyle">{{ selectedGame.creatorName }}</td>
-          <td class="itemstyle">{{ selectedGame.startDate }}</td>
-          <td class="itemstyleend">{{ selectedGame.endDate }}</td>
+          <td class="itemstyle">{{ selectedGame.formattedStartDate }}</td>
+          <td class="itemstyleend">{{ selectedGame.formattedEndDate }}</td>
         </tr>
       </tbody>
     </table>
