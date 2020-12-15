@@ -152,7 +152,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("Select SUM(quantity_held * current_price) AS 'net_worth', users.user_id, users.username, final_networth From portfolio left join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id left join assets on portfolio_assets.asset_id = assets.asset_id left join user_games on portfolio.user_game_id = user_games.user_game_id left join users on user_games.user_id = users.user_id where game_id = @gameid Group By users.user_id, users.username order by 'net_worth' desc", conn);
+                    SqlCommand cmd = new SqlCommand("Select SUM(quantity_held * current_price) AS 'net_worth', users.user_id, users.username, final_networth From portfolio left join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id left join assets on portfolio_assets.asset_id = assets.asset_id left join user_games on portfolio.user_game_id = user_games.user_game_id left join users on user_games.user_id = users.user_id where game_id = @gameid Group By users.user_id, users.username, final_networth order by 'net_worth' desc", conn);
                     cmd.Parameters.AddWithValue("@gameid", gameID);
                     SqlDataReader reader = cmd.ExecuteReader();
 
