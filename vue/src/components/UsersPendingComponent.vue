@@ -47,6 +47,7 @@ data(){
         this.invite.gameId=gameid
         inviteService.acceptInvite(this.invite)
         .then(
+            this.pendingGames=[],
             this.GetUsersGames()
         )
     },
@@ -58,6 +59,7 @@ data(){
     GetUsersGames(){
         gameService.getUsersGames(this.$store.state.user.userId)
         .then(response=>{
+            this.$store.commit("SET_USERSGAMES", response.data)
             response.data.forEach(element => {
                 if(element.statusName=='Pending'){
                     this.pendingGames.push(element)

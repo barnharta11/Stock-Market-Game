@@ -25,6 +25,7 @@ namespace Capstone.DAO
                     SqlCommand command = new SqlCommand("update user_games set user_games.status_code = 1 where user_games.game_id=@gameid and user_games.user_id=@userid", conn);
                     command.Parameters.AddWithValue("@userid", invite.UserId);
                     command.Parameters.AddWithValue("@gameid", invite.GameId);
+                    command.ExecuteNonQuery();
                 }
             }
             catch (SqlException)
