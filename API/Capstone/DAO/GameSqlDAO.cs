@@ -96,17 +96,17 @@ namespace Capstone.DAO
                         readGame.CreatorName = Convert.ToString(reader["username"]);
                         returnList.Add(readGame);
                     }
-
-                    foreach(Game game in returnList)
+                    reader.Close();
+                    foreach (Game game in returnList)
                     {
-                        if (DateTime.Compare(game.StartDate, DateTime.Now) > 0)
+                        if (DateTime.Compare(game.StartDate, DateTime.Now) < 0)
                         {
                             SqlCommand command = new SqlCommand("update user_games set status_code = 2 where game_id = @gameid", conn);
                             command.Parameters.AddWithValue("@gameid", game.GameId);
                             command.ExecuteNonQuery();
                             game.StatusName = "Active";
                         }
-                        if (DateTime.Compare(game.EndDate, DateTime.Now) > 0)
+                        if (DateTime.Compare(game.EndDate, DateTime.Now) < 0)
                         {
                             SqlCommand command = new SqlCommand("update user_games set status_code = 3 where game_id = @gameid", conn);
                             command.Parameters.AddWithValue("@gameid", game.GameId);
@@ -186,16 +186,18 @@ namespace Capstone.DAO
                         readGame.StatusName = Convert.ToString(gameReader["status_name"]);
                         returnList.Add(readGame);
                     }
+                    gameReader.Close();
                     foreach (Game game in returnList)
                     {
-                        if (DateTime.Compare(game.StartDate, DateTime.Now) > 0)
+                        if (DateTime.Compare(game.StartDate, DateTime.Now) < 0)
                         {
                             SqlCommand command = new SqlCommand("update user_games set status_code = 2 where game_id = @gameid", conn);
                             command.Parameters.AddWithValue("@gameid", game.GameId);
                             command.ExecuteNonQuery();
                             game.StatusName = "Active";
                         }
-                        if (DateTime.Compare(game.EndDate, DateTime.Now) > 0)
+
+                        if (DateTime.Compare(game.EndDate, DateTime.Now) < 0)
                         {
                             SqlCommand command = new SqlCommand("update user_games set status_code = 3 where game_id = @gameid", conn);
                             command.Parameters.AddWithValue("@gameid", game.GameId);
@@ -203,8 +205,6 @@ namespace Capstone.DAO
                             game.StatusName = "Completed";
                         }
                     }
-                    gameReader.Close();
-
                     foreach (Game element in returnList)
                     {
                         SqlCommand leadercmd = new SqlCommand("Select SUM(quantity_held * current_price) AS 'net_worth', users.user_id, users.username From portfolio left join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id left join assets on portfolio_assets.asset_id = assets.asset_id left join user_games on portfolio.user_game_id = user_games.user_game_id left join users on user_games.user_id = users.user_id where game_id = @gameid Group By users.user_id, users.username order by 'net_worth' desc", conn);

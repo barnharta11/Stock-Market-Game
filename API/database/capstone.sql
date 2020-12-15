@@ -58,7 +58,7 @@ Create Table user_games (
 	Constraint fk_user_games_user_id Foreign Key (user_id) References users(user_id),
 	Constraint fk_user_games_game_id Foreign Key (game_id) References games (game_id),
 	Constraint fk_user_games_game_status Foreign Key (status_code) References game_status (status_id),
-	Constraint ck_status_code check(status_code in (0,1))
+	Constraint ck_status_code check(status_code in (0, 1, 2, 3))
 );
 
 Create Table assets (
