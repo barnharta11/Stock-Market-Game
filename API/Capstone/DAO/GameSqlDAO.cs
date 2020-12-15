@@ -17,7 +17,8 @@ namespace Capstone.DAO
         }
         public Game AddGame(string gameName, int creatorId, DateTime startDate, DateTime endDate)
         {
-
+            startDate.AddHours(9).AddMinutes(30);
+            endDate.AddHours(16);
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -95,6 +96,24 @@ namespace Capstone.DAO
                         readGame.CreatorName = Convert.ToString(reader["username"]);
                         returnList.Add(readGame);
                     }
+
+                    foreach(Game game in returnList)
+                    {
+                        if (DateTime.Compare(game.StartDate, DateTime.Now) > 0)
+                        {
+                            SqlCommand command = new SqlCommand("update user_games set status_code = 2 where game_id = @gameid", conn);
+                            command.Parameters.AddWithValue("@gameid", game.GameId);
+                            command.ExecuteNonQuery();
+                            game.StatusName = "Active";
+                        }
+                        if (DateTime.Compare(game.EndDate, DateTime.Now) > 0)
+                        {
+                            SqlCommand command = new SqlCommand("update user_games set status_code = 3 where game_id = @gameid", conn);
+                            command.Parameters.AddWithValue("@gameid", game.GameId);
+                            command.ExecuteNonQuery();
+                            game.StatusName = "Completed";
+                        }
+                    }
                 }
             }
             catch (SqlException)
@@ -166,6 +185,23 @@ namespace Capstone.DAO
                         readGame.CreatorName = Convert.ToString(gameReader["username"]);
                         readGame.StatusName = Convert.ToString(gameReader["status_name"]);
                         returnList.Add(readGame);
+                    }
+                    foreach (Game game in returnList)
+                    {
+                        if (DateTime.Compare(game.StartDate, DateTime.Now) > 0)
+                        {
+                            SqlCommand command = new SqlCommand("update user_games set status_code = 2 where game_id = @gameid", conn);
+                            command.Parameters.AddWithValue("@gameid", game.GameId);
+                            command.ExecuteNonQuery();
+                            game.StatusName = "Active";
+                        }
+                        if (DateTime.Compare(game.EndDate, DateTime.Now) > 0)
+                        {
+                            SqlCommand command = new SqlCommand("update user_games set status_code = 3 where game_id = @gameid", conn);
+                            command.Parameters.AddWithValue("@gameid", game.GameId);
+                            command.ExecuteNonQuery();
+                            game.StatusName = "Completed";
+                        }
                     }
                     gameReader.Close();
 
