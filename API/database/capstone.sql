@@ -106,7 +106,7 @@ INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('use
 INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('admin', 'totallynotgamblingatwork@hotmail.com','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 
 INSERT INTO	game_status (status_id, status_name) VALUES (0, 'Pending'), (1, 'Accepted'), (2, 'Active'), (3, 'Completed');
-INSERT INTO assets (symbol, company_name, current_price) VALUES('USD', 'United States Dollar', 1)
+INSERT INTO assets (symbol, company_name, current_price, time_updated) VALUES('USD', 'United States Dollar', 1, GETDATE())
 INSERT INTO	transaction_names (trans_id, trans_name) VALUES (0, 'Buy'), (1, 'Sell');
 
 INSERT INTO games (game_name, creator_id, start_date, end_date) VALUEs ('Wall St. Wolves', 1, '12/07/2020', '12/16/2020');
