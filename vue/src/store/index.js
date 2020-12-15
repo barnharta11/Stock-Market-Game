@@ -36,7 +36,7 @@ export default new Vuex.Store({
       state.allStocks=stocks
     },
     SET_SELECTED_ASSETS(state, assets){
-      state.activeAssets=assets
+      state.activeAssets = assets
     },
     SET_SELECTED_GAME(state, game){
       state.selectedGame=game

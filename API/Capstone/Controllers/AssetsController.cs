@@ -38,16 +38,16 @@ namespace Capstone.Controllers
         {
 
 
-            assetsDAO.UpdateQuantity(updateAsset);
-            return Ok();
+            
+            return Ok(assetsDAO.UpdateQuantity(updateAsset));
             
         }
 
         [HttpPost("/assets/{userID}/{gameID}")]
         public IActionResult BuySellAsset(UpdateAsset newAsset)
         {
-            assetsDAO.BuySellAsset(newAsset);
-            return Created("it was created", null);
+            
+            return Ok(assetsDAO.BuySellAsset(newAsset));
         }
     }
 }

@@ -66,45 +66,37 @@ export default {
     },
     PromptForPurchase(stock) {
       this.quantityToBuy = prompt("How many would you like to purchase?", "");
-      if (
-        stock.currentPrice * this.quantityToBuy <=
-        this.$store.state.activeAssets[0].quantityHeld
-      ) {
+      if (stock.currentPrice * this.quantityToBuy <= this.$store.state.activeAssets[0].quantityHeld) {
         this.transactionRequest.portfolioId = this.$store.state.activeAssets[0].portfolioID;
         this.transactionRequest.quantityAdjustment = this.quantityToBuy;
-        this.transactionRequest.USDAdjustment =
-          stock.currentPrice * this.quantityToBuy * -1;
+        this.transactionRequest.USDAdjustment = stock.currentPrice * this.quantityToBuy * -1;
         this.transactionRequest.assetId = stock.assetId;
 
-        this.$store.state.activeAssets.forEach((asset) => {
-          if (asset.assetId == stock.assetId) {
-            assetService.buyExistingStocks(
-              this.$store.state.user.userId,
-              this.$store.state.selectedGame.gameId,
-              this.transactionRequest
-            );
-            this.existed = true;
+        this.$store.state.activeAssets.forEach(asset =>{
+          if (asset.assetId == stock.assetId){           
+            this.existed = true}})
+          if(this.existed){
+             assetService.buyExistingStocks(this.$store.state.user.userId, this.$store.state.selectedGame.gameId, this.transactionRequest)
+             .then(response =>{
+               this.$store.commit("SET_SELECTED_ASSETS", response.data)
+             })
           }
-        });
-        if (this.existed == false) {
-          assetService.buyNewStocks(
-            this.$store.state.user.userId,
-            this.$store.state.selectedGame.gameId,
-            this.transactionRequest
-          );
-        }
-        assetService
-          .getUserAssets(
-            this.$store.state.user.userId,
-            this.$store.state.selectedGame.gameId
-          )
-          .then((response) =>
-            this.$store.commit("SET_SELECTED_ASSETS", response.data[1])
-          );
-      }
+        if (this.existed==false){
+             assetService.buyNewStocks(this.$store.state.user.userId, this.$store.state.selectedGame.gameId, this.transactionRequest)        
+          .then(response =>
+            this.$store.commit("SET_SELECTED_ASSETS", response.data)
+            )
+          
+        }  
+        this.existed=false
+       } 
+       
         else{
-            alert("Insufficient funds, try liquidating some assets")
-            }
+          alert("Insufficient funds, try liquidating some assets")
+        }
+            
+            
+            
     },
     IncrementIndex() {
       this.startIndex += 10;

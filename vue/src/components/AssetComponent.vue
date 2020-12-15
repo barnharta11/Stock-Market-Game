@@ -33,7 +33,7 @@
           v-for="asset in $store.state.activeAssets"
           v-bind:key="asset.portfolioId"
         >
-          <tr>
+          <tr v-if="IsNotZero(asset.quantityHeld)">
             <td class="itemstyle">{{ asset.symbol }}</td>
             <td class="itemstyle">{{ asset.companyName }}</td>
             <td class="itemstyle">{{ asset.currentPrice }}</td>
@@ -60,19 +60,19 @@ export default {
             quantityAdjustment:"",
             USDAdjustment:"",
             assetId:""
-        }
+        },
+        
     };
   },
   methods: {
+    IsNotZero(quantity){
+      return (quantity>0)
+    },
       IsDollar(symbol){
           return (symbol!='USD')
       },
     SetUserAssets() {
-      assetService
-        .getUserAssets(
-          this.$store.state.user.userId,
-          this.$store.state.selectedGame.gameId
-        )
+      assetService.getUserAssets(this.$store.state.user.userId,this.$store.state.selectedGame.gameId)
         .then((response) => {
           this.$store.commit("SET_ALL_STOCKS", response.data[0]);
           this.$store.commit("SET_SELECTED_ASSETS", response.data[1]);
@@ -92,34 +92,19 @@ export default {
     },
     PromptForPurchase(stock) {
       this.quantityToBuy = prompt("How many would you like to purchase?", "");
-      if (
-        stock.currentPrice * this.quantityToBuy <=
-        this.$store.state.activeAssets[0].quantityHeld
-      ) {
+      if (stock.currentPrice * this.quantityToBuy <= this.$store.state.activeAssets[0].quantityHeld){
         this.transactionRequest.portfolioId = this.$store.state.activeAssets[0].portfolioID;
         this.transactionRequest.quantityAdjustment = this.quantityToBuy;
-        this.transactionRequest.USDAdjustment =
-          stock.currentPrice * this.quantityToBuy * -1;
+        this.transactionRequest.USDAdjustment = stock.currentPrice * this.quantityToBuy * -1;
         this.transactionRequest.assetId = stock.assetId;
 
-       
-          
-            assetService.buyExistingStocks(
-              this.$store.state.user.userId,
-              this.$store.state.selectedGame.gameId,
-              this.transactionRequest
-            );
-
-          
+        assetService.buyExistingStocks(this.$store.state.user.userId, this.$store.state.selectedGame.gameId, this.transactionRequest)
         
-           assetService
-          .getUserAssets(
-            this.$store.state.user.userId,
-            this.$store.state.selectedGame.gameId
+        .then((response) =>
+            this.$store.commit("SET_SELECTED_ASSETS", response.data)
           )
-          .then((response) =>
-            this.$store.commit("SET_SELECTED_ASSETS", response.data[1])
-          );
+        
+        
       }
       else{
           alert("Insufficient funds, try liquidating some assets")
@@ -132,11 +117,12 @@ export default {
         this.transactionRequest.quantityAdjustment = (this.quantityToSell*-1);
         this.transactionRequest.USDAdjustment = (stock.currentPrice * this.quantityToSell);
         this.transactionRequest.assetId = stock.assetId;
-        assetService.buyExistingStocks(this.$store.state.user.userId, this.$store.state.selectedGame.gameId, this.transactionRequest);
-        assetService.getUserAssets(this.$store.state.user.userId, this.$store.state.selectedGame.gameId)
-          .then((response) =>
-            this.$store.commit("SET_SELECTED_ASSETS", response.data[1])
-          );
+        assetService.buyExistingStocks(this.$store.state.user.userId, this.$store.state.selectedGame.gameId, this.transactionRequest)
+        .then(response=>         
+            this.$store.commit("SET_SELECTED_ASSETS", response.data)
+          )
+        
+        
       }
       else{
           alert("You don't have that many, please try again")

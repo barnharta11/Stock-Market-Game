@@ -18,7 +18,7 @@ export default {
     },
     methods:{
       IsInGame(){
-        return (this.$store.state.selectedGame.statusName=="Accepted")
+        return (this.$store.state.selectedGame.statusName=="Active")
       }
     },
 components:{GameDetailsComponent,AssetComponent, StockUniverseComponent, LeaderboardComponent}

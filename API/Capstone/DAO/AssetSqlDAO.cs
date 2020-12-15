@@ -53,41 +53,53 @@ namespace Capstone.DAO
             return returnList;
         }
 
-        public void UpdateQuantity(UpdateAsset updateAsset)
+        public List<Asset> UpdateQuantity(UpdateAsset updateAsset)
         {
+            List<Asset> returnList = new List<Asset>();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("update portfolio_assets set quantity_held += @input where portfolio_id = @portfolioid AND asset_id = @asset_id; update portfolio_assets set quantity_held += @adjustment where portfolio_id = @portfolioid AND asset_id = 1;", conn);
+                SqlCommand cmd = new SqlCommand("update portfolio_assets set quantity_held += @input where portfolio_id = @portfolioid AND asset_id = @asset_id; update portfolio_assets set quantity_held += @adjustment where portfolio_id = @portfolioid AND asset_id = 1; select * from portfolio_assets join assets on portfolio_assets.asset_id=assets.asset_id where portfolio_id=@portfolioid", conn);
                 cmd.Parameters.AddWithValue("@input", updateAsset.QuantityAdjustment);
                 cmd.Parameters.AddWithValue("@portfolioid", updateAsset.PortfolioID);
                 cmd.Parameters.AddWithValue("@asset_id", updateAsset.AssetId);
                 cmd.Parameters.AddWithValue("@adjustment", updateAsset.USDAdjustment);
-                cmd.ExecuteScalar();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Asset asset = GetAssetFromReader(reader);
+                    returnList.Add(asset);
+                }
 
             }
+            return returnList;
                     
         }
 
-        public void BuySellAsset(UpdateAsset newAsset)
+        public List<Asset> BuySellAsset(UpdateAsset newAsset)
         {
-            
+            List<Asset> returnList = new List<Asset>();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUES (@portfolioID, @assetID, @quantityHeld); update portfolio_assets set quantity_held += @adjustment where portfolio_id = @portfolioid AND asset_id = 1;", conn);
+                SqlCommand cmd = new SqlCommand("INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUES (@portfolioID, @assetID, @quantityHeld); update portfolio_assets set quantity_held += @adjustment where portfolio_id = @portfolioid AND asset_id = 1; select * from portfolio_assets join assets on portfolio_assets.asset_id=assets.asset_id where portfolio_id=@portfolioid", conn);
                 cmd.Parameters.AddWithValue("@portfolioID", newAsset.PortfolioID);
                 cmd.Parameters.AddWithValue("@assetID", newAsset.AssetId);
                 cmd.Parameters.AddWithValue("@quantityHeld", newAsset.QuantityAdjustment);
                 cmd.Parameters.AddWithValue("@adjustment", newAsset.USDAdjustment);
-                cmd.ExecuteScalar();
-
+                
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Asset asset = GetAssetFromReader(reader);
+                    returnList.Add(asset);
+                }
 
 
             }
-           
+            return returnList;
         }
 
 
