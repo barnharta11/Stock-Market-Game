@@ -11,6 +11,7 @@ import Leaderboard from "../views/Leaderboard.vue"
 import CreatedGames from "../views/CreatedGames.vue"
 import GameDetailsPage from "../views/GameDetailsPage.vue"
 import DisplayUser from "../views/DisplayUser.vue"
+import PendingPage from "../views/PendingPage.vue"
 
 Vue.use(Router)
 
@@ -107,6 +108,15 @@ const router = new Router({
       requiresAuth:true
     }
   },
+  {
+    path: "/games/:userid/pendingpage",
+    name: "pendinginvites",
+    component: PendingPage,
+    meta:{
+      requiresAuth:true
+    }
+  },
+
   {
     path: "/assets/:userid/:gameid",
     name: "assetdisplay",
