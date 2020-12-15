@@ -1,7 +1,7 @@
 <template>
 <div class="mainbackground">
     <div id="pendingcontainer">
-        <h2 id="tablehead3" class="tableheader1">My Pending Games</h2>
+        <h2 id="tablehead3" class="tableheader">My Pending Games</h2>
         <table id="pendingtable" class="tablebody">
             <thead>
                 <tr>

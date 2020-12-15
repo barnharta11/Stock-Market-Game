@@ -2,7 +2,7 @@
 
 <div class="testfix">
     <div id="gamelistcontainer">
-        <h2 id="tablehead1" class="tableheader1">My Current Games</h2>
+        <h2 id="tablehead1" class="tableheader">My Current Games</h2>
         <table class="tablebody">
             <thead>
                 <tr>
@@ -78,17 +78,8 @@ created(){
     text-align: center;
 }
 
-.tableheader1{
+#tablehead1{
     font-size: 45px;
-    font-family: Consolas, Arial, Helvetica;
-    margin: 0;
-    padding: 0;
-    background-color: lightgray;
-    color: rgb(105, 172, 105);
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    padding-top: 1%;
-    text-align: center;
     grid-area: thead;
 }
 

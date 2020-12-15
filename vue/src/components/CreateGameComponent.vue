@@ -73,7 +73,6 @@ methods:{
 
 #createheader{
   grid-area: header;
-  margin: 0;
 }
 
 #creategamename{

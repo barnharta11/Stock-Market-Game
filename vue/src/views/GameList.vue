@@ -1,5 +1,5 @@
 <template>
-<div class="bigbackground">
+<div class="mainbackground">
   <div>
     <!-- <div id="mycurrentgamesheader" class="tableheader"> My Current Games</div> -->
     <users-games-component/>

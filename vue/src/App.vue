@@ -27,9 +27,9 @@ body {
   text-align: center;
 }
 
-#app {
+/* #app {
   background-color: rgb(105, 172, 105);
-}
+} */
 
 #nav {
   display: grid;
@@ -90,7 +90,12 @@ body {
   text-decoration: none;
 }
 
+
+/* url(../../background.jpg) */
+
 .mainbackground {
+  /* background-color: linear-gradient(to right,rgba(105, 172, 105, 1),rgba(105, 172, 105, 0)); z-index: 1;
+  background-image: url(../../background.jpg); z-index: 0;; */
   font-family: Consolas, Arial, Helvetica;
   background-color: rgb(105, 172, 105);
   height: 100vh;
