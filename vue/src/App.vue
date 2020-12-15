@@ -97,6 +97,7 @@ body {
 }
 
 .tableheader {
+  margin-bottom: 0;
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
   color: rgb(105, 172, 105);
