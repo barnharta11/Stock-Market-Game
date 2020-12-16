@@ -43,7 +43,25 @@ data(){
     },
     computed:{
         FilterForPending(){
-            return this.$store.state.userGames
+            
+            let arrayToFilter = this.$store.state.userGames
+            return arrayToFilter.filter(game=>{
+                game.leaderboardList.forEach(entry=>{
+                    if(entry.playerStatus=="Pending"){
+                        return true;
+                    }
+                    
+                })
+            })
+
+
+
+
+
+
+
+            // I want to find all the games where the leaderboard list has an entry that has a status of pending
+           
         }
     },
     methods:{
