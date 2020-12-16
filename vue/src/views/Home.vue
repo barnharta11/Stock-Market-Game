@@ -2,7 +2,7 @@
   <div class="mainbackground">
     <div id="home">
       <div id="homelabel">
-        <h1 id="homelabel2" class="label">Welcome! {{player.userName}} </h1>
+        <h1 id="homelabel2" class="label">Welcome {{this.$store.state.user.username}}!</h1>
       </div>
       <div id="nav2">
         <h1 id="navheader" class="tableheader">Nav</h1>

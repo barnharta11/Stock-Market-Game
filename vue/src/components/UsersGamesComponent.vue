@@ -1,9 +1,9 @@
 <template>
 
 <div>
-    <div v-for="Game in acceptedGames" v-bind:key="Game.gameId">
-    <game-cardcomponent :Game="Game" />
-    </div>
+    <!-- <div v-for="Game in acceptedGames" v-bind:key="Game.gameId"> -->
+    <game-cardcomponent v-for="Game in acceptedGames" v-bind:key="Game.gameId" :Game="Game" />
+    <!-- </div> -->
 </div>
 
   <!-- <div class="testfix">
