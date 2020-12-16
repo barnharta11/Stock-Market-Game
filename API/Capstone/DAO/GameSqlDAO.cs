@@ -162,6 +162,7 @@ namespace Capstone.DAO
                         readLeaderboard.NetWorth = Convert.ToDecimal(reader["net_worth"]);
                         readLeaderboard.UserName = Convert.ToString(reader["username"]);
                         readLeaderboard.PlayerStatus = Convert.ToString(reader["player_status_name"]);
+                        readLeaderboard.GameID = gameID;
                         returnList.Add(readLeaderboard);
                     }
                 }
@@ -176,13 +177,13 @@ namespace Capstone.DAO
 
         public Leaderboard UpdateFinalNetworth(Leaderboard leaderboard)
         {
-            decimal sumOfAssets = 0;
-            foreach (Asset asset in leaderboard.PlayersAssets)
-            {
-                sumOfAssets += (asset.QuantityHeld * asset.CurrentPrice);
+            //decimal sumOfAssets = 0;
+            //foreach (Asset asset in leaderboard.PlayersAssets)
+            //{
+            //    sumOfAssets += (asset.QuantityHeld * asset.CurrentPrice);
 
-            }
-            leaderboard.FinalNetworth = sumOfAssets;
+            //}
+            leaderboard.FinalNetworth = leaderboard.NetWorth;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
