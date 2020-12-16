@@ -71,7 +71,7 @@ data(){
             let arrayToFilter = this.$store.state.userGames
             arrayToFilter.forEach(game=>{
                 game.leaderboardList.forEach(element=>{
-                    if (element.playerStatus=="Pending"){
+                    if (element.playerStatus=="Pending" && element.userName==this.$store.state.user.username){
                         this.arrayOfGameID.push(parseInt(element.gameID))
                     }
                 })

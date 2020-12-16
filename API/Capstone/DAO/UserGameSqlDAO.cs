@@ -43,7 +43,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand command = new SqlCommand("INSERT INTO user_games ( user_id, game_id, player_status_code) VALUES (@user_id, @game_id, @player_status_code); INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);", conn);
+                    SqlCommand command = new SqlCommand("INSERT INTO user_games ( user_id, game_id, player_status_code) VALUES (@user_id, @game_id, @player_status_code); INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY); INSERT INTO portfolio_assets(portfolio_id, asset_id, quantity_held) Values((select portfolio_id from portfolio join user_games on portfolio.user_game_id = user_games.user_game_id where user_games.user_id = @user_id and user_games.game_id = @game_id), 1, 0)", conn);
                     command.Parameters.AddWithValue("@user_id", inviteRequest.UserId);
                     command.Parameters.AddWithValue("@game_id", inviteRequest.GameId);
                     command.Parameters.AddWithValue("@player_status_code", 0);//0 is pending
