@@ -36,7 +36,7 @@ methods:{
         .then(response =>{
             if(response.status==201){
                 alert(`${this.formgame.gamename} has been created.`)
-                this.$router.push('/games/:userid/createdgames')
+                this.$router.push(`/games/${this.$store.state.user.userId}/createdgames`)
             }
           })
          .catch(error=>{

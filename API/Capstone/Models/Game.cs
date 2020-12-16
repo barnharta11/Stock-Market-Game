@@ -48,6 +48,7 @@ namespace Capstone.Models
 
         public decimal FinalNetworth { get; set; }
         public List<Asset> PlayersAssets { get; set; }
+        public string PlayerStatus { get; set; }
         
     }
 }

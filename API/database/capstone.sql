@@ -37,12 +37,12 @@ CREATE TABLE games (
 	creator_id int NOT NULL,
 	start_date date NOT NULL,
 	end_date date NOT NULL,
-	game_status_code int NOT NULL,
+	game_status_code int default(0) NOT NULL,
 	Constraint fk_games_game_status Foreign Key (game_status_code) References game_status (game_status_id),
 	Constraint fk_games_users_creator Foreign Key (creator_id) References users(user_id), 
 	--Constraint fk_games_users_winner Foreign Key (winner_id) References users (user_id),
 	constraint pk_games Primary Key (game_id),
-	Constraint ck_status_code check(game_status_code in (0, 1, 2, 3))
+	Constraint ck_status_code check(game_status_code in (0, 1, 2))
 );
 
 Create Table portfolio (
@@ -117,7 +117,7 @@ INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('Ric
 INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('TiercelCap', 'brad.grasl@gmail.com', 'v6Dr5iJQD/S7J21sblFM2ZdHeMw=', 'v3iL2Wcq8nE=', 'user');
 INSERT INTO users (username, email, password_hash, salt, user_role) VALUES ('alicia', 'aliciambarnhart@gmail.com', 'xxtiEUohNZYPs9U3gkrTEqBC9LM=', 'p+2HGbb6gE0=', 'user');
 
-INSERT INTO	game_status (game_status_id, game_status_name) VALUES (0, 'Pending'), (1, 'Accepted'), (2, 'Active'), (3, 'Completed');
+INSERT INTO	game_status (game_status_id, game_status_name) VALUES (0, 'Inactive'), (1, 'Active'), (2, 'Completed');
 INSERT INTO	player_status (player_status_id, player_status_name) VALUES (0, 'Pending'), (1, 'Accepted');
 INSERT INTO assets (symbol, company_name, current_price, time_updated) VALUES('USD', 'United States Dollar', 1, GETDATE());
 INSERT INTO	transaction_names (trans_id, trans_name) VALUES (0, 'Buy'), (1, 'Sell');

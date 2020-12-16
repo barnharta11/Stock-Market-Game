@@ -12,7 +12,7 @@
                     <th class="columnheaderend">Status</th>
                 </tr>
             </thead>
-            <tbody v-for="game in pendingGames" v-bind:key="game.id">
+            <tbody v-for="game in FilterForPending" v-bind:key="game.id">
                 <tr>
                     <td class="itemstyle" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
                     <td class="itemstyle">{{game.creatorName}}</td>
@@ -39,6 +39,11 @@ data(){
                 userId: "",
                 gameId: ""
             }
+        }
+    },
+    computed:{
+        FilterForPending(){
+            return this.$store.state.userGames
         }
     },
     methods:{

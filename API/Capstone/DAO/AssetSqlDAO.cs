@@ -74,7 +74,7 @@ namespace Capstone.DAO
 
             }
             return returnList;
-                    
+
         }
 
         public List<Asset> BuySellAsset(UpdateAsset newAsset)
@@ -89,7 +89,7 @@ namespace Capstone.DAO
                 cmd.Parameters.AddWithValue("@assetID", newAsset.AssetId);
                 cmd.Parameters.AddWithValue("@quantityHeld", newAsset.QuantityAdjustment);
                 cmd.Parameters.AddWithValue("@adjustment", newAsset.USDAdjustment);
-                
+
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -117,49 +117,8 @@ namespace Capstone.DAO
 
             return a;
         }
-
-
-        //public List<ReturnPortfolio> ListAllPortfolios()
-        //{
-        //    List<ReturnPortfolio> returnPortfolioList = new List<ReturnPortfolio>();
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(connectionString))
-        //        {
-        //            conn.Open();
-        //            SqlCommand cmd = new SqlCommand("Select * from portfolio", conn);
-        //            SqlDataReader reader = cmd.ExecuteReader();
-
-        //            while (reader.Read())
-        //            {
-        //                ReturnPortfolio portfolio = new ReturnPortfolio();
-        //                portfolio.Balance = Convert.ToDecimal(reader["balance"]);
-        //                portfolio.QuantityHeld = Convert.ToInt32(reader["quantity_held"]);
-        //                portfolio.StockTicker = Convert.ToString(reader["stock_ticker"]);
-        //                portfolio.CompanyName = Convert.ToString(reader["company_name"]);
-        //                portfolio.CurrentPrice = Convert.ToDecimal(reader["current_price"]);
-        //                portfolio.CostBasis = Convert.ToDecimal(reader["cost_basis"]);
-        //                portfolio.Time = Convert.ToDateTime(reader["time"]);
-        //                returnPortfolioList.Add(portfolio);
-
-        //            }
-
-        //        }
-        //    }
-        //    catch (SqlException)
-        //    {
-
-        //        throw;
-
-        //    };
-
-        //    return returnPortfolioList;
-        //}
     }
 }
-
-
-
-//Select balance, quantity_held, stock_ticker, company_name, current_price, cost_basis, time from portfolio left join portfolio_stocks on portfolio.portfolio_id = portfolio_stocks.portfolio_id left join stocks on portfolio_stocks.stock_id = stocks.stock_id left join transactions on stocks.stock_id = transactions.stock_id  left join user_games on portfolio.user_game_id=user_games.user_game_id Where user_id=@userID and game_id=@gameID", conn);
+        
 
 
