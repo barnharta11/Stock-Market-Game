@@ -148,7 +148,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("Select SUM(quantity_held * current_price) AS 'net_worth', player_status_name, users.user_id, users.username, final_networth From portfolio  join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id join assets on portfolio_assets.asset_id = assets.asset_id join user_games on portfolio.user_game_id = user_games.user_game_id join users on user_games.user_id = users.user_id join player_status on user_games.player_status_code=player_status.player_status_id where game_id = @gameid Group By users.user_id, users.username, final_networth, player_status_name order by 'net_worth' desc", conn);
+                    SqlCommand cmd = new SqlCommand("Select SUM(quantity_held * current_price) AS 'net_worth', player_status_name, users.user_id, users.username, final_networth, user_games.user_game_id From portfolio  join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id join assets on portfolio_assets.asset_id = assets.asset_id join user_games on portfolio.user_game_id = user_games.user_game_id join users on user_games.user_id = users.user_id join player_status on user_games.player_status_code=player_status.player_status_id where game_id = @gameid Group By users.user_id, users.username, final_networth, player_status_name, user_games.user_game_id order by 'net_worth' desc", conn);
                     cmd.Parameters.AddWithValue("@gameid", gameID);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -160,6 +160,7 @@ namespace Capstone.DAO
                         readLeaderboard.NetWorth = Convert.ToDecimal(reader["net_worth"]);
                         readLeaderboard.UserName = Convert.ToString(reader["username"]);
                         readLeaderboard.PlayerStatus = Convert.ToString(reader["player_status_name"]);
+                        readLeaderboard.UserGameID = Convert.ToInt32(reader["user_game_id"]);
                         readLeaderboard.GameID = gameID;
                         returnList.Add(readLeaderboard);
                     }

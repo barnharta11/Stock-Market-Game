@@ -42,30 +42,38 @@ import gameService from "../services/GameService.js";
 export default {
   data() {
     return {
-      acceptedGames: [],
-      arrayOfGameID: [],
+    //   arrayOfGameID: [],
     };
   },
   components: {GameCardcomponent},
-  methods: {
-    SetFilteredList() {
-      let arrayToFilter = this.$store.state.userGames;
-      arrayToFilter.forEach((game) => {
-        game.leaderboardList.forEach((element) => {
-          if (
-            element.playerStatus == "Accepted" &&
-            element.userName == this.$store.state.user.username
-          ) {
-            this.arrayOfGameID.push(parseInt(element.gameID));
-          }
-        });
-      });
-      arrayToFilter.forEach((game) => {
-        if (this.arrayOfGameID.includes(game.gameId)) {
-          this.acceptedGames.push(game);
-        }
-      });
+  computed:{
+       acceptedGames(){
+           return this.$store.state.userGames.filter(game=>{
+               return game.leaderboardList.find(entry=>{
+                   return entry.playerStatus == "Accepted" &&
+            entry.userName == this.$store.state.user.username
+               })
+           })
+    //   let arrayToFilter = this.$store.state.userGames;
+    //   arrayToFilter.forEach((game) => {
+    //     game.leaderboardList.forEach((element) => {
+    //       if (
+    //         element.playerStatus == "Accepted" &&
+    //         element.userName == this.$store.state.user.username
+    //       ) {
+    //         this.arrayOfGameID.push(parseInt(element.gameID));
+    //       }
+    //     });
+    //   });
+    //   arrayToFilter.forEach((game) => {
+    //     if (this.arrayOfGameID.includes(game.gameId)) {
+    //       this.acceptedGames.push(game);
+    //     }
+    //   });
     },
+  },
+  methods: {
+   
     SetSelectedGame(game) {
       this.$store.commit("SET_SELECTED_GAME", game);
       this.$router.push(
@@ -82,7 +90,7 @@ export default {
   },
   created() {
     this.GetUsersGames();
-    this.SetFilteredList();
+    // this.SetFilteredList();
   },
 };
 </script>
