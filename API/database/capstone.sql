@@ -137,7 +137,7 @@ INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
 INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (1, 3, 0);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
-INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
+INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 0)
 INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (2, 3, 1);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
@@ -146,16 +146,16 @@ INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
 INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (2, 1, 0);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
-INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
+INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 0)
 INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (2, 5, 0);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
-INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
+INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 0)
 INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (1, 5, 1);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
 INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (1, 6, 0);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
-INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)
+INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 0)
 INSERT INTO user_games (user_id, game_id, player_status_code) VALUEs (2, 6, 1);
 INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY);
 INSERT INTO portfolio_assets (portfolio_id, asset_id, quantity_held) VALUEs(@@IDENTITY, 1, 100000)

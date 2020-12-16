@@ -13,7 +13,7 @@
                     <th class="columnheaderend">Status</th>
                 </tr>
             </thead>
-            <tbody v-for="game in this.$store.state.userGames" v-bind:key="game.id">
+            <tbody v-for="game in acceptedGames" v-bind:key="game.id">
                 <tr>
                     <td class="itemstyle" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
                     <td class="itemstyle">{{game.creatorName}}</td>
@@ -32,7 +32,28 @@
 <script>
 import gameService from "../services/GameService.js"
 export default {
+    data(){
+        return{
+            acceptedGames: [],
+            arrayOfGameID:[]
+        }
+    },
 methods:{
+    SetFilteredList(){
+            let arrayToFilter = this.$store.state.userGames
+            arrayToFilter.forEach(game=>{
+                game.leaderboardList.forEach(element=>{
+                    if (element.playerStatus=="Accepted" && element.userName==this.$store.state.user.username){
+                        this.arrayOfGameID.push(parseInt(element.gameID))
+                    }
+                })
+            })
+            arrayToFilter.forEach(game=>{
+                if(this.arrayOfGameID.includes(game.gameId)){
+                    this.acceptedGames.push(game)
+                }
+            })
+        },
     SetSelectedGame(game){
         this.$store.commit("SET_SELECTED_GAME", game)
         this.$router.push(`/games/leaderboard/${this.$store.state.selectedGame.gameId}`)
@@ -46,6 +67,7 @@ methods:{
 },
 created(){
     this.GetUsersGames()
+    this.SetFilteredList()
 
 }
 }
