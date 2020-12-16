@@ -12,7 +12,7 @@
                     <th class="columnheaderend">Status</th>
                 </tr>
             </thead>
-            <tbody v-for="game in FilterForPending" v-bind:key="game.id">
+            <tbody v-for="game in pendingGames" v-bind:key="game.id">
                 <tr>
                     <td class="itemstyle" v-on:click='SetSelectedGame(game)'>{{game.gameName}}</td>
                     <td class="itemstyle">{{game.creatorName}}</td>
@@ -38,21 +38,23 @@ data(){
             invite: {
                 userId: "",
                 gameId: ""
-            }
+            },
+            arrayOfGameID:[]
         }
     },
     computed:{
-        FilterForPending(){
+        // FilterForPending(){
             
-            let arrayToFilter = this.$store.state.userGames
-            return arrayToFilter.filter(game=>{
-                game.leaderboardList.forEach(entry=>{
-                    if(entry.playerStatus=="Pending"){
-                        return true;
-                    }
+            
+            
+
+
+            
+
+            
                     
-                })
-            })
+                
+           
 
 
 
@@ -62,9 +64,24 @@ data(){
 
             // I want to find all the games where the leaderboard list has an entry that has a status of pending
            
-        }
+        // }
     },
     methods:{
+        SetFilteredList(){
+            let arrayToFilter = this.$store.state.userGames
+            arrayToFilter.forEach(game=>{
+                game.leaderboardList.forEach(element=>{
+                    if (element.playerStatus=="Pending"){
+                        this.arrayOfGameID.push(parseInt(element.gameID))
+                    }
+                })
+            })
+            arrayToFilter.forEach(game=>{
+                if(this.arrayOfGameID.includes(game.gameId)){
+                    this.pendingGames.push(game)
+                }
+            })
+        },
     AcceptInvite(gameid){
         this.invite.userId=this.$store.state.user.userId
         this.invite.gameId=gameid
@@ -93,6 +110,7 @@ data(){
 },
 created(){
     this.GetUsersGames()
+    this.SetFilteredList()
 
 }
 }
