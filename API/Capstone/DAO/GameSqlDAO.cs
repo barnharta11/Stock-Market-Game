@@ -32,7 +32,7 @@ namespace Capstone.DAO
                     command.Parameters.AddWithValue("@creatorid", creatorId);
                     command.Parameters.AddWithValue("@startdate", startDate);
                     command.Parameters.AddWithValue("@enddate", endDate);
-                    command.Parameters.AddWithValue("@playerstatuscode", 0);
+                    command.Parameters.AddWithValue("@playerstatuscode", 1);
                     command.ExecuteNonQuery();
 
                 }
