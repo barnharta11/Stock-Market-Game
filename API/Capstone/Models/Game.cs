@@ -45,7 +45,6 @@ namespace Capstone.Models
         public string CompanyName { get; set; }
         public decimal CurrentPrice { get; set; }
         public string UserName { get; set; }
-
         public decimal FinalNetworth { get; set; }
         public List<Asset> PlayersAssets { get; set; }
         public string PlayerStatus { get; set; }

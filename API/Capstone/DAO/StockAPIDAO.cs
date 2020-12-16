@@ -21,8 +21,8 @@ namespace Capstone.DAO
         {
             connectionString = dbConnectionString;
         }
-        private RestClient client;
 
+        private RestClient client;
         public List<Asset> GetStocks()
         {
             bool notUpToDate = false;

@@ -11,13 +11,11 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
 
-
         public GameSqlDAO(string dbConnectionString)
         {
             connectionString = dbConnectionString;
           
         }
-
         public Game AddGame(string gameName, int creatorId, DateTime startDate, DateTime endDate)
         {
             //Creates game, then adds creator to user_games
@@ -194,7 +192,7 @@ namespace Capstone.DAO
             return leaderboard;
         }
 
-            public List<Game> GetGamesByUser(int userID)
+        public List<Game> GetGamesByUser(int userID)
         {
             List<Game> returnList = new List<Game>();
             try
@@ -259,8 +257,6 @@ namespace Capstone.DAO
 
             return returnList;
         }
-
-
 
         private Game GetGameFromReader(SqlDataReader reader)
         {
