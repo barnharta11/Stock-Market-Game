@@ -100,7 +100,7 @@ namespace Capstone.DAO
                         readGame.CreatorName = Convert.ToString(reader["username"]);
                         readGame.StatusName = Convert.ToString(reader["game_status_name"]);
                         //gets leaderboard for each game
-                        GetLeaderboard(readGame.GameId);
+                        readGame.LeaderboardList = GetLeaderboard(readGame.GameId);
                         returnList.Add(readGame);
                        
                     }
@@ -161,6 +161,7 @@ namespace Capstone.DAO
                         readLeaderboard.UserID = Convert.ToInt32(reader["user_id"]);
                         readLeaderboard.NetWorth = Convert.ToDecimal(reader["net_worth"]);
                         readLeaderboard.UserName = Convert.ToString(reader["username"]);
+                        readLeaderboard.PlayerStatus = Convert.ToString(reader["player_status_name"]);
                         returnList.Add(readLeaderboard);
                     }
                 }
@@ -218,7 +219,7 @@ namespace Capstone.DAO
                         readGame.CreatorName = Convert.ToString(gameReader["username"]);
                         readGame.StatusName = Convert.ToString(gameReader["game_status_name"]);
                         //gets leaderboard for each game
-                        GetLeaderboard(readGame.GameId);
+                        readGame.LeaderboardList = GetLeaderboard(readGame.GameId);
                         returnList.Add(readGame);
 
                     }
