@@ -12,8 +12,6 @@
         <th> networth</th>
       </tr>
     </thead>
-</table>
-<table>
       <tbody>
         <tr>
           <td>{{ board.userName }}</td>
