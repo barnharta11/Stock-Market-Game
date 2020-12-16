@@ -2,7 +2,7 @@
   <div class="mainbackground">
     <div id="home">
       <div id="homelabel">
-        <h1 id="homelabel2" class="label">Home</h1>
+        <h1 id="homelabel2" class="label">Welcome! (username here)</h1>
       </div>
       <div id="nav2">
         <h1 id="navheader" class="tableheader">Nav</h1>
@@ -31,17 +31,18 @@
         <label id="mainfooter" class="tablefooter"></label>
       </div>
       <div id="leaderboard">
-        <leaderboard-component />
+    <users-games-component/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import LeaderboardComponent from "../components/LeaderboardComponent.vue";
+import UsersGamesComponent from '../components/UsersGamesComponent.vue'
+// import LeaderboardComponent from "../components/LeaderboardComponent.vue";
 export default {
   name: "home",
-  components: { LeaderboardComponent },
+  components: { UsersGamesComponent },
 };
 </script>
 
@@ -83,7 +84,7 @@ export default {
   grid-area: leaderboard;
 }
 
-#creategamelink {
+#creategamelink:link {
   grid-area: create;
   font-family: Consolas, Arial, Helvetica;
   padding-top: 15px;
@@ -95,8 +96,32 @@ export default {
   background-color: lightgray;
   text-decoration: none;
 }
+#creategamelink:visited {
+  grid-area: create;
+  font-family: Consolas, Arial, Helvetica;
+  padding-top: 15px;
+  padding-bottom: 3px;
+  font-size: 35px;
+  text-align: center;
+  color: rgb(105, 172, 105);
+  line-height: 30px;
+  background-color: lightgray;
+  text-decoration: none;
+}
+#creategamelink:hover {
+  grid-area: create;
+  font-family: Consolas, Arial, Helvetica;
+  padding-top: 15px;
+  padding-bottom: 3px;
+  font-size: 35px;
+  text-align: center;
+  color: black;
+  line-height: 30px;
+  background-color: lightgray;
+  text-decoration: none;
+}
 
-#allgameslink {
+#allgameslink:link {
   grid-area: allgames;
   font-family: Consolas, Arial, Helvetica;
   padding-top: 15px;
@@ -108,8 +133,32 @@ export default {
   background-color: lightgray;
   text-decoration: none;
 }
+#allgameslink:visited {
+  grid-area: allgames;
+  font-family: Consolas, Arial, Helvetica;
+  padding-top: 15px;
+  padding-bottom: 3px;
+  font-size: 35px;
+  text-align: center;
+  color: rgb(105, 172, 105);
+  line-height: 30px;
+  background-color: lightgray;
+  text-decoration: none;
+}
+#allgameslink:hover {
+  grid-area: allgames;
+  font-family: Consolas, Arial, Helvetica;
+  padding-top: 15px;
+  padding-bottom: 3px;
+  font-size: 35px;
+  text-align: center;
+  color: black;
+  line-height: 30px;
+  background-color: lightgray;
+  text-decoration: none;
+}
 
-#createdgameslink {
+#createdgameslink:link {
   grid-area: created;
   font-family: Consolas, Arial, Helvetica;
   padding-top: 15px;
@@ -121,8 +170,33 @@ export default {
   background-color: lightgray;
   text-decoration: none;
 }
+#createdgameslink:visited {
+  grid-area: created;
+  font-family: Consolas, Arial, Helvetica;
+  padding-top: 15px;
+  padding-bottom: 3px;
+  font-size: 35px;
+  text-align: center;
+  color: rgb(105, 172, 105);
+  line-height: 30px;
+  background-color: lightgray;
+  text-decoration: none;
+}
+#createdgameslink:hover {
+  grid-area: created;
+  font-family: Consolas, Arial, Helvetica;
+  padding-top: 15px;
+  padding-bottom: 3px;
+  font-size: 35px;
+  text-align: center;
+  color: black;
+  line-height: 30px;
+  background-color: lightgray;
+  text-decoration: none;
+}
 
-#pendinglink{
+
+#pendinglink:link{
   grid-area: pending;
   font-family: Consolas, Arial, Helvetica;
   padding-top: 15px;
@@ -134,6 +208,31 @@ export default {
   background-color: lightgray;
   text-decoration: none;
 }
+#pendinglink:visited{
+  grid-area: pending;
+  font-family: Consolas, Arial, Helvetica;
+  padding-top: 15px;
+  padding-bottom: 3px;
+  font-size: 35px;
+  text-align: center;
+  color: rgb(105, 172, 105);
+  line-height: 30px;
+  background-color: lightgray;
+  text-decoration: none;
+}
+#pendinglink:hover{
+  grid-area: pending;
+  font-family: Consolas, Arial, Helvetica;
+  padding-top: 15px;
+  padding-bottom: 3px;
+  font-size: 35px;
+  text-align: center;
+  color: black;
+  line-height: 30px;
+  background-color: lightgray;
+  text-decoration: none;
+}
+
 
 #mainfooter {
   grid-area: footer;

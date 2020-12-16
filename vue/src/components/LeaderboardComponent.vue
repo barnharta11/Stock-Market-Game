@@ -52,7 +52,6 @@ export default {
 </script>
 
 <style>
-
 #leaderboardhead {
   grid-area: thead;
 }

@@ -2,21 +2,21 @@
 <div class="mainbackground">
   <div>
     <!-- <div id="mycurrentgamesheader" class="tableheader"> My Current Games</div> -->
-    <users-games-component/>
+    <!-- <users-games-component/> -->
     <!-- <div id="allgamesheader" class="tableheader">All Games</div> -->
     <game-list-component/>
     <!-- <div id="mypendinginvitesheader" class="tableheader"> My Pending Invites</div> -->
-    <users-pending-component/>
+    <!-- <users-pending-component/> -->
   </div>
   </div>
 </template>
 
 <script>
 import GameListComponent from '../components/GameListComponent.vue'
-import UsersGamesComponent from '../components/UsersGamesComponent.vue'
-import UsersPendingComponent from '../components/UsersPendingComponent.vue'
+// import UsersGamesComponent from '../components/UsersGamesComponent.vue'
+// import UsersPendingComponent from '../components/UsersPendingComponent.vue'
 export default {
-  components: { GameListComponent, UsersGamesComponent, UsersPendingComponent },
+  components: { GameListComponent },
 
 }
 </script>
