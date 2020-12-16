@@ -29,7 +29,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand command = new SqlCommand("INSERT INTO games ( game_name, creator_id, start_date, end_date) VALUES (@gamename, @creatorid, @startdate, @enddate); INSERT INTO user_games ( user_id, game_id, player_status_code) VALUES (@creatorid, @@IDENTITY, @playerstatuscode); INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY); INSERT INTO portfolio_assets(portfolio_id, asset_id, quantity_held) Values (@@IDENTITY, 1, 100000)", conn);
+                    SqlCommand command = new SqlCommand("INSERT INTO games (game_name, creator_id, start_date, end_date) VALUES (@gamename, @creatorid, @startdate, @enddate); INSERT INTO user_games ( user_id, game_id, player_status_code) VALUES (@creatorid, @@IDENTITY, @playerstatuscode); INSERT INTO portfolio (user_game_id) VALUEs (@@IDENTITY); INSERT INTO portfolio_assets(portfolio_id, asset_id, quantity_held) Values (@@IDENTITY, 1, 100000)", conn);
                     command.Parameters.AddWithValue("@gamename", gameName);
                     command.Parameters.AddWithValue("@creatorid", creatorId);
                     command.Parameters.AddWithValue("@startdate", startDate);
@@ -99,33 +99,15 @@ namespace Capstone.DAO
                         readGame.EndDate = Convert.ToDateTime(reader["end_date"]);
                         readGame.CreatorName = Convert.ToString(reader["username"]);
                         readGame.StatusName = Convert.ToString(reader["game_status_name"]);
+                        //gets leaderboard for each game
+                        GetLeaderboard(readGame.GameId);
                         returnList.Add(readGame);
+                       
                     }
                     reader.Close();
-
-                    //creates leaderboard for each game
                     foreach (Game game in returnList)
                     {
-                        SqlCommand leadercmd = new SqlCommand("Select SUM(quantity_held * current_price) AS 'net_worth', player_status_name, users.user_id, users.username, final_networth From portfolio  join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id join assets on portfolio_assets.asset_id = assets.asset_id join user_games on portfolio.user_game_id = user_games.user_game_id join users on user_games.user_id = users.user_id join player_status on user_games.player_status_code=player_status.player_status_id where game_id = @gameid Group By users.user_id, users.username, final_networth, player_status_name order by 'net_worth' desc", conn);
-                        leadercmd.Parameters.AddWithValue("@gameid", game.GameId);
-                        SqlDataReader leaderReader = leadercmd.ExecuteReader();
-                        List<Leaderboard> readLeaderboard = new List<Leaderboard>();
-
-                        while (leaderReader.Read())
-                        {
-                            Leaderboard leaderBoard = new Leaderboard();
-                            leaderBoard.FinalNetworth = Convert.ToDecimal(leaderReader["final_networth"]);
-                            leaderBoard.UserID = Convert.ToInt32(leaderReader["user_id"]);
-                            leaderBoard.NetWorth = Convert.ToDecimal(leaderReader["net_worth"]);
-                            leaderBoard.UserName = Convert.ToString(leaderReader["username"]);
-                            leaderBoard.PlayerStatus = Convert.ToString(leaderReader["player_status_name"]);
-                            //gets assets for each board entry
-                            //leaderBoard.PlayersAssets = assetsDAO.GetAssets((Convert.ToInt32(leaderReader["user_id"])), game.GameId);
-                            readLeaderboard.Add(leaderBoard);
-
-                        }
-                        game.LeaderboardList = readLeaderboard;
-                        leaderReader.Close();
+                        
                         //Updates game status
                         if (DateTime.Compare(game.StartDate, DateTime.Now) < 0)
                         {
@@ -143,13 +125,12 @@ namespace Capstone.DAO
                             //Updates final networth
                             foreach (Leaderboard board in game.LeaderboardList)
                             {
-                                UpdateFinalNetworth(board);                                
+                                UpdateFinalNetworth(board);
                             }
-                            
-                        }
 
-                   
+                        }
                     }
+                    
                 }
             }
             catch (SqlException)
@@ -169,7 +150,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("Select SUM(quantity_held * current_price) AS 'net_worth', users.user_id, users.username, final_networth From portfolio join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id join assets on portfolio_assets.asset_id = assets.asset_id join user_games on portfolio.user_game_id = user_games.user_game_id join users on user_games.user_id = users.user_id where game_id = @gameid Group By users.user_id, users.username, final_networth order by 'net_worth' desc", conn);
+                    SqlCommand cmd = new SqlCommand("Select SUM(quantity_held * current_price) AS 'net_worth', player_status_name, users.user_id, users.username, final_networth From portfolio  join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id join assets on portfolio_assets.asset_id = assets.asset_id join user_games on portfolio.user_game_id = user_games.user_game_id join users on user_games.user_id = users.user_id join player_status on user_games.player_status_code=player_status.player_status_id where game_id = @gameid Group By users.user_id, users.username, final_networth, player_status_name order by 'net_worth' desc", conn);
                     cmd.Parameters.AddWithValue("@gameid", gameID);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -236,29 +217,16 @@ namespace Capstone.DAO
                         readGame.EndDate = Convert.ToDateTime(gameReader["end_date"]);
                         readGame.CreatorName = Convert.ToString(gameReader["username"]);
                         readGame.StatusName = Convert.ToString(gameReader["game_status_name"]);
+                        //gets leaderboard for each game
+                        GetLeaderboard(readGame.GameId);
                         returnList.Add(readGame);
+
                     }
                     gameReader.Close();
                     foreach (Game game in returnList)
                     {
-                        SqlCommand leadercmd = new SqlCommand("Select SUM(quantity_held * current_price) AS 'net_worth', player_status_name, users.user_id, users.username, final_networth From portfolio  join portfolio_assets on portfolio.portfolio_id = portfolio_assets.portfolio_id join assets on portfolio_assets.asset_id = assets.asset_id join user_games on portfolio.user_game_id = user_games.user_game_id join users on user_games.user_id = users.user_id join player_status on user_games.player_status_code=player_status.player_status_id where game_id = @gameid Group By users.user_id, users.username, final_networth, player_status_name order by 'net_worth' desc", conn);
-                        leadercmd.Parameters.AddWithValue("@gameid", game.GameId);
-                        SqlDataReader leaderReader = leadercmd.ExecuteReader();
-                        List<Leaderboard> readLeaderboard = new List<Leaderboard>();
-                        while (leaderReader.Read())
-                        {
-                            Leaderboard leaderBoard = new Leaderboard();
-                            leaderBoard.FinalNetworth = Convert.ToDecimal(leaderReader["final_networth"]);
-                            leaderBoard.UserID = Convert.ToInt32(leaderReader["user_id"]);
-                            leaderBoard.NetWorth = Convert.ToDecimal(leaderReader["net_worth"]);
-                            leaderBoard.UserName = Convert.ToString(leaderReader["username"]);
-                           // leaderBoard.PlayersAssets = assetsDAO.GetAssets((Convert.ToInt32(leaderReader["user_id"])), game.GameId);
-                            readLeaderboard.Add(leaderBoard);
 
-                        }
-                        game.LeaderboardList = readLeaderboard;
-                        leaderReader.Close();
-
+                        //Updates game status
                         if (DateTime.Compare(game.StartDate, DateTime.Now) < 0)
                         {
                             SqlCommand command = new SqlCommand("update games set game_status_code = 1 where game_id = @gameid", conn);
@@ -266,20 +234,22 @@ namespace Capstone.DAO
                             command.ExecuteNonQuery();
                             game.StatusName = "Active";
                         }
-
-                        if (DateTime.Compare(game.EndDate, DateTime.Now) < 0)
+                        if (DateTime.Compare(game.EndDate, DateTime.Now) < 0 && game.StatusName != "Completed")
                         {
                             SqlCommand command = new SqlCommand("update games set game_status_code = 2 where game_id = @gameid", conn);
                             command.Parameters.AddWithValue("@gameid", game.GameId);
                             command.ExecuteNonQuery();
                             game.StatusName = "Completed";
+                            //Updates final networth
                             foreach (Leaderboard board in game.LeaderboardList)
                             {
                                 UpdateFinalNetworth(board);
                             }
+
                         }
                     }
                     
+
                 }
             }
             catch (SqlException)
