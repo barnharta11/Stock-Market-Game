@@ -76,10 +76,15 @@ methods:{
 }
 
 #creategamename{
+  padding-bottom: 50px;
+  /* line-height: 80px; */
+  margin-bottom: -45px;
   grid-area: gamename;
 }
 
 #gamenamein{
+  padding-top: 0;
+  margin:0px 20px;
   grid-area: createin;
   font-family: Consolas, Arial, Helvetica;
   border-color: gray;
@@ -90,18 +95,29 @@ methods:{
 }
 
 #createstartdate{
+  padding-bottom: 50px;
+  /* line-height: 80px; */
+  margin-bottom: -45px;
   grid-area: start;
 }
 
 #startdatein{
+  padding-top: 0;
+  margin:0px 20px;
   grid-area: startin;
 }
 
 #createenddate{
+  padding-bottom: 50px;
+  /* line-height: 80px; */
+  margin-bottom: -45px;
   grid-area: end;
 }
 
 #enddatein{
+  padding-top: 0;
+  margin:0px 20px;
+  grid-area: startin;
   grid-area: endin;
 }
 
@@ -124,5 +140,48 @@ methods:{
   margin-bottom: 100%;
   transition-duration: .4s;
 }
+#createbutton:link{
+  grid-area: createbut;
+  background-color: lightgray;
+  font-family: Consolas, Arial, Helvetica;
+  color: rgb(105, 172, 105);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 20px;
+  line-height: 20px;
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 100%;
+}
+#createbutton:visited{
+  grid-area: createbut;
+  background-color: lightgray;
+  font-family: Consolas, Arial, Helvetica;
+  color: rgb(105, 172, 105);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 20px;
+  line-height: 20px;
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 100%;
+}
+#createbutton:hover{
+  grid-area: createbut;
+  background-color: lightgray;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 20px;
+  line-height: 20px;
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 100%;
+}
+
+
 
 </style>

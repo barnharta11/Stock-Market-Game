@@ -27,10 +27,6 @@ body {
   text-align: center;
 }
 
-/* #app {
-  background-color: rgb(105, 172, 105);
-} */
-
 #nav {
   display: grid;
   background-color: black;
