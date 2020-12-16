@@ -2,7 +2,7 @@
 
 <div class="mainbackground">
     <div id="mycreatedgamescontainer">
-        <h2 id="tablehead4" class="tableheader1">My Created Games</h2>
+        <h2 id="tablehead4" class="tableheader">My Created Games</h2>
         <table id="createdgamestable" class="tablebody">
             <thead>
                 <tr>
@@ -90,13 +90,6 @@ created(){
 
 #end4{
     grid-area: footer;
-}
-
-.mainbackground{
-    font-family: Consolas, Arial, Helvetica;
-    padding-top: 25px;
-    background-color: rgb(105,172,105);
-    height: 100vh;
 }
 
 .mediumtextclass{
