@@ -1,6 +1,6 @@
 <template>
   <div id="gamedetailscontainer">
-    <h2 id="gamedetailshead" class="tableheader1">Details</h2>
+    <h2 id="gamedetailshead" class="tableheader">Details</h2>
     <table id="gamedetailsbody" class="tablebody">
       <thead>
         <tr>

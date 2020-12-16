@@ -1,18 +1,29 @@
 <template>
-  <div class="game">
-    <div class="game-title">{{ Game.gameName }}</div>
-    <div v-for="board in Game.leaderboardList" v-bind:key="board.userGameID" >
-      <div>{{board.userName}}</div>
-      <div>{{board.netWorth}}</div>
-      
-    </div>
-<button v-on:click='SetSelectedGame(Game)'>Game Details</button>
-
-
-    <!-- <div v-for="object in Game.leaderboardList" v-bind:key="object.userID">
-      <div>{{ object.userName }}</div>
-    </div> -->
-    <!-- <router-link :to="`/assets/${this.$store.state.user.userId}/${object.gameID}`">game details</router-link> -->
+  <div id="gamecard" class="game">
+    <div id="title" class="header">{{ Game.gameName }}</div>
+    <table
+      id="info"
+      v-for="board in Game.leaderboardList"
+      v-bind:key="board.userGameID"
+    >
+    <thead>
+      <tr>
+        <th> username</th>
+        <th> networth</th>
+      </tr>
+    </thead>
+</table>
+<table>
+      <tbody>
+        <tr>
+          <td>{{ board.userName }}</td>
+          <td>{{ board.netWorth }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button id="detailbutton" v-on:click="SetSelectedGame(Game)">
+      Game Details
+    </button>
   </div>
 </template>
 
@@ -21,26 +32,60 @@ export default {
   props: {
     Game: Object,
   },
-  data(){
-    return{
-      currentLeaderboardList:[]
-    }
+  data() {
+    return {
+      currentLeaderboardList: [],
+    };
   },
-  methods:{
-    SetCurrentBoard(game){
-      this.currentLeaderboardList=game
+  methods: {
+    SetCurrentBoard(game) {
+      this.currentLeaderboardList = game;
     },
-          SetSelectedGame(game){
-        this.$store.commit("SET_SELECTED_GAME", game)
-        this.$router.push(`/games/leaderboard/${this.$store.state.selectedGame.gameId}`)
+    SetSelectedGame(game) {
+      this.$store.commit("SET_SELECTED_GAME", game);
+      this.$router.push(
+        `/games/leaderboard/${this.$store.state.selectedGame.gameId}`
+      );
     },
   },
 
-  created(){
-    this.SetCurrentBoard()
-  }
+  created() {
+    this.SetCurrentBoard();
+  },
 };
 </script>
 
 <style>
+/* #detailbutton {
+  grid-area: btn;
+}
+
+#info {
+  display: grid;
+  grid-area: info;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "name"
+    "worth";
+}
+#name {
+  grid-area: name;
+}
+
+#networth {
+  grid-area: worth;
+}
+
+#title {
+  grid-area: title;
+}
+
+#gamecard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    ". title ."
+    ". info ."
+    ". btn .";
+} */
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="testfix">
     <div id="portfoliocontainer">
-      <h2 id="leaderboardhead" class="tableheader1">{{ $store.state.user.username }}'s Portfolio</h2>
+      <h2 id="leaderboardhead" class="tableheader">{{ $store.state.user.username }}'s Portfolio</h2>
       <table id="portfoliobody" class="tablebody">
         <thead>
           <tr>
@@ -16,7 +16,7 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="stockshead" class="tableheader1">{{ $store.state.user.username }}'s Stocks</h3>
+      <h3 id="stockshead" class="tableheader">{{ $store.state.user.username }}'s Stocks</h3>
       <table id="stocksbody" class="tablebody">
         <thead>
           <tr>
@@ -160,6 +160,7 @@ export default {
 }
 
 #stockshead{
+  margin-top: 0;
     grid-area: thead2;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;

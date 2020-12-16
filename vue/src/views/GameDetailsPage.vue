@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainbackground">
     <game-details-component/>
     <leaderboard-component />    
     <asset-component v-show="IsInGame()"/>

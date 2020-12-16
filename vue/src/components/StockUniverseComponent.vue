@@ -1,7 +1,7 @@
 <template>
   <div class="mainbackground">
     <div id="stockunicontainer">
-      <h2 id="stockunihead" class="tableheader1">Stock Universe Menu</h2>
+      <h2 id="stockunihead" class="tableheader">Stock Universe Menu</h2>
       <input class="textclass"
         id="stocksearch"
         type="text"
