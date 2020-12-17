@@ -1,6 +1,6 @@
 <template>
   <div class="mainbackground">
-    <div id="home">
+    <div id="home" class="mainbackground">
       <div id="homelabel">
         <h1 id="homelabel2" class="label">Welcome {{this.$store.state.user.username}}!</h1>
       </div>
