@@ -15,11 +15,13 @@
 <style>
 body {
   margin: 0px;
+   background-color: rgb(105, 172, 105);
 }
 
 #title{
   grid-area: title;
   text-align: right;
+  padding-right: 2%;
 }
 
 #seperator{
@@ -39,6 +41,7 @@ body {
   "homebtn sep logoutbtn . title";
   padding-bottom: 0;
   margin: 0;
+  padding-left: 2%;
 }
 #homebutton:link {
   grid-area: homebtn;

@@ -88,7 +88,8 @@ data(){
         inviteService.acceptInvite(this.invite)
         .then(
             this.pendingGames=[],
-            this.GetUsersGames()
+            this.GetUsersGames(),
+              this.$router.push('/')
         )
     },
     SetSelectedGame(game){
@@ -103,6 +104,7 @@ data(){
             response.data.forEach(element => {
                 if(element.statusName=='Pending'){
                     this.pendingGames.push(element)
+                  
                 }
             });
         })
