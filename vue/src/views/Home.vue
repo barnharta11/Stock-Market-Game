@@ -1,6 +1,6 @@
 <template>
   <div class="mainbackground">
-    <div id="home" class="mainbackground">
+    <div id="home">
       <div id="homelabel">
         <h1 id="homelabel2" class="label">Welcome {{this.$store.state.user.username}}!</h1>
       </div>
@@ -31,7 +31,7 @@
         <label id="mainfooter" class="tablefooter"></label>
       </div>
       <label id="activityheader" class="tableheader">Current Activity</label>
-      <div id="leaderboard">
+      <div id="leaderboard" class="mainbackground">
     <users-games-component/>
       </div>
     </div>
