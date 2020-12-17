@@ -1,5 +1,4 @@
 <template>
-
 <div class="mainbackground">
     <div id="mycreatedgamescontainer">
         <h2 id="tablehead4" class="tableheader">My Created Games</h2>

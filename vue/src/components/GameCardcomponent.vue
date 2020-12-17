@@ -1,6 +1,6 @@
 <template>
-  <div id="gamecard" class="game">
-    <div id="title" class="tableheader">{{ Game.gameName }}</div>
+  <div id="gamecard">
+    <div id="title2" class="midtableheader">{{ Game.gameName }}</div>
     <table id="cardcomp" class="tablebody">
       <thead id="cardhead" class="carbackground">
         <tr id="headerrow">
@@ -10,16 +10,21 @@
       </thead>
       <tbody
         id="info"
-        v-for="board in TopFive"
+        v-for="board in Game.leaderboardList"
         v-bind:key="board.userGameID"
       >
-        <tr>
-          <td>{{ board.userName }}</td>
-          <td>{{ board.netWorth }}</td>
+        <tr id="cardbody">
+          <td id="uname" class="itemstyle">{{ board.userName }}</td>
+          <td id="networth" class="itemstyleend">{{ board.netWorth }}</td>
         </tr>
       </tbody>
     </table>
-      Game Details
+    <button
+      id="detailbutton"
+      class="textclass"
+      v-on:click="SetSelectedGame(Game)"
+    >
+      Details
     </button>
   </div>
 </template>
@@ -28,13 +33,6 @@
 export default {
   props: {
     Game: Object,
-  },
-    computed:{
-    TopFive(){
-       let returnArray= this.Game.leaderboardList
-       returnArray.sort((a,b)=>(b.netWorth-a.netWorth))
-      return returnArray.slice(0,5)
-    }
   },
   data() {
     return {
@@ -60,6 +58,19 @@ export default {
 </script>
 
 <style>
+
+
+#cardhead{
+  border-top-left-radius: 0px;
+}
+
+#cardbody{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+  "uname newtworth";
+}
+
 #headerrow {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -74,8 +85,6 @@ export default {
   grid-area: netgrid;
 }
 
-#cardhead {
-}
 
 #cardcomp {
   display: grid;
@@ -86,25 +95,14 @@ export default {
     "info";
 }
 
-#detailbutton {
-  grid-area: btn;
-}
 
-#name {
-  grid-area: name;
-}
-
-#networth {
-  grid-area: worth;
-}
-
-#title {
+#title2 {
   text-align: center;
   grid-area: title;
 }
 
 #gamecard {
-  margin-top: 15px;
+  margin-top: 0px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
@@ -112,4 +110,16 @@ export default {
     "comp"
     "btn";
 }
+
+#detailbutton {
+  padding-top: 0;
+  text-align: center;
+  /* line-height: 40px; */
+  border-left: none;
+  border-right: none;
+  border-top: rgb(105, 172, 105) 2px solid;
+  font-size: larger;
+  grid-area: btn;
+}
+
 </style>

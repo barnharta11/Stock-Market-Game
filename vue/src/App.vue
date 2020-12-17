@@ -111,6 +111,19 @@ body {
   padding-top: 10px;
 }
 
+.midtableheader {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: rgb(105, 172, 105);
+  background-color: black;
+  font-family: Consolas, Arial, Helvetica;
+  font-weight: bolder;
+  font-size: 50px;
+  text-align: center;
+  padding-bottom: 15px;
+  padding-top: 10px;
+}
+
 .tablefooter {
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 25px;

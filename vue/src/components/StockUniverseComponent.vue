@@ -2,7 +2,8 @@
   <div class="mainbackground">
     <div id="stockunicontainer">
       <h2 id="stockunihead" class="tableheader">Stock Universe Menu</h2>
-      <input class="textclass"
+      <input
+        class="textclass"
         id="stocksearch"
         type="text"
         v-model="currentSearch"
@@ -19,22 +20,36 @@
           </tr>
         </thead>
         <tbody v-for="stock in arrayByPage" v-bind:key="stock.assetId">
-          <!-- <tbody> -->
           <tr>
             <td class="itemstyle">{{ stock.symbol }}</td>
             <td class="itemstyle">{{ stock.companyName }}</td>
             <td class="itemstyle">{{ stock.currentPrice }}</td>
             <td class="itemstyle">
-              <button class="buttondefault" v-on:click="PromptForPurchase(stock)">Purchase</button>
+              <button
+                class="buttondefault"
+                v-on:click="PromptForPurchase(stock)"
+              >
+                Purchase
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
       <label id="end8" class="tablefoot"></label>
-      <button id="backpage" class="buttondefault" v-on:click="DecreaseIndex()" v-show="showPrevious">
+      <button
+        id="backpage"
+        class="buttondefault"
+        v-on:click="DecreaseIndex()"
+        v-show="showPrevious"
+      >
         Previous Page
       </button>
-      <button id="nextpage" class="buttondefault" v-on:click="IncrementIndex()" v-show="showNext">
+      <button
+        id="nextpage"
+        class="buttondefault"
+        v-on:click="IncrementIndex()"
+        v-show="showNext"
+      >
         Next Page
       </button>
     </div>
@@ -66,37 +81,47 @@ export default {
     },
     PromptForPurchase(stock) {
       this.quantityToBuy = prompt("How many would you like to purchase?", "");
-      if (stock.currentPrice * this.quantityToBuy <= this.$store.state.activeAssets[0].quantityHeld) {
+      if (
+        stock.currentPrice * this.quantityToBuy <=
+        this.$store.state.activeAssets[0].quantityHeld
+      ) {
         this.transactionRequest.portfolioId = this.$store.state.activeAssets[0].portfolioID;
         this.transactionRequest.quantityAdjustment = this.quantityToBuy;
-        this.transactionRequest.USDAdjustment = stock.currentPrice * this.quantityToBuy * -1;
+        this.transactionRequest.USDAdjustment =
+          stock.currentPrice * this.quantityToBuy * -1;
         this.transactionRequest.assetId = stock.assetId;
 
-        this.$store.state.activeAssets.forEach(asset =>{
-          if (asset.assetId == stock.assetId){           
-            this.existed = true}})
-          if(this.existed){
-             assetService.buyExistingStocks(this.$store.state.user.userId, this.$store.state.selectedGame.gameId, this.transactionRequest)
-             .then(response =>{
-               this.$store.commit("SET_SELECTED_ASSETS", response.data)
-             })
+        this.$store.state.activeAssets.forEach((asset) => {
+          if (asset.assetId == stock.assetId) {
+            this.existed = true;
           }
-        if (this.existed==false){
-             assetService.buyNewStocks(this.$store.state.user.userId, this.$store.state.selectedGame.gameId, this.transactionRequest)        
-          .then(response =>
-            this.$store.commit("SET_SELECTED_ASSETS", response.data)
+        });
+        if (this.existed) {
+          assetService
+            .buyExistingStocks(
+              this.$store.state.user.userId,
+              this.$store.state.selectedGame.gameId,
+              this.transactionRequest
             )
-          
-        }  
-        this.existed=false
-       } 
-       
-        else{
-          alert("Insufficient funds, try liquidating some assets")
+            .then((response) => {
+              this.$store.commit("SET_SELECTED_ASSETS", response.data);
+            });
         }
-            
-            
-            
+        if (this.existed == false) {
+          assetService
+            .buyNewStocks(
+              this.$store.state.user.userId,
+              this.$store.state.selectedGame.gameId,
+              this.transactionRequest
+            )
+            .then((response) =>
+              this.$store.commit("SET_SELECTED_ASSETS", response.data)
+            );
+        }
+        this.existed = false;
+      } else {
+        alert("Insufficient funds, try liquidating some assets");
+      }
     },
     IncrementIndex() {
       this.startIndex += 10;
@@ -133,10 +158,9 @@ export default {
 </script>
 
 <style>
-
 #stockunicontainer {
   display: grid;
-  grid-template-columns: 1fr 4fr  4fr 1fr;
+  grid-template-columns: 1fr 4fr 4fr 1fr;
   grid-template-areas:
     ". thead thead ."
     ". search search ."
@@ -148,7 +172,6 @@ export default {
 #stockunihead {
   grid-area: thead;
 }
-
 
 #stockunihead {
   grid-area: thead;
