@@ -31,7 +31,7 @@
         <label id="mainfooter" class="tablefooter"></label>
       </div>
       <label id="activityheader" class="tableheader">Current Activity</label>
-      <div id="leaderboard" class="mainbackground">
+      <div id="leaderboard">
     <users-games-component/>
       </div>
     </div>
