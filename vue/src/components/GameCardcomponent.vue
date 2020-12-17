@@ -10,7 +10,7 @@
       </thead>
       <tbody
         id="info"
-        v-for="board in Game.leaderboardList"
+        v-for="board in TopFive"
         v-bind:key="board.userGameID"
       >
         <tr id="cardbody">
@@ -33,6 +33,13 @@
 export default {
   props: {
     Game: Object,
+  },
+    computed:{
+    TopFive(){
+       let returnArray= this.Game.leaderboardList
+       returnArray.sort((a,b)=>(b.netWorth-a.netWorth))
+      return returnArray.slice(0,5)
+    }
   },
   data() {
     return {
