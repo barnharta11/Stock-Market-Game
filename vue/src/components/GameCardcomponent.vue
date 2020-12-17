@@ -1,25 +1,24 @@
 <template>
   <div id="gamecard" class="game">
-    <div id="title" class="header">{{ Game.gameName }}</div>
-    <table
-      id="info"
-      v-for="board in Game.leaderboardList"
-      v-bind:key="board.userGameID"
-    >
-    <thead>
-      <tr>
-        <th> username</th>
-        <th> networth</th>
-      </tr>
-    </thead>
-      <tbody>
+    <div id="title" class="tableheader">{{ Game.gameName }}</div>
+    <table id="cardcomp" class="tablebody">
+      <thead id="cardhead" class="carbackground">
+        <tr id="headerrow">
+          <th id="user" class="columnheader">username</th>
+          <th id="net" class="columnheaderend">networth</th>
+        </tr>
+      </thead>
+      <tbody
+        id="info"
+        v-for="board in Game.leaderboardList"
+        v-bind:key="board.userGameID"
+      >
         <tr>
           <td>{{ board.userName }}</td>
           <td>{{ board.netWorth }}</td>
         </tr>
       </tbody>
     </table>
-    <button id="detailbutton" v-on:click="SetSelectedGame(Game)">
       Game Details
     </button>
   </div>
@@ -54,18 +53,36 @@ export default {
 </script>
 
 <style>
-/* #detailbutton {
+#headerrow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "usergrid netgrid";
+}
+
+#user {
+  grid-area: usergrid;
+}
+
+#net {
+  grid-area: netgrid;
+}
+
+#cardhead {
+}
+
+#cardcomp {
+  display: grid;
+  grid-area: comp;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "head"
+    "info";
+}
+
+#detailbutton {
   grid-area: btn;
 }
 
-#info {
-  display: grid;
-  grid-area: info;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "name"
-    "worth";
-}
 #name {
   grid-area: name;
 }
@@ -75,15 +92,17 @@ export default {
 }
 
 #title {
+  text-align: center;
   grid-area: title;
 }
 
 #gamecard {
+  margin-top: 15px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-areas:
-    ". title ."
-    ". info ."
-    ". btn .";
-} */
+    "title"
+    "comp"
+    "btn";
+}
 </style>
