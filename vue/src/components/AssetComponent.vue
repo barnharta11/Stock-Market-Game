@@ -11,7 +11,7 @@
         </thead>
         <tbody>
           <tr>
-            <td class="itemstyle">{{ NetWorth() }}</td>
+            <td class="itemstyle">${{ NetWorth() }}</td>
             <td class="itemstyleend">{{ $store.state.selectedGame.formattedEndDate }}</td>
           </tr>
         </tbody>
@@ -36,7 +36,7 @@
           <tr v-if="IsNotZero(asset.quantityHeld)">
             <td class="itemstyle">{{ asset.symbol }}</td>
             <td class="itemstyle">{{ asset.companyName }}</td>
-            <td class="itemstyle">{{ asset.currentPrice }}</td>
+            <td class="itemstyle">${{ asset.currentPrice.toFixed(2) }}</td>
             <td class="itemstyle">{{ asset.quantityHeld }}</td>
             <td class="itemstyle">${{ TotalEquity(asset).toFixed(2) }}</td>
             <!-- <td>{{- purchased price -}}</td> -->
