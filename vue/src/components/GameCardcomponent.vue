@@ -1,5 +1,5 @@
 <template>
-  <div id="gamecard">
+  <div id="gamecard" main="mainbackground">
     <div id="title2" class="midtableheader">{{ Game.gameName }}</div>
     <table id="cardcomp" class="tablebody">
       <thead id="cardhead" class="carbackground">
