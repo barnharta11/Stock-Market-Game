@@ -12,6 +12,7 @@ import CreatedGames from "../views/CreatedGames.vue"
 import GameDetailsPage from "../views/GameDetailsPage.vue"
 import DisplayUser from "../views/DisplayUser.vue"
 import PendingPage from "../views/PendingPage.vue"
+import Audit from "../views/Audit.vue"
 
 Vue.use(Router)
 
@@ -84,14 +85,14 @@ const router = new Router({
         requiresAuth:true
       }
     },
-  //   {
-  //     path: "/games/:userid",
-  //     name: "usersGames",
-  //     component: UsersGames,
-  //     meta:{
-  //       requiresAuth:true
-  //     }
-  // },
+    {
+      path: "/IRS",
+      name: "audit",
+      component: Audit,
+      meta:{
+        requiresAuth:true
+      }
+  },
   {
     path:"/inviteusers",
     name:"displayusers",

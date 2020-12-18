@@ -33,17 +33,22 @@
       <label id="activityheader" class="tableheader">Current Activity</label>
       <div id="leaderboard">
     <users-games-component/>
+    <rosebud-component/>
       </div>
     </div>
+      
   </div>
 </template>
 
 <script>
 import UsersGamesComponent from '../components/UsersGamesComponent.vue'
-// import LeaderboardComponent from "../components/LeaderboardComponent.vue";
+import RosebudComponent from "../components/RosebudComponent.vue";
 export default {
   name: "home",
-  components: { UsersGamesComponent },
+  components: { UsersGamesComponent, RosebudComponent },
+  
+  
+  
 };
 </script>
 
@@ -128,7 +133,6 @@ export default {
   background-color: lightgray;
   text-decoration: none;
 }
-
 #allgameslink:link {
   grid-area: allgames;
   font-family: Consolas, Arial, Helvetica;
@@ -165,7 +169,6 @@ export default {
   background-color: lightgray;
   text-decoration: none;
 }
-
 #createdgameslink:link {
   grid-area: created;
   font-family: Consolas, Arial, Helvetica;
@@ -202,8 +205,6 @@ export default {
   background-color: lightgray;
   text-decoration: none;
 }
-
-
 #pendinglink:link{
   grid-area: pending;
   font-family: Consolas, Arial, Helvetica;
@@ -241,9 +242,10 @@ export default {
   text-decoration: none;
 }
 
-
 #mainfooter {
   grid-area: footer;
 }
+
+
 </style>
 

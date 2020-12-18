@@ -3,7 +3,8 @@
     <game-details-component/>
     <leaderboard-component />    
     <asset-component v-show="IsInGame()"/>
-    <stock-universe-component v-show="IsInGame()"/>
+    <stock-universe-component v-show="IsInGame()"/> 
+    
   </div>
 </template>
 
@@ -14,17 +15,20 @@ import StockUniverseComponent from '../components/StockUniverseComponent.vue'
 import LeaderboardComponent from '../components/LeaderboardComponent.vue'
 export default {
     props:{
-        game:[]
+        game:[],
+        
+
     },
     methods:{
       IsInGame(){
         return (this.$store.state.selectedGame.statusName=="Active")
-      }
+      },
     },
 components:{GameDetailsComponent,AssetComponent, StockUniverseComponent, LeaderboardComponent}
 }
 </script>
 
 <style>
+
 
 </style>,
